@@ -9,7 +9,7 @@
 #define Pathway_hpp
 
 #include <stdio.h>
-#include "Lane.hpp"
+#include "src/Lane.hpp"
 
 
 class Pathway : public Lane {

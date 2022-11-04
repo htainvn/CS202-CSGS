@@ -9,7 +9,7 @@
 #define TrafficLight_hpp
 
 #include <SFML/Graphics.hpp>
-#include "ResourceManager.hpp"
+#include "src/ResourceManager.hpp"
 
 class TrafficLight {
 private:

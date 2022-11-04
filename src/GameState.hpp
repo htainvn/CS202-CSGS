@@ -11,10 +11,10 @@
 #include <stdio.h>
 
 #include <SFML/Graphics.hpp>
-#include "State.hpp"
-#include "Handler.hpp"
-#include "LaneGenerator.hpp"
-#include "definition_library.hpp"
+#include "src/State.hpp"
+#include "src/Handler.hpp"
+#include "src/LaneGenerator.hpp"
+#include "src/definition_library.hpp"
 
 class GameState : public State {
 private:

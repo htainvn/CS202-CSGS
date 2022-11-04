@@ -5,7 +5,7 @@
 //  Created by Hoang The Anh on 01/11/2022.
 //
 
-#include "GameState.hpp"
+#include "src/GameState.hpp"
 
 GameState::GameState(handler_ptr _data) {
     this->data = _data;

@@ -9,7 +9,7 @@
 #define Road_hpp
 
 #include <stdio.h>
-#include "Lane.hpp"
+#include "src/Lane.hpp"
 
 class Road : public Lane {
 private:

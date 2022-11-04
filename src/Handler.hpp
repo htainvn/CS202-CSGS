@@ -9,9 +9,9 @@
 #define Handler_h
 
 #include <SFML/Graphics.hpp>
-#include "StateManager.hpp"
-#include "ResourceManager.hpp"
-#include "LaneGenerator.hpp"
+#include "src/StateManager.hpp"
+#include "src/ResourceManager.hpp"
+#include "src/LaneGenerator.hpp"
 
 #include "Lane.hpp"
 

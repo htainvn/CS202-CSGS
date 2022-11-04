@@ -11,9 +11,9 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 
-#include "Handler.hpp"
+#include "src/Handler.hpp"
 
-#include "GameState.hpp"
+#include "src/GameState.hpp"
 
 class Game {
 private:

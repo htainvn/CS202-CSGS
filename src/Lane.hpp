@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 
-#include "definition_library.hpp"
+#include "src/definition_library.hpp"
 
 class Lane {
 public:

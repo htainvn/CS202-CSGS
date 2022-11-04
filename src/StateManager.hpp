@@ -11,9 +11,9 @@
 #include <stack>
 #include <stdio.h>
 
-#include "State.hpp"
+#include "src/State.hpp"
 
-#include "definition_library.hpp"
+#include "src/definition_library.hpp"
 
 class StateManager {
     
