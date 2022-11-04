@@ -1,3 +1,0 @@
-C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/sfml-populate.dir
-C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/edit_cache.dir
-C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/rebuild_cache.dir
