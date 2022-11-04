@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/CMakeFiles/sfml-populate"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/sfml-populate"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/CMakeFiles/sfml-populate.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/sfml-populate.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/CMakeFiles/CMakeFiles/sfml-populate-complete.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/CMakeFiles/sfml-populate-complete.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-build.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-build.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-configure.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-configure.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-download.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-download.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-install.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-install.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-mkdir.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-mkdir.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-patch.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-test.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-test.rule"
 		},
 		{
-			"file" : "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/CMakeFiles/sfml-populate-update.rule"
+			"file" : "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update.rule"
 		}
 	],
 	"target" : 

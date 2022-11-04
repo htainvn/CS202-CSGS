@@ -3,9 +3,9 @@
 # No other meaning or use of this file is supported.
 
 method=git
-command=/opt/homebrew/Cellar/cmake/3.24.2/bin/cmake;-P;/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-gitclone.cmake
-source_dir=/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-src
-work_dir=/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps
+command=C:/Program Files/CMake/bin/cmake.exe;-P;C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-gitclone.cmake
+source_dir=C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-src
+work_dir=C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps
 repository=https://github.com/SFML/SFML.git
 remote=origin
 init_submodules=TRUE

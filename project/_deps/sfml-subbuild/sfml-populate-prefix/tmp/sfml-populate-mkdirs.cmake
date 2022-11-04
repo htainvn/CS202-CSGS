@@ -4,19 +4,16 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-src"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-build"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/tmp"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src"
-  "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-src"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-build"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/tmp"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src"
+  "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp"
 )
 
-set(configSubDirs Debug)
+set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/Users/Administrator/Desktop/Deadline/CS202-CSGS/Project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/${subDir}")
 endforeach()
-if(cfgdir)
-  file(MAKE_DIRECTORY "/Users/hoangtheanh/Documents/GitHub/CS202-CSGS/project/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp${cfgdir}") # cfgdir has leading slash
-endif()
