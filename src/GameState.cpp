@@ -34,6 +34,7 @@ void GameState::init() {
     this->data->resource_manager.load_texture("TRAFFIC_YELLOW", TRAFFIC_SIGN_YELLOW_FILE_PATH);
     this->data->resource_manager.load_texture("TRAFFIC_GREEN", TRAFFIC_SIGN_GREEN_FILE_PATH);
     
+    
     for (int i = 600; i >= 0; i-=100) {
         lane_gen.add_lane(data->resource_manager, i, 0);
     }
