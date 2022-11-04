@@ -31,6 +31,5 @@ public:
     void move_right();
     void move_left();
     void move_down();
-    
     void render (sf::RenderWindow &window);
 };

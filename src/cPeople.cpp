@@ -52,3 +52,12 @@ void cpeople::move_left()
     if (can_move_left())
         x_ = x_ - 100;
 }
+
+void cpeople::move_down()
+{
+    if (can_move_down())
+    {
+        y_ += 100;
+        type_ = "mario_down.png";
+    }
+}
