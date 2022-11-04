@@ -1,7 +1,7 @@
-#include "Game.hpp"
+#include "src/Game.hpp"
 
 #include <iostream>
-#include "definition_library.hpp"
+#include "src/definition_library.hpp"
 
 int main() {
     Game CROSSING_ROAD = Game();

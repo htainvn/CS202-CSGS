@@ -5,7 +5,7 @@
 //  Created by Hoang The Anh on 01/11/2022.
 //
 
-#include "Game.hpp"
+#include "src/Game.hpp"
 
 Game::Game() {
     //if (this->machine->window.isOpen()) this->machine->window.close();

@@ -1,25 +1,17 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.8)
 project(CROSSING_ROAD LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+file(GLOB SOURCES_OPERATION "src/*.h" "src/*.hpp" "src/*.cpp")
+file(GLOB SOURCES_DESIGN "src_design")
+
 set(PROJECT_SOURCES 
 	main.cpp
-	StateManager.hpp StateManager.cpp
-	State.hpp
-	definition_library.hpp
-	Game.hpp Game.cpp
-	Handler.hpp
-	GameState.hpp GameState.cpp
-	Lane.hpp	Lane.cpp
-	Pathway.hpp	Pathway.cpp
-	Road.hpp	Road.cpp
-	River.hpp	River.cpp
-	LaneGenerator.hpp	LaneGenerator.cpp
-    ResourceManager.hpp ResourceManager.cpp
-    TrafficLight.hpp TrafficLight.cpp
+	${SOURCES_OPERATION}
+	${SOURCES_DESIGN}
 )
 
 include(FetchContent)

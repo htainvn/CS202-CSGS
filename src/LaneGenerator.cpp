@@ -5,7 +5,7 @@
 //  Created by Hoang The Anh on 01/11/2022.
 //
 
-#include "LaneGenerator.hpp"
+#include "src/LaneGenerator.hpp"
 
 int LaneGenerator::get_prediction_type() {
     return prediction[0].get_lane_type();

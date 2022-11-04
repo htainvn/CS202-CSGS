@@ -1,7 +1,8 @@
 #pragma once
 
 #include <filesystem>
-#include <ResourceManager.hpp>
+
+#include <src/ResourceManager.hpp>
 
 //define here
 #define state_ptr State*
@@ -12,8 +13,8 @@
 #define SCREEN_HEIGHT 700
 #define BOUNDARY_LANE 600
 #define HEIGHT_TITLE 100
-#define WORKING_DIR std::filesystem::current_path()
-#define PAVEMENT_IMAGE_FILE_PATH "/Users/hoangtheanh/Documents/HCMUS/CS202/Project/environment/pavement.png"
+#define WORKING_DIR get_current_dir_name();
+#define PAVEMENT_IMAGE_FILE_PATH "./src_design/environment/pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH "/Users/hoangtheanh/Documents/HCMUS/CS202/Project/environment/left-bottomdash-normal.png"
 #define LEFT_BOTTOMDASH_TOP_FILE_PATH "/Users/hoangtheanh/Documents/HCMUS/CS202/Project/environment/left-bottomdash-top.png"
 #define LEFT_FULLDASH_NORMAL_FILE_PATH "/Users/hoangtheanh/Documents/HCMUS/CS202/Project/environment/left-fulldash-normal.png"
@@ -45,26 +46,3 @@
 #define LANE_MOVING_SPEED 20.f
 #define SHIFT_MOVING_SPEED 300.f
 #define LANE_SPAWN_SPEED 0.2f
-
-
-class Coordinate {
-private:
-    int x = 0;
-    int y = 0;
-public:
-    Coordinate() = default;
-    Coordinate(int _x, int _y) {
-        this->x = _x;
-        this->y = _y;
-    }
-    Coordinate(const Coordinate& another) {
-        this->x = another.x;
-        this->y = another.y;
-    }
-    int getX() {
-        return x;
-    }
-    int getY() {
-        return y;
-    }
-};

@@ -5,7 +5,7 @@
 //  Created by Hoang The Anh on 01/11/2022.
 //
 
-#include "Pathway.hpp"
+#include "src/Pathway.hpp"
 
 Pathway::Pathway(sf::Texture& texture) {
     this->sprite.setTexture(texture);

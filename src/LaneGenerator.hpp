@@ -12,11 +12,11 @@
 
 #include <vector>
 
-#include "ResourceManager.hpp"
-#include "Lane.hpp"
-#include "Pathway.hpp"
-#include "River.hpp"
-#include "Road.hpp"
+#include "src/ResourceManager.hpp"
+#include "src/Lane.hpp"
+#include "src/Pathway.hpp"
+#include "src/River.hpp"
+#include "src/Road.hpp"
 
 class LaneGenerator {
     
