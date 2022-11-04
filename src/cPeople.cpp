@@ -42,6 +42,14 @@ bool cpeople::can_move_left()
         return true;
 }
 
+bool cpeople::can_move_down()
+{
+    if (y_ + 200 < y_res)
+        return true;
+    else
+        return false;
+}
+
 void cpeople::move_right()
 {
     if (can_move_right())
