@@ -17,7 +17,7 @@ Game::Game() {
 void Game::frame_refresh(float& currentTime, float& runningTime) {
     float nextTime = this->game_clock.getElapsedTime().asSeconds();
     float dis = nextTime - currentTime;
-    dis = fmin(0.25f, dis);
+    dis = std::min(0.25f, dis);
     runningTime += dis;
     while (runningTime >= FRAME_RATE_SECOND) {
         this->machine->state_manager.get_current_state()->handle_input();
