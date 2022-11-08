@@ -1,4 +1,4 @@
-#include "People.hpp"
+#include "class.h"
 
 cpeople::cpeople(double x, double y, bool alive, std::string type, double size)
 {
@@ -16,14 +16,12 @@ std::string cpeople::type_path () const
     return type_;
 }
 
-double cpeople::Ox_coordinate() const
+sf::Vector2f cpeople::get_position() const
 {
-    return x_;
-}
-
-double cpeople::Oy_coordinate() const
-{
-    return y_;
+    sf::Vector2f vector;
+    vector.x = x_;
+    vector.y = y_;
+    return vector;
 }
 
 bool cpeople::can_move_right()
@@ -90,7 +88,16 @@ sf::Sprite set_character(const cpeople &character)
         std::cout << "image loading error!" << std::endl;
     }
     sp.setTexture(image);
-    sf::Vector2f v(character.Ox_coordinate(), character.Oy_coordinate());
+    sf::Vector2f v = character.get_position();
     sp.setPosition(v);
     return sp;
+}
+
+bool is_collision(sf::Vector2f vector, sf::Vector2f character)
+{
+    if (vector.x >= character.x && vector.x <= character.x + 100 && vector.y == character.y)
+    {
+        return true;
+    }
+    return false;
 }

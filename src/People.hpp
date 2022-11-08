@@ -1,12 +1,11 @@
-//
-//  People.hpp
-//  CROSSING_ROAD
-//
-//  Created by Hoang The Anh on 06/11/2022.
-//
-
 #ifndef People_hpp
 #define People_hpp
+
+#ifndef class_h
+#define class_h
+
+
+#endif /* class_h */
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -27,8 +26,7 @@ public:
     cpeople(double x = x_res/2, double y = y_res - 400, bool alive = true, std::string type = "/Users/hovietbaolong/Documents/GitHub/CS202-CSGS/src_design/people/mario_forward.png", double size = dsize);
     ~cpeople();
     std::string type_path () const;
-    double Ox_coordinate() const;
-    double Oy_coordinate() const;
+    sf::Vector2f get_position() const;
     bool can_move_right();
     bool can_move_left();
     bool can_move_down();
@@ -39,3 +37,6 @@ public:
 };
 
 sf::Sprite set_character (const cpeople &character);
+
+bool is_collision(sf::Vector2f obs, sf::Vector2f character);
+
