@@ -8,16 +8,34 @@
 #ifndef People_hpp
 #define People_hpp
 
-#include <stdio.h>
+#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <string>
 
-class People {
-  
+#define x_res 1000
+#define y_res 700
+#define dsize 100
+
+class cpeople
+{
 private:
-    
+    double x_,y_;
+    bool alive_;
+    std::string type_;
+    double size_;
 public:
-    void go_to_position(int x, int y) {}
-    
-    
+    cpeople(double x = x_res/2, double y = y_res - 400, bool alive = true, std::string type = "/Users/hovietbaolong/Documents/GitHub/CS202-CSGS/src_design/people/mario_forward.png", double size = dsize);
+    ~cpeople();
+    std::string type_path () const;
+    double Ox_coordinate() const;
+    double Oy_coordinate() const;
+    bool can_move_right();
+    bool can_move_left();
+    bool can_move_down();
+    void move_right();
+    void move_left();
+    void move_down();
+    void change_type (std::string type);
 };
 
-#endif /* People_hpp */
+sf::Sprite set_character (const cpeople &character);
