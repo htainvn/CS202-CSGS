@@ -19,19 +19,19 @@
 class Lane {
 public:
     sf::Sprite sprite;
-    virtual int get_lane_type() {}
+    virtual int get_lane_type() { return 0; }
     virtual void allocate_lane_position(float x, float y) { }
     virtual void adjust_objects() {}
-    virtual std::vector<sf::Sprite> all_relative_object() {}
+    virtual std::vector<sf::Sprite> all_relative_object() { return std::vector<sf::Sprite>(0); }
     
     virtual void update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock) {}
     virtual void stop_traffic() {}
     
     //for road only
-    virtual int see_position() {}
-    virtual int see_dir() {}
-    virtual int see_bottom_type() {}
-    virtual int see_top_type() {}
+    virtual int see_position() { return 0; }
+    virtual int see_dir() { return 0; }
+    virtual int see_bottom_type() { return 0; }
+    virtual int see_top_type() { return 0;  }
     virtual std::string get_texture_code() {return "";}
     virtual void change_dir(int x) {}
     virtual void change_position(int x) {}
