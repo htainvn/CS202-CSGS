@@ -1,6 +1,6 @@
-#include "class.h"
+#include "People.hpp"
 
-cpeople::cpeople(double x, double y, bool alive, std::string type, double size)
+People::People(double x, double y, bool alive, std::string type, double size)
 {
     x_ = x;
     y_ = y;
@@ -9,14 +9,14 @@ cpeople::cpeople(double x, double y, bool alive, std::string type, double size)
     size_ = size;
 }
 
-cpeople::~cpeople(){}
+People::~People(){}
 
-std::string cpeople::type_path () const
+std::string People::type_path () const
 {
     return type_;
 }
 
-sf::Vector2f cpeople::get_position() const
+sf::Vector2f People::get_position() const
 {
     sf::Vector2f vector;
     vector.x = x_;
@@ -24,7 +24,7 @@ sf::Vector2f cpeople::get_position() const
     return vector;
 }
 
-bool cpeople::can_move_right()
+bool People::can_move_right()
 {
     if (x_ + size_ >= x_res)
         return false;
@@ -32,7 +32,7 @@ bool cpeople::can_move_right()
         return true;
 }
 
-bool cpeople::can_move_left()
+bool People::can_move_left()
 {
     if (x_ <= 0)
         return false;
@@ -40,7 +40,7 @@ bool cpeople::can_move_left()
         return true;
 }
 
-bool cpeople::can_move_down()
+bool People::can_move_down()
 {
     if (y_ + 200 < y_res)
         return true;
@@ -48,38 +48,38 @@ bool cpeople::can_move_down()
         return false;
 }
 
-void cpeople::move_right()
+void People::move_right()
 {
     if (can_move_right())
     {
         x_ = x_ + 100;
-        type_ = "/Users/hovietbaolong/Desktop/crossing_road/Picture3.png";
+        type_ = "MARIO_RIGHT";
     }
 }
-void cpeople::move_left()
+void People::move_left()
 {
     if (can_move_left())
     {
         x_ = x_ - 100;
-        type_ = "/Users/hovietbaolong/Desktop/crossing_road/PICTURE 5.png";
+        type_ = "MARIO_LEFT";
     }
 }
 
-void cpeople::move_down()
+void People::move_down()
 {
     if (can_move_down())
     {
         y_ += 100;
-        type_ = "/Users/hovietbaolong/Desktop/crossing_road/Picture2.png";
+        type_ = "MARIO_DOWNWARD";
     }
 }
 
-void cpeople::change_type (std::string type)
+void People::change_type (std::string type)
 {
     type_ = type;
 }
 
-sf::Sprite set_character(const cpeople &character)
+sf::Sprite set_character(const People &character)
 {
     sf::Sprite sp;
     sf::Texture image;
