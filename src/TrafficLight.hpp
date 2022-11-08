@@ -16,10 +16,13 @@ private:
     sf::Sprite sprite;
     int status = 0;
 public:
-    TrafficLight(ResourceManager& resource_manager);
-    void turn_red();
-    void turn_yellow();
-    void turn_green();
+    TrafficLight() = default;
+    TrafficLight(sf::Texture& texture);
+    void turn_red(sf::Texture& texture);
+    void turn_yellow(sf::Texture& texture);
+    void turn_green(sf::Texture& texture);
+    void allocate_position(float oy);
+    sf::Sprite out_scr();
 };
 
 #endif /* TrafficLight_hpp */

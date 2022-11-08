@@ -38,9 +38,13 @@ public:
     
     ~StateManager() {
         while (!states_container.empty()) {
-            state_ptr temp = states_container.top();
-            delete temp;
+            delete states_container.top();
+            states_container.top() = nullptr;
             states_container.pop();
+        }
+        if (received_state) {
+            delete received_state;
+            received_state = nullptr;
         }
     }
 };

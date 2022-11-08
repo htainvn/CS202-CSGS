@@ -14,12 +14,12 @@ void StateManager::process_request() {
         case 0:
             if (!this->states_container.empty()) this->states_container.top()->pause();
             this->states_container.push(std::move(received_state));
-            this->states_container.top()->init();
+            this->states_container.top()->init(0);
             break;
         case 1:
             if (!this->states_container.empty()) this->states_container.pop();
             this->states_container.push(std::move(received_state));
-            this->states_container.top()->init();
+            this->states_container.top()->init(0);
             break;
         case 2:
             if (!this->states_container.empty()) this->states_container.pop();

@@ -28,8 +28,13 @@ public:
     void display_lane(LaneGenerator& lane_gen) {
         int n = lane_gen.counting_lanes();
         for (int i = 0; i < n; i++) {
-            lane_gen[i].sprite.setPosition(sf::Vector2f(window.getSize().x, 0));
-            window.draw(lane_gen[i].sprite);
+            window.draw(lane_gen[i]->sprite);
+        }
+        for (int i = n-1; i >= 0; i--) {
+            auto cus = lane_gen[i]->all_relative_object();
+            for (int j = 0; j < cus.size(); j++) {
+                window.draw(cus[j]);
+            }
         }
     }
     

@@ -12,13 +12,42 @@
 #include <SFML/Graphics.hpp>
 
 #include "src/definition_library.hpp"
+#include "src/ResourceManager.hpp"
+#include "src/Vehicle.hpp"
+#include "src/Animal.hpp"
 
 class Lane {
 public:
     sf::Sprite sprite;
-    int get_lane_type() {}
-    void allocate_lane_position(float x, float y) {}
-    ~Lane() {}
+    virtual int get_lane_type() {}
+    virtual void allocate_lane_position(float x, float y) { }
+    virtual void adjust_objects() {}
+    virtual std::vector<sf::Sprite> all_relative_object() {}
+    
+    virtual void update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock) {}
+    virtual void stop_traffic() {}
+    
+    //for road only
+    virtual int see_position() {}
+    virtual int see_dir() {}
+    virtual int see_bottom_type() {}
+    virtual int see_top_type() {}
+    virtual std::string get_texture_code() {return "";}
+    virtual void change_dir(int x) {}
+    virtual void change_position(int x) {}
+    virtual void change_bottom_type(int x) {}
+    virtual void change_top_type(int x) {}
+    virtual void change_texture(ResourceManager& resource_manager) {}
+    virtual void add_vehicle(Vehicle*& vehicle) {}
+    //
+    
+    
+    // for river only
+    virtual void add_log(Log*& log) {}
+    virtual void add_animal(Animal*& animal) {}
+    //
+    
+    virtual ~Lane() {}
 };
 
 #endif /* Lane_hpp */

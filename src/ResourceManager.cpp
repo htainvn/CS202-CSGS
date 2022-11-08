@@ -13,6 +13,9 @@ void ResourceManager::load_texture(std::string hash_name, std::string path) {
         texture.setSmooth(true);
         this->storage.push_back(make_pair(hash_name, texture));
     }
+    else {
+        std::cout << "error at: " << path << "\n";
+    }
 }
 
 sf::Texture& ResourceManager::get_texture(std::string hash_name) {

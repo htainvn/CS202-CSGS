@@ -23,11 +23,10 @@ private:
     
     void run();
     
-public:
-    Game();
-    
     void frame_refresh(float&, float&);
     
+public:
+    Game();
 };
 
 #endif /* Game_hpp */

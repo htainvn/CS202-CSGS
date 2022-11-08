@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Oblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 This file shows the convention for loading and caching game.\
+\
+//The first line of files: 2 floats represent the position of the character\
+\
+//The second line: three integers represent level, path_left, road_left\
+\
+// The third line: one integers represents the number of lanes in the lane-generator\
+\
+Let say the lane generator currently has n lanes. Each one of them is represented as a bunch of lines, if needed. Each line of formula has conditions. If the line is not for the lane, skip it but do not skip the count. The formula is:\
+\
+//the first line: one integer represents the type of lane\
+//the second line: one float represents the position of lane\
+//the third line: if the lane is a road, print /position/, /dir/, /bottom_type/, /top_type/.\
+// the 4th line: if the lane is a road, print the number 
+\f1\i n
+\f0\i0  of vehicles. if the lane is a river, print the number 
+\f1\i n 
+\f0\i0 of logs\
+// from the 5th line -> 
+\f1\i n 
+\f0\i0 + 4 line: one float represents the position of the vehicle or log.\
+// the n+5 line: if the road is a river, print the number 
+\f1\i l 
+\f0\i0 of animals\
+// from the n+6 line: one float represents the position of the animal\
+\
+Let say we come to line m.\
+\
+// Line m: one integer represents the type of the predicted lane 1\
+// Line m+1: if the lane is a road, print /position/, /dir/, /bottom_type/, /top_type/.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 // Line m+1: one integer represents the type of the predicted lane 1\
+// Line m+2: if the lane is a road, print /position/, /dir/, /bottom_type/, /top_type/.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+//Line m+3: one integer represents the counting of the clock as seconds}

@@ -15,9 +15,13 @@
 #include "src/Handler.hpp"
 #include "src/LaneGenerator.hpp"
 #include "src/definition_library.hpp"
+#include "src/People.hpp"
 
 class GameState : public State {
 private:
+    
+    People people;
+    
     handler_ptr data;
     
     sf::Clock countingClock = sf::Clock();
@@ -29,11 +33,10 @@ private:
 public:
     GameState(handler_ptr _data);
     
-    void init();
+    void init(int status);
     void handle_input();
     void update(float dt);
     void draw(float dt);
-    
     void pause();
     void resume();
     
