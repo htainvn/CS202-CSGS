@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB SOURCES_OPERATION "src/*.h" "src/*.hpp" "src/*.cpp")
-file(GLOB SOURCES_DESIGN "src_design")
+file(GLOB SOURCES_DESIGN "src_design/environment/*.png" "src_design/people/*.png" "src_design/vehicle/*.png" "src_design/animal/*.png")
 
 set(PROJECT_SOURCES 
 	main.cpp
