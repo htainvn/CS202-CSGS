@@ -13,6 +13,7 @@
 #define SCREEN_HEIGHT 700
 #define BOUNDARY_LANE 600
 #define HEIGHT_TITLE 100
+#define dsize 100
 
 #define WORKING_DIR std::filesystem::current_path().string()
 #define PAVEMENT_IMAGE_FILE_PATH WORKING_DIR+"/src_design/environment/pavement.png"

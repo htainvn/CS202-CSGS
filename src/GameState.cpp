@@ -42,6 +42,10 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("MARIO_RIGHT", MARIO_RIGHT_FILE_PATH);
     this->data->resource_manager.load_texture("MARIO_LEFT", MARIO_LEFT_FILE_PATH);
 
+    //people
+    this->people = People(this->data->resource_manager);
+    //
+    
     
     if (status == 0) {
         //initialization
@@ -140,6 +144,22 @@ void GameState::handle_input() {
                 //else {
                     
                 //}
+            case (sf::Event::KeyPressed):
+            {
+                switch (key_event.key.code) {
+                    case (sf::Keyboard::D):
+                        this->people.move_right(this->data->resource_manager);
+                        break;
+                    case (sf::Keyboard::A):
+                        this->people.move_left(this->data->resource_manager);
+                        break;
+                    case (sf::Keyboard::S):
+                        this->people.move_down(this->data->resource_manager);
+                        break;
+                    default:
+                        break;
+                }
+            }
                 break;
         }
     }
@@ -167,6 +187,8 @@ void GameState::draw(float dt) {
     this->data->window.clear();
     
     this->data->display_lane(lane_gen);
+    
+    this->data->window.draw(this->people.get_sprite());
     
     this->data->window.display();
 }

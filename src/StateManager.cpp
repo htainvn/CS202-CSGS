@@ -11,17 +11,17 @@ void StateManager::process_request() {
     switch(this->syntax) {
         case -1:
             break;
-        case 0:
+        case 0: //add
             if (!this->states_container.empty()) this->states_container.top()->pause();
             this->states_container.push(std::move(received_state));
             this->states_container.top()->init(0);
             break;
-        case 1:
+        case 1: //replace
             if (!this->states_container.empty()) this->states_container.pop();
             this->states_container.push(std::move(received_state));
             this->states_container.top()->init(0);
             break;
-        case 2:
+        case 2: //delete
             if (!this->states_container.empty()) this->states_container.pop();
             if (!this->states_container.empty()) this->states_container.top()->resume();
             break;

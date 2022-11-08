@@ -1,12 +1,11 @@
 #include "People.hpp"
 
-People::People(double x, double y, bool alive, std::string type, double size)
+People::People(ResourceManager& resource_manager, bool alive, std::string type)
 {
-    x_ = x;
-    y_ = y;
+    sp.setTexture(resource_manager.get_texture(type));
+    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT - 300));
     alive_ = alive;
     type_ = type;
-    size_ = size;
 }
 
 People::~People(){}
@@ -16,17 +15,20 @@ std::string People::type_path () const
     return type_;
 }
 
+void People::go_to_position(int x, int y)
+{
+    sp.setPosition(sf::Vector2f(x, y));
+}
+
 sf::Vector2f People::get_position() const
 {
-    sf::Vector2f vector;
-    vector.x = x_;
-    vector.y = y_;
-    return vector;
+    return sp.getPosition();
 }
 
 bool People::can_move_right()
 {
-    if (x_ + size_ >= x_res)
+    sf::Vector2f v = sp.getPosition();
+    if (v.x + dsize>= SCREEN_WIDTH)
         return false;
     else
         return true;
@@ -34,7 +36,8 @@ bool People::can_move_right()
 
 bool People::can_move_left()
 {
-    if (x_ <= 0)
+    sf::Vector2f v = sp.getPosition();
+    if (v.x <= 0)
         return false;
     else
         return true;
@@ -42,41 +45,52 @@ bool People::can_move_left()
 
 bool People::can_move_down()
 {
-    if (y_ + 200 < y_res)
+    sf::Vector2f v = sp.getPosition();
+    if (v.y + 200 < SCREEN_HEIGHT)
         return true;
     else
         return false;
 }
 
-void People::move_right()
+void People::move_right(ResourceManager& resource_manager)
 {
+    sf::Vector2f v = sp.getPosition();
     if (can_move_right())
     {
-        x_ = x_ + 100;
+        sp.setPosition(sf::Vector2f(v.x + 100, v.y));
         type_ = "MARIO_RIGHT";
+        sp.setTexture(resource_manager.get_texture(type_));
     }
 }
-void People::move_left()
+void People::move_left(ResourceManager& resource_manager)
 {
+    sf::Vector2f v = sp.getPosition();
     if (can_move_left())
     {
-        x_ = x_ - 100;
+        sp.setPosition(sf::Vector2f(v.x - 100, v.y));
         type_ = "MARIO_LEFT";
+        sp.setTexture(resource_manager.get_texture(type_));
     }
 }
 
-void People::move_down()
+void People::move_down(ResourceManager& resource_manager)
 {
+    sf::Vector2f v = sp.getPosition();
     if (can_move_down())
     {
-        y_ += 100;
+        sp.setPosition(sf::Vector2f(v.x, v.y + 100));
         type_ = "MARIO_DOWNWARD";
+        sp.setTexture(resource_manager.get_texture(type_));
     }
 }
 
 void People::change_type (std::string type)
 {
     type_ = type;
+}
+
+sf::Sprite People::get_sprite () const{
+    return sp;
 }
 
 sf::Sprite set_character(const People &character)
