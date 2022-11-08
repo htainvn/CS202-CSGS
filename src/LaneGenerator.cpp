@@ -52,8 +52,8 @@ void LaneGenerator::delete_bottom_lane() {
 }
 
 void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShifting, ResourceManager& resource_manager, bool is_green) {
+    float movement = moving_speed * FRAME_RATE_SECOND;
     for (int i = 0; i < this->lanes.size(); i++) {
-        float movement = moving_speed * FRAME_RATE_SECOND;
         this->lanes[i]->sprite.move(sf::Vector2f(0, movement));
     }
     if (this->lanes[0]->sprite.getPosition().y >= BOUNDARY_LANE) {

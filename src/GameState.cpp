@@ -137,13 +137,6 @@ void GameState::handle_input() {
             case (sf::Event::Closed) :
                 this->data->window.close();
                 break;
-            case (sf::Event::MouseButtonPressed) :
-                //if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-                    isShifting = true;
-                //}
-                //else {
-                    
-                //}
             case (sf::Event::KeyPressed):
             {
                 switch (key_event.key.code) {
@@ -156,6 +149,9 @@ void GameState::handle_input() {
                     case (sf::Keyboard::S):
                         this->people.move_down(this->data->resource_manager);
                         break;
+                    case (sf::Keyboard::W):
+                        isShifting = true;
+                        break;
                     default:
                         break;
                 }
@@ -166,7 +162,15 @@ void GameState::handle_input() {
 }
 
 void GameState::update(float dt) {
+    bool catchShifting = isShifting;
+    
     this->lane_gen.updating(((isShifting) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
+    people.move(sf::Vector2f(0, ((isShifting) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    
+    if (catchShifting) {
+        people.get_sprite().setPosition(sf::Vector2f(people.get_sprite().getPosition().x, lane_gen[2]->sprite.getPosition().y));
+    }
+    
     for (int i = 0; i < lane_gen.counting_lanes(); i++) {
         lane_gen[i]->adjust_objects();
     }

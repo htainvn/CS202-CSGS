@@ -46,7 +46,7 @@ bool People::can_move_left()
 bool People::can_move_down()
 {
     sf::Vector2f v = sp.getPosition();
-    if (v.y + 200 < SCREEN_HEIGHT)
+    if (v.y + 100 < SCREEN_HEIGHT)
         return true;
     else
         return false;
@@ -89,8 +89,12 @@ void People::change_type (std::string type)
     type_ = type;
 }
 
-sf::Sprite People::get_sprite () const{
+sf::Sprite& People::get_sprite () {
     return sp;
+}
+
+void People::move (sf::Vector2f vec){
+    sp.move(vec);
 }
 
 sf::Sprite set_character(const People &character)

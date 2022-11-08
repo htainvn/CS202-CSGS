@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "src/definition_library.hpp"
-
+#include "src/LaneGenerator.hpp"
 
 
 class People
@@ -26,10 +26,12 @@ public:
     void move_right(ResourceManager& resource_manager);
     void move_left(ResourceManager& resource_manager);
     void move_down(ResourceManager& resource_manager);
+    void move_forward(ResourceManager& resource_manager, const LaneGenerator& lane);
     void change_type (std::string type);
     void scroll();
     void go_to_position(int x, int y);
-    sf::Sprite get_sprite () const;
+    void move (sf::Vector2f vec);
+    sf::Sprite& get_sprite ();
 };
 
 sf::Sprite set_character (const People &character);

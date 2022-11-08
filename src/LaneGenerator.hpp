@@ -17,6 +17,7 @@
 #include "src/Pathway.hpp"
 #include "src/River.hpp"
 #include "src/Road.hpp"
+//#include "src/People.hpp"
 
 class LaneGenerator {
     
