@@ -37,6 +37,12 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("TRAFFIC_YELLOW", TRAFFIC_SIGN_YELLOW_FILE_PATH);
     this->data->resource_manager.load_texture("TRAFFIC_GREEN", TRAFFIC_SIGN_GREEN_FILE_PATH);
     
+    this->data->resource_manager.load_texture("MARIO_FORWARD", MARIO_FORWARD_FILE_PATH);
+    this->data->resource_manager.load_texture("MARIO_DOWNWARD", MARIO_DOWNWARD_FILE_PATH);
+    this->data->resource_manager.load_texture("MARIO_RIGHT", MARIO_RIGHT_FILE_PATH);
+    this->data->resource_manager.load_texture("MARIO_LEFT", MARIO_LEFT_FILE_PATH);
+
+    
     if (status == 0) {
         //initialization
         

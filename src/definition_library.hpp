@@ -39,6 +39,11 @@
 #define TRAFFIC_SIGN_YELLOW_FILE_PATH WORKING_DIR+"/src_design/environment/trafficsign_yellow.png"
 #define TRAFFIC_SIGN_GREEN_FILE_PATH WORKING_DIR+"/src_design/environment/trafficsign_green.png"
 
+#define MARIO_FORWARD_FILE_PATH WORKING_DIR+"/src_design/people/mario_forward.png"
+#define MARIO_DOWNWARD_FILE_PATH WORKING_DIR+"/src_design/people/mario_down.png"
+#define MARIO_RIGHT_FILE_PATH WORKING_DIR+"/src_design/people/mario_right.png"
+#define MARIO_LEFT_FILE_PATH WORKING_DIR+"/src_design/people/mario_left.png"
+
 #define PATHWAY_TYPE 0
 #define PATHWAYLIGHT_TYPE 1
 #define ROAD_TYPE 2
