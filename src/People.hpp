@@ -23,14 +23,18 @@ public:
     bool can_move_right();
     bool can_move_left();
     bool can_move_down();
+    bool can_move_forward();
     void move_right(ResourceManager& resource_manager);
     void move_left(ResourceManager& resource_manager);
     void move_down(ResourceManager& resource_manager);
-    void move_forward(ResourceManager& resource_manager, const LaneGenerator& lane);
+    void move_forward(ResourceManager& resource_manager);
     void change_type (std::string type);
     void scroll();
+    void touch_border();
     void go_to_position(int x, int y);
     void move (sf::Vector2f vec);
+    bool is_alive();
+    bool is_mid_height();
     sf::Sprite& get_sprite ();
 };
 

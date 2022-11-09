@@ -43,6 +43,14 @@ bool People::can_move_left()
         return true;
 }
 
+bool People::can_move_forward()
+{
+    sf::Vector2f v = sp.getPosition();
+    if (v.y > 0)
+        return true;
+    return false;
+}
+
 bool People::can_move_down()
 {
     sf::Vector2f v = sp.getPosition();
@@ -50,6 +58,14 @@ bool People::can_move_down()
         return true;
     else
         return false;
+}
+
+bool People::is_mid_height()
+{
+    sf::Vector2f v = sp.getPosition();
+    if (v.y <= SCREEN_HEIGHT - 300)
+        return true;
+    return false;
 }
 
 void People::move_right(ResourceManager& resource_manager)
@@ -82,6 +98,32 @@ void People::move_down(ResourceManager& resource_manager)
         type_ = "MARIO_DOWNWARD";
         sp.setTexture(resource_manager.get_texture(type_));
     }
+}
+
+void People::move_forward(ResourceManager& resource_manager)
+{
+    sf::Vector2f v = sp.getPosition();
+    if(can_move_forward()){
+        sp.setPosition(sf::Vector2f(v.x, v.y - 100));
+        type_ = "MARIO_FORWARD";
+        sp.setTexture(resource_manager.get_texture(type_));
+    }
+}
+
+void People::touch_border()
+{
+    sf::Vector2f v = get_position();
+    if (v.y + 100 >= SCREEN_HEIGHT)
+    {
+        alive_ = false;
+        return true;
+    }
+    return false;
+}
+
+bool People::is_alive()
+{
+    return alive_;
 }
 
 void People::change_type (std::string type)
