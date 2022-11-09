@@ -30,7 +30,7 @@ public:
     void move_forward(ResourceManager& resource_manager);
     void change_type (std::string type);
     void scroll();
-    void touch_border();
+    bool touch_border();
     void go_to_position(int x, int y);
     void move (sf::Vector2f vec);
     bool is_alive();

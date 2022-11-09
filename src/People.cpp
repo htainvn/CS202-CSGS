@@ -46,7 +46,7 @@ bool People::can_move_left()
 bool People::can_move_forward()
 {
     sf::Vector2f v = sp.getPosition();
-    if (v.y > 0)
+    if (v.y > 100)
         return true;
     return false;
 }
@@ -110,7 +110,7 @@ void People::move_forward(ResourceManager& resource_manager)
     }
 }
 
-void People::touch_border()
+bool People::touch_border()
 {
     sf::Vector2f v = get_position();
     if (v.y + 100 >= SCREEN_HEIGHT)
