@@ -11,7 +11,7 @@ Pathway::Pathway(sf::Texture& texture) {
     this->sprite.setTexture(texture);
 }
 
-void Pathway::allocate_lane_position(float x, float y) {
+void Pathway::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     this->sprite.setPosition(sf::Vector2f(x, y));
 }
 
@@ -28,7 +28,7 @@ PathwayLight::PathwayLight(sf::Texture& texture_path, sf::Texture& texture_light
     this->light = TrafficLight(texture_light);
 }
 
-void PathwayLight::allocate_lane_position(float x, float y) {
+void PathwayLight::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     this->sprite.setPosition(sf::Vector2f(x, y));
     this->light.allocate_position(y);
 }

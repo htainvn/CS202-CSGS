@@ -13,6 +13,7 @@ GameState::GameState(handler_ptr _data) {
 }
 
 void GameState::init(int status) {
+    // road
     this->data->resource_manager.load_texture("PAVEMENT", PAVEMENT_IMAGE_FILE_PATH);
     this->data->resource_manager.load_texture("ROAD_LEFT_BOTTOMDASH_NORMAL", LEFT_BOTTOMDASH_NORMAL_FILE_PATH);
     this->data->resource_manager.load_texture("ROAD_LEFT_BOTTOMDASH_TOP", LEFT_BOTTOMDASH_TOP_FILE_PATH);
@@ -36,11 +37,32 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("TRAFFIC_RED", TRAFFIC_SIGN_RED_FILE_PATH);
     this->data->resource_manager.load_texture("TRAFFIC_YELLOW", TRAFFIC_SIGN_YELLOW_FILE_PATH);
     this->data->resource_manager.load_texture("TRAFFIC_GREEN", TRAFFIC_SIGN_GREEN_FILE_PATH);
-    
+    // people
     this->data->resource_manager.load_texture("MARIO_FORWARD", MARIO_FORWARD_FILE_PATH);
     this->data->resource_manager.load_texture("MARIO_DOWNWARD", MARIO_DOWNWARD_FILE_PATH);
     this->data->resource_manager.load_texture("MARIO_RIGHT", MARIO_RIGHT_FILE_PATH);
     this->data->resource_manager.load_texture("MARIO_LEFT", MARIO_LEFT_FILE_PATH);
+    // vehicle
+    this->data->resource_manager.load_texture("CL_0", CL_0);
+    this->data->resource_manager.load_texture("CL_1", CL_1);
+    this->data->resource_manager.load_texture("CL_2", CL_2);
+    this->data->resource_manager.load_texture("CL_3", CL_3);
+    this->data->resource_manager.load_texture("CL_4", CL_4);
+    this->data->resource_manager.load_texture("CL_5", CL_5);
+    this->data->resource_manager.load_texture("CL_6", CL_6);
+    this->data->resource_manager.load_texture("CL_7", CL_7);
+    this->data->resource_manager.load_texture("CL_8", CL_8);
+
+    this->data->resource_manager.load_texture("CR_0", CR_0);
+    this->data->resource_manager.load_texture("CR_1", CR_1);
+    this->data->resource_manager.load_texture("CR_2", CR_2);
+    this->data->resource_manager.load_texture("CR_3", CR_3);
+    this->data->resource_manager.load_texture("CR_4", CR_4);
+    this->data->resource_manager.load_texture("CR_5", CR_5);
+    this->data->resource_manager.load_texture("CR_6", CR_6);
+    this->data->resource_manager.load_texture("CR_7", CR_7);
+    this->data->resource_manager.load_texture("CR_8", CR_8);
+
 
     //people
     this->people = People(this->data->resource_manager);
@@ -70,6 +92,7 @@ void GameState::init(int status) {
         //end of initialization
     }
     else {
+        /*
         //load game
         std::ifstream fin(WORKING_DIR + "/datagame/data.txt");
         int x, y; fin >> x >> y;
@@ -130,7 +153,7 @@ void GameState::init(int status) {
         }
         long long ltc; fin >> ltc;
         while (countingClock.getElapsedTime().asSeconds() < ltc) {}
-        //end
+        //end */
     }
 }
 
@@ -171,7 +194,6 @@ void GameState::handle_input() {
 void GameState::update(float dt) {
     
     float mov_spd = std::min(2.0f * SHIFT_MOVING_SPEED, this->lane_gen.get_base() * SHIFT_MOVING_SPEED);
-    
     
     if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) mov_spd = 2.1f * SHIFT_MOVING_SPEED;
     

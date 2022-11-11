@@ -45,6 +45,25 @@
 #define MARIO_RIGHT_FILE_PATH WORKING_DIR+"/src_design/people/mario_right.png"
 #define MARIO_LEFT_FILE_PATH WORKING_DIR+"/src_design/people/mario_left.png"
 
+#define CL_0 WORKING_DIR+"/src_design/vehicle/CL_0.png"
+#define CL_1 WORKING_DIR+"/src_design/vehicle/CL_1.png"
+#define CL_2 WORKING_DIR+"/src_design/vehicle/CL_2.png"
+#define CL_3 WORKING_DIR+"/src_design/vehicle/CL_3.png"
+#define CL_4 WORKING_DIR+"/src_design/vehicle/CL_4.png"
+#define CL_5 WORKING_DIR+"/src_design/vehicle/CL_5.png"
+#define CL_6 WORKING_DIR+"/src_design/vehicle/CL_6.png"
+#define CL_7 WORKING_DIR+"/src_design/vehicle/CL_7.png"
+#define CL_8 WORKING_DIR+"/src_design/vehicle/CL_8.png"
+#define CR_0 WORKING_DIR+"/src_design/vehicle/CR_0.png"
+#define CR_1 WORKING_DIR+"/src_design/vehicle/CR_1.png"
+#define CR_2 WORKING_DIR+"/src_design/vehicle/CR_2.png"
+#define CR_3 WORKING_DIR+"/src_design/vehicle/CR_3.png"
+#define CR_4 WORKING_DIR+"/src_design/vehicle/CR_4.png"
+#define CR_5 WORKING_DIR+"/src_design/vehicle/CR_5.png"
+#define CR_6 WORKING_DIR+"/src_design/vehicle/CR_6.png"
+#define CR_7 WORKING_DIR+"/src_design/vehicle/CR_7.png"
+#define CR_8 WORKING_DIR+"/src_design/vehicle/CR_8.png"
+
 #define PATHWAY_TYPE 0
 #define PATHWAYLIGHT_TYPE 1
 #define ROAD_TYPE 2

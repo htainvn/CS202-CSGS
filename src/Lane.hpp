@@ -20,7 +20,7 @@ class Lane {
 public:
     sf::Sprite sprite;
     virtual int get_lane_type() { return 0; }
-    virtual void allocate_lane_position(float x, float y) { }
+    virtual void allocate_lane_position( ResourceManager& resource_manager, float x, float y) { }
     virtual void adjust_objects() {}
     virtual std::vector<sf::Sprite> all_relative_object() { return std::vector<sf::Sprite>(0); }
     

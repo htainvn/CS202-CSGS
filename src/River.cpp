@@ -15,7 +15,7 @@ River::River(sf::Texture& texture) {
     sprite.setTexture(texture);
 }
 
-void River::allocate_lane_position(float x, float y) {
+void River::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     sprite.setPosition(sf::Vector2f(x,y));
 }
 

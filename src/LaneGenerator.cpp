@@ -16,25 +16,25 @@ void LaneGenerator::add_lane(ResourceManager& resource_manager, float oy, int ty
     switch(type_of_lane) {
         case 0: {
             Pathway* new_lanep = new Pathway(resource_manager.get_texture("PAVEMENT"));
-            new_lanep->allocate_lane_position(0, oy);
+            new_lanep->allocate_lane_position( resource_manager, 0, oy);
             lanes.push_back(new_lanep);
             break;
         }
         case 1: {
              PathwayLight* new_lane = new PathwayLight(resource_manager.get_texture("PAVEMENT"), resource_manager.get_texture("TRAFFIC_RED"));
-             new_lane->allocate_lane_position(0, oy);
+             new_lane->allocate_lane_position(resource_manager, 0, oy);
              lanes.push_back(new_lane);
             break;
         }
         case 2: {
             Road* new_lanero = new Road(resource_manager);
-            new_lanero->allocate_lane_position(0, oy);
+            new_lanero->allocate_lane_position(resource_manager, 0, oy);
             lanes.push_back(new_lanero);
             break;
         }
         case 3: {
             River* new_laneri = new River(resource_manager.get_texture("RIVER"));
-            new_laneri->allocate_lane_position(0, oy);
+            new_laneri->allocate_lane_position(resource_manager, 0, oy);
             lanes.push_back(new_laneri);
             break;
         }
@@ -71,7 +71,7 @@ void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShift
                 this->road_left--;
             }
             this->lanes.push_back(prediction[0]);
-            lanes[lanes.size()-1]->allocate_lane_position(0, -100 + this->lanes[0]->sprite.getPosition().y - BOUNDARY_LANE);
+            lanes[lanes.size()-1]->allocate_lane_position( resource_manager, 0, -100 + this->lanes[0]->sprite.getPosition().y - BOUNDARY_LANE);
             prediction.erase(prediction.begin());
             add_prediction(resource_manager, type_of_spawn_lane);
         }
