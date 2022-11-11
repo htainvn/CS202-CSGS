@@ -43,19 +43,12 @@ std::vector<sf::Sprite> PathwayLight::all_relative_object() {
     return res;
 }
 
-void PathwayLight::update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock, sf::CircleShape& shape) {
-    if (status == 0) {
-        if (clock.getElapsedTime().asSeconds() >= 14) {
-            this->light.turn_yellow(resource_manager.get_texture("TRAFFIC_YELLOW"));
-            shape.setFillColor(sf::Color::Yellow);
-        }
-        else {
+void PathwayLight::update_traffic(ResourceManager& resource_manager, int& cnt_time) {
+    if (cnt_time >= RED_TIME_END) {
+        if (cnt_time >= YELLOW_TIME_START) this->light.turn_yellow(resource_manager.get_texture("TRAFFIC_YELLOW"));
+        else
             this->light.turn_green(resource_manager.get_texture("TRAFFIC_GREEN"));
-            shape.setFillColor(sf::Color::Green);
-        }
     }
-    else {
-            this->light.turn_red(resource_manager.get_texture("TRAFFIC_RED"));
-            shape.setFillColor(sf::Color::Red);
-    }
+    else
+        this->light.turn_red(resource_manager.get_texture("TRAFFIC_RED"));
 }

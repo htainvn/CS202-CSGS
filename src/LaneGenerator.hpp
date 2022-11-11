@@ -45,7 +45,7 @@ public:
     
     void delete_bottom_lane();
     
-    void updating(float moving_speed, sf::Clock& clock, bool& isShifting, ResourceManager& resource_manager, bool is_green);
+    void updating(float moving_speed, sf::Clock& clock, int& isShifting, bool& has_shifted, ResourceManager& resource_manager, bool is_green, int& real_level);
     
     int counting_lanes();
     

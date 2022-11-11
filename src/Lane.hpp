@@ -24,7 +24,7 @@ public:
     virtual void adjust_objects() {}
     virtual std::vector<sf::Sprite> all_relative_object() { return std::vector<sf::Sprite>(0); }
     
-    virtual void update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock, sf::CircleShape& shape) {}
+    virtual void update_traffic(ResourceManager& resource_manager, int& cnt_time) {}
     virtual void stop_traffic() {}
     
     //for road only

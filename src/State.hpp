@@ -8,8 +8,11 @@
 #ifndef State_h
 #define State_h
 
+#include <SFML/Graphics/Font.hpp>
+
 class State {
 public:
+    sf::Font* font;
     
     virtual void init(int status) = 0;
     virtual void handle_input() = 0;

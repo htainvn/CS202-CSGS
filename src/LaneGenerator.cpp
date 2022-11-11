@@ -51,7 +51,11 @@ void LaneGenerator::delete_bottom_lane() {
     this->lanes.resize(number_of_lanes);
 }
 
-void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShifting, ResourceManager& resource_manager, bool is_green) {
+void LaneGenerator::updating(float moving_speed, sf::Clock& clock, int& isShifting, bool& has_shifted, ResourceManager& resource_manager, bool is_green, int& real_level) {
+    
+    std::cout << isShifting << "\n";
+    
+    int able_shift = (isShifting) ? std::min(isShifting, 7)-1 : 0;
     
     float movement = moving_speed * FRAME_RATE_SECOND;
     
@@ -78,7 +82,14 @@ void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShift
         
         if (this->lanes[0]->sprite.getPosition().y >= SCREEN_HEIGHT) {
             delete_bottom_lane();
-            isShifting = false;
+            if (isShifting) isShifting--;
+            has_shifted = true;
+            if ((this->lanes[2]->get_lane_type() == 0) || (this->lanes[2]->get_lane_type() == 1)) {
+                real_level += (real_level & 0x1);
+            }
+            else {
+                real_level += 1 - (real_level & 0x1);
+            }
         }
     }
     
@@ -163,7 +174,7 @@ void LaneGenerator::set_level(int x) {
     srand((int) time(0));
     this->level = x;
     this->path_left = rand() % 3 + 1;
-    this->road_left = (x-1)/5 + 1;
+    this->road_left = (x-1)/CAR_PER_LANE + 1;
 }
 
 Lane*& LaneGenerator::get_prediction(int index) {

@@ -20,6 +20,12 @@
 class GameState : public State {
 private:
     
+    int level = 2;
+    
+    sf::Text count_down;
+    
+    sf::Text t_lev;
+    
     sf::CircleShape light_circle = sf::CircleShape(15.f);
     
     People people;
@@ -30,7 +36,9 @@ private:
     
     LaneGenerator lane_gen;
     
-    bool isShifting = false;
+    int isShifting = 0;
+    
+    bool has_shifted = false;
     
 public:
     GameState(handler_ptr _data);

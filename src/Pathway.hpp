@@ -34,7 +34,7 @@ public:
     void adjust_objects();
     std::vector<sf::Sprite> all_relative_object();
     int get_lane_type();
-    void update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock, sf::CircleShape& shape);
+    void update_traffic(ResourceManager& resource_manager, int& cnt_time);
     ~PathwayLight() {}
 };
 

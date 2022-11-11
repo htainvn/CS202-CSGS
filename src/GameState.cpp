@@ -52,7 +52,6 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("CL_6", CL_6);
     this->data->resource_manager.load_texture("CL_7", CL_7);
     this->data->resource_manager.load_texture("CL_8", CL_8);
-
     this->data->resource_manager.load_texture("CR_0", CR_0);
     this->data->resource_manager.load_texture("CR_1", CR_1);
     this->data->resource_manager.load_texture("CR_2", CR_2);
@@ -63,7 +62,6 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("CR_7", CR_7);
     this->data->resource_manager.load_texture("CR_8", CR_8);
 
-
     this->data->resource_manager.load_texture("CROC_LEFT",CROC_LEFT_FILE_PATH );
     this->data->resource_manager.load_texture("CROC_RIGHT",CROC_RIGHT_FILE_PATH );
     this->data->resource_manager.load_texture("HIPPO_LEFT",HIPPO_LEFT_FILE_PATH );
@@ -73,8 +71,29 @@ void GameState::init(int status) {
     //people
     this->people = People(this->data->resource_manager);
     
+    //font
+    this->font = new sf::Font();
+    if (!this->font->loadFromFile(FONT_PATH_FILE)) {
+        std::cout << "Loi!\n";
+    }
+    //
+    
+    //mini-light
     light_circle.setFillColor(sf::Color::Red);
     light_circle.setPosition(sf::Vector2f(10, 10));
+    
+    count_down.setPosition(sf::Vector2f(50, 13));
+    count_down.setFont(*font);
+    count_down.setCharacterSize(20);
+    count_down.setStyle(sf::Text::Regular);
+    //
+    
+    //show level
+    t_lev.setPosition(sf::Vector2f(700, 13));
+    t_lev.setFont(*font);
+    t_lev.setCharacterSize(20);
+    t_lev.setStyle(sf::Text::Regular);
+    //
     
     if (status == 0) {
         //initialization
@@ -138,7 +157,6 @@ void GameState::init(int status) {
                     fin >> nL;
                     for (int j = 0; j < nL; j++) {
                         float _posL; fin >> _posL;
-                        /*
                         Animal* new_animal = new Animal(data->resource_manager);
                         new_animal->go_to_position(_posL);
                         lane_gen[lane_gen.counting_lanes() - 1]->add_animal(new_animal);
@@ -184,10 +202,13 @@ void GameState::handle_input() {
                         this->people.move_down(this->data->resource_manager);
                         break;
                     case (sf::Keyboard::W):
-                        isShifting = true;
-                        this->people.move_forward(this->data->resource_manager);
-                        this->lane_gen.inc_multi_base();
-                        this->lane_gen.set_cutoff(countingClock.getElapsedTime().asMilliseconds());
+                        has_shifted = false;
+                        if (people.can_move_forward()) {
+                            this->people.move_forward(this->data->resource_manager);
+                            if (people.get_position().y <= lane_gen[2]->sprite.getPosition().y) ++isShifting;
+                            this->lane_gen.inc_multi_base();
+                            this->lane_gen.set_cutoff(countingClock.getElapsedTime().asMilliseconds());
+                        }
                         break;
                     default:
                         break;
@@ -200,40 +221,74 @@ void GameState::handle_input() {
 
 void GameState::update(float dt) {
     
-    float mov_spd = std::min(2.0f * SHIFT_MOVING_SPEED, this->lane_gen.get_base() * SHIFT_MOVING_SPEED);
+    //camera moving
     
-    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) mov_spd = 2.1f * SHIFT_MOVING_SPEED;
+    if (isShifting < 4) has_shifted = 1;
     
-    this->lane_gen.updating(((this->people.is_mid_height()) ? mov_spd : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
+    float mov_spd = ((isShifting < 4) ? (isShifting) : (isShifting + 1)) * SHIFT_MOVING_SPEED;
     
-    people.move(sf::Vector2f(0, ((this->people.is_mid_height()) ? mov_spd : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) mov_spd = 3.0f * SHIFT_MOVING_SPEED;
     
-    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) this->lane_gen.reset_base();
+    this->lane_gen.updating(((isShifting) ? mov_spd : LANE_MOVING_SPEED), countingClock, isShifting, has_shifted, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5), level);
     
+    t_lev.setString("Level: " + std::to_string(level/2));
+    
+    people.move(sf::Vector2f(0, ((isShifting) ? mov_spd : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    
+    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) {
+        this->lane_gen.reset_base();
+    }
+    //end here
+    
+    //adjust all objects on the lanes
     for (int i = 0; i < lane_gen.counting_lanes(); i++) {
         lane_gen[i]->adjust_objects();
     }
-    if (countingClock.getElapsedTime().asSeconds() >= 6) {
-        for (int i = 0; i < lane_gen.counting_lanes(); i++) {
-            lane_gen[i]->update_traffic(this->data->resource_manager, 0, countingClock, light_circle);
-        }
-    }
-    if (countingClock.getElapsedTime().asSeconds() > 15) {
-        for (int i = 0; i < lane_gen.counting_lanes(); i++) {
-            lane_gen[i]->update_traffic(this->data->resource_manager, 1, countingClock, light_circle);
-        }
+    //end here
+    
+    //manage the traffic light
+    int cnt_time;
+    while ((cnt_time = countingClock.getElapsedTime().asSeconds()) > GREEN_TIME_END) {
         countingClock.restart();
     }
+    
+    if (cnt_time >= RED_TIME_END) {
+        
+        if (cnt_time >= YELLOW_TIME_START) light_circle.setFillColor(sf::Color::Yellow);
+        else light_circle.setFillColor(sf::Color::Green);
+        
+        for (int i = 0; i < lane_gen.counting_lanes(); i++) {
+            lane_gen[i]->update_traffic(this->data->resource_manager, cnt_time);
+        }
+        
+        count_down.setString(std::to_string(GREEN_TIME_END - cnt_time));
+    }
+    else {
+        
+        light_circle.setFillColor(sf::Color::Red);
+        
+        for (int i = 0; i < lane_gen.counting_lanes(); i++) {
+            lane_gen[i]->update_traffic(this->data->resource_manager, cnt_time);
+        }
+        
+        count_down.setString(std::to_string(RED_TIME_END - cnt_time));
+    }
+    //end here
 }
 
 void GameState::draw(float dt) {
+    
     this->data->window.clear();
     
     this->data->display_lane(lane_gen);
     
-    this->data->window.draw(this->people.get_sprite());
+    if (has_shifted) this->data->window.draw(this->people.get_sprite());
     
     this->data->window.draw(light_circle);
+    
+    this->data->window.draw(t_lev);
+    
+    this->data->window.draw(count_down);
     
     this->data->window.display();
 }
@@ -250,5 +305,9 @@ GameState::~GameState() {
     if (data) {
         delete data;
         data = nullptr;
+    }
+    if (font) {
+        delete font;
+        font = nullptr;
     }
 }

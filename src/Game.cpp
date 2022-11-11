@@ -21,8 +21,8 @@ void Game::frame_refresh(float& currentTime, float& runningTime) {
     runningTime += dis;
     while (runningTime >= FRAME_RATE_SECOND) {
         this->machine->state_manager.get_current_state()->handle_input();
-        this->machine->state_manager.get_current_state()->draw(FRAME_RATE_SECOND);
         this->machine->state_manager.get_current_state()->update(FRAME_RATE_SECOND);
+        this->machine->state_manager.get_current_state()->draw(FRAME_RATE_SECOND);
         runningTime -= FRAME_RATE_SECOND;
     }
     currentTime = nextTime;

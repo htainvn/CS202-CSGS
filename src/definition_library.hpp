@@ -15,6 +15,8 @@
 #define HEIGHT_TITLE 100
 #define dsize 100
 
+#define CAR_PER_LANE 3
+
 #define WORKING_DIR std::filesystem::current_path().string()
 #define PAVEMENT_IMAGE_FILE_PATH WORKING_DIR+"/src_design/environment/pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH WORKING_DIR+"/src_design/environment/left-bottomdash-normal.png"
@@ -78,3 +80,12 @@
 #define LANE_MOVING_SPEED 20.f
 #define SHIFT_MOVING_SPEED 300.f
 #define LANE_SPAWN_SPEED 0.2f
+
+#define YELLOW_TIME_START 14
+#define RED_TIME_END 6
+#define GREEN_TIME_END 15
+
+#define RED_COUNT_DOWN GREEN_TIME_END-3
+#define GREEN_COUNT_DOWN RED_TIME_END-3
+
+#define FONT_PATH_FILE WORKING_DIR+"/src_design/font/TextaPro-Medium.otf"
