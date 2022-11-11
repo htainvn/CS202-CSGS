@@ -166,6 +166,8 @@ void GameState::update(float dt) {
     
     this->lane_gen.updating(((this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
     people.move(sf::Vector2f(0, ((this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    this->lane_gen.updating(((isShifting|this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
+    people.move(sf::Vector2f(0, ((isShifting|this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
     
     for (int i = 0; i < lane_gen.counting_lanes(); i++) {
         lane_gen[i]->adjust_objects();
