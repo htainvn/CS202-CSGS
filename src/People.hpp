@@ -35,6 +35,7 @@ public:
     void move (sf::Vector2f vec);
     bool is_alive();
     bool is_mid_height();
+    int lane() const;
     sf::Sprite& get_sprite ();
 };
 
