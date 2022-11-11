@@ -142,11 +142,11 @@ void GameState::init(int status) {
                         Animal* new_animal = new Animal(data->resource_manager);
                         new_animal->go_to_position(_posL);
                         lane_gen[lane_gen.counting_lanes() - 1]->add_animal(new_animal);
-                        */
+                        
                     }
-                    break;
-                }
-            }
+                    //break;
+                //}
+            //}
         }
         for (int i = 0; i < 1; i++) {
             int type_of_lane; fin >> type_of_lane;
