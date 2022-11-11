@@ -6,6 +6,7 @@
 //
 
 #include <string.h>
+#include <time.h>
 #include "Vehicle.hpp"
 
 const int car_number = 9;
@@ -13,7 +14,7 @@ const int MAX_SPEED = 36; // maximum speed
 
 Vehicle::Vehicle(ResourceManager& resource_manager, int dir, int speed, int y )
 {
-	srand(time(0));
+	//srand(time(NULL));
 	int car_index = rand() % car_number;
 	this->velocity = speed;
 	sprite.setTexture(resource_manager.get_texture(get_car_texture(dir, car_index)));
@@ -27,8 +28,12 @@ std::string Vehicle::get_car_texture(int dir, int index)
 	if (!dir) result += 'L'; else result += 'R';
 	result += '_';
 	result += char(48 + index);
-	std::cout << result << '\n';
 	return result;
+}
+
+int Vehicle::see_velocity() 
+{ 
+	return velocity; 
 }
 
 void Vehicle::go_to_position( int x, int y )

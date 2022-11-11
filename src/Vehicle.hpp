@@ -21,7 +21,7 @@ public:
     Vehicle() = default;
     Vehicle(ResourceManager& resource_manager, int dir, int speed, int y); 
     void go_to_position(int x, int y = 0);
-    int see_velocity() { return velocity; }
+    int see_velocity();
 };
 
 class Log : public Vehicle {

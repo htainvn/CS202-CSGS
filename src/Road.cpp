@@ -188,13 +188,18 @@ void Road::spawn(ResourceManager& resource_manager)
         }
         sort(init_position.begin(), init_position.end());
         for (int i = 0; i <= 2; ++i)
+        {
+            //srand(time(NULL));
             add_vehicle(resource_manager, speed, init_position[i] * 100);
+        }
+            
     }
     else if (vehicles.size() < max_car) 
         add_vehicle(resource_manager, vehicles[0]->see_velocity(), -100);
 }
 
 void Road::add_vehicle(ResourceManager& resource_manager, int speed, int pos_x) {
+    //srand(time(0));
     Vehicle* new_vehicle = new Vehicle(resource_manager, dir, speed, sprite.getPosition().y);
     new_vehicle->go_to_position(pos_x, sprite.getPosition().y + 25 );
     this->vehicles.push_back(new_vehicle);
