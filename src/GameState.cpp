@@ -42,9 +42,14 @@ void GameState::init(int status) {
     this->data->resource_manager.load_texture("MARIO_RIGHT", MARIO_RIGHT_FILE_PATH);
     this->data->resource_manager.load_texture("MARIO_LEFT", MARIO_LEFT_FILE_PATH);
 
+    this->data->resource_manager.load_texture("CROC_LEFT",CROC_LEFT_FILE_PATH );
+    this->data->resource_manager.load_texture("CROC_RIGHT",CROC_RIGHT_FILE_PATH );
+    this->data->resource_manager.load_texture("HIPPO_LEFT",HIPPO_LEFT_FILE_PATH );
+    this->data->resource_manager.load_texture("HIPPO_RIGHT",HIPPO_RIGHT_FILE_PATH );
+
+
     //people
     this->people = People(this->data->resource_manager);
-    //
     
     light_circle.setFillColor(sf::Color::Red);
     light_circle.setPosition(sf::Vector2f(10, 10));
@@ -110,9 +115,11 @@ void GameState::init(int status) {
                     fin >> nL;
                     for (int j = 0; j < nL; j++) {
                         float _posL; fin >> _posL;
+                        /*
                         Animal* new_animal = new Animal(data->resource_manager);
                         new_animal->go_to_position(_posL);
-                        lane_gen[lane_gen.counting_lanes()-1]->add_animal(new_animal);
+                        lane_gen[lane_gen.counting_lanes() - 1]->add_animal(new_animal);
+                        */
                     }
                     break;
                 }
