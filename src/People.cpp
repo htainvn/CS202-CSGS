@@ -1,7 +1,6 @@
 #include "People.hpp"
 
-People::People(ResourceManager& resource_manager, bool alive, std::string type)
-{
+People::People(ResourceManager& resource_manager, bool alive, std::string type){
     sp.setTexture(resource_manager.get_texture(type));
     sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT - 300));
     alive_ = alive;
@@ -10,23 +9,19 @@ People::People(ResourceManager& resource_manager, bool alive, std::string type)
 
 People::~People(){}
 
-std::string People::type_path () const
-{
+std::string People::type_path () const{
     return type_;
 }
 
-void People::go_to_position(int x, int y)
-{
+void People::go_to_position(int x, int y){
     sp.setPosition(sf::Vector2f(x, y));
 }
 
-sf::Vector2f People::get_position() const
-{
+sf::Vector2f People::get_position() const{
     return sp.getPosition();
 }
 
-bool People::can_move_right()
-{
+bool People::can_move_right(){
     sf::Vector2f v = sp.getPosition();
     if (v.x + dsize>= SCREEN_WIDTH)
         return false;
@@ -34,8 +29,7 @@ bool People::can_move_right()
         return true;
 }
 
-bool People::can_move_left()
-{
+bool People::can_move_left(){
     sf::Vector2f v = sp.getPosition();
     if (v.x <= 0)
         return false;
@@ -43,16 +37,14 @@ bool People::can_move_left()
         return true;
 }
 
-bool People::can_move_forward()
-{
+bool People::can_move_forward(){
     sf::Vector2f v = sp.getPosition();
     if (v.y > 100)
         return true;
     return false;
 }
 
-bool People::can_move_down()
-{
+bool People::can_move_down(){
     sf::Vector2f v = sp.getPosition();
     if (v.y + 100 < SCREEN_HEIGHT)
         return true;
@@ -60,16 +52,14 @@ bool People::can_move_down()
         return false;
 }
 
-bool People::is_mid_height()
-{
+bool People::is_mid_height(){
     sf::Vector2f v = sp.getPosition();
     if (v.y <= SCREEN_HEIGHT - 300)
         return true;
     return false;
 }
 
-void People::move_right(ResourceManager& resource_manager)
-{
+void People::move_right(ResourceManager& resource_manager){
     sf::Vector2f v = sp.getPosition();
     if (can_move_right())
     {
@@ -78,8 +68,7 @@ void People::move_right(ResourceManager& resource_manager)
         sp.setTexture(resource_manager.get_texture(type_));
     }
 }
-void People::move_left(ResourceManager& resource_manager)
-{
+void People::move_left(ResourceManager& resource_manager){
     sf::Vector2f v = sp.getPosition();
     if (can_move_left())
     {
@@ -89,8 +78,7 @@ void People::move_left(ResourceManager& resource_manager)
     }
 }
 
-void People::move_down(ResourceManager& resource_manager)
-{
+void People::move_down(ResourceManager& resource_manager){
     sf::Vector2f v = sp.getPosition();
     if (can_move_down())
     {
@@ -100,8 +88,7 @@ void People::move_down(ResourceManager& resource_manager)
     }
 }
 
-void People::move_forward(ResourceManager& resource_manager)
-{
+void People::move_forward(ResourceManager& resource_manager){
     sf::Vector2f v = sp.getPosition();
     if(can_move_forward()){
         sp.setPosition(sf::Vector2f(v.x, v.y - 100));
@@ -110,8 +97,13 @@ void People::move_forward(ResourceManager& resource_manager)
     }
 }
 
-bool People::touch_border()
-{
+int People::lane() const{
+    sf::Vector2f v = sp.getPosition();
+    int lane_top = v.y/100;
+    return 6-lane_top;
+}
+
+bool People::touch_border(){
     sf::Vector2f v = get_position();
     if (v.y + 100 >= SCREEN_HEIGHT)
     {
@@ -121,13 +113,11 @@ bool People::touch_border()
     return false;
 }
 
-bool People::is_alive()
-{
+bool People::is_alive(){
     return alive_;
 }
 
-void People::change_type (std::string type)
-{
+void People::change_type (std::string type){
     type_ = type;
 }
 
@@ -139,8 +129,7 @@ void People::move (sf::Vector2f vec){
     sp.move(vec);
 }
 
-sf::Sprite set_character(const People &character)
-{
+sf::Sprite set_character(const People &character){
     sf::Sprite sp;
     sf::Texture image;
     if (!image.loadFromFile(character.type_path()))
@@ -153,8 +142,7 @@ sf::Sprite set_character(const People &character)
     return sp;
 }
 
-bool is_collision(sf::Vector2f vector, sf::Vector2f character)
-{
+bool is_collision(sf::Vector2f vector, sf::Vector2f character){
     if (vector.x >= character.x && vector.x <= character.x + 100 && vector.y == character.y)
     {
         return true;
