@@ -20,6 +20,8 @@
 class GameState : public State {
 private:
     
+    sf::CircleShape light_circle = sf::CircleShape(15.f);
+    
     People people;
     
     handler_ptr data;

@@ -52,10 +52,13 @@ void LaneGenerator::delete_bottom_lane() {
 }
 
 void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShifting, ResourceManager& resource_manager, bool is_green) {
+    
     float movement = moving_speed * FRAME_RATE_SECOND;
+    
     for (int i = 0; i < this->lanes.size(); i++) {
         this->lanes[i]->sprite.move(sf::Vector2f(0, movement));
     }
+    
     if (this->lanes[0]->sprite.getPosition().y >= BOUNDARY_LANE) {
         if (lanes.size() == SCREEN_HEIGHT / HEIGHT_TITLE) {
             int type_of_spawn_lane = 0;
@@ -165,4 +168,24 @@ void LaneGenerator::set_level(int x) {
 
 Lane*& LaneGenerator::get_prediction(int index) {
     return this->prediction[index];
+}
+
+void LaneGenerator::inc_multi_base() {
+    this->multi_base += 0.1f;
+}
+
+void LaneGenerator::reset_base() {
+    this->multi_base = 1.0f;
+}
+
+float LaneGenerator::get_base() {
+    return this->multi_base;
+}
+
+void LaneGenerator::set_cutoff(int time_x) {
+    this->cutoff_time = time_x;
+}
+
+int LaneGenerator::get_cutoff() {
+    return this->cutoff_time;
 }

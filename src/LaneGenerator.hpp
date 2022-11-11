@@ -33,6 +33,10 @@ private:
     
     std::vector<Lane*> prediction;
     
+    float multi_base = 1.0;
+    
+    int cutoff_time = 0;
+    
 public:
     
     void add_lane(ResourceManager& resource_manager, float oy, int type_of_lane);
@@ -54,6 +58,16 @@ public:
     void set_level(int x);
     
     void set_level(int x, int path_left, int road_left);
+    
+    void inc_multi_base();
+    
+    void reset_base();
+    
+    float get_base();
+    
+    void set_cutoff(int time_x);
+    
+    int get_cutoff();
     
     ~LaneGenerator();
 };

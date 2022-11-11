@@ -46,6 +46,8 @@ void GameState::init(int status) {
     this->people = People(this->data->resource_manager);
     //
     
+    light_circle.setFillColor(sf::Color::Red);
+    light_circle.setPosition(sf::Vector2f(10, 10));
     
     if (status == 0) {
         //initialization
@@ -62,6 +64,8 @@ void GameState::init(int status) {
         this->lane_gen.add_prediction(this->data->resource_manager, 1);
         
         this->lane_gen.set_level(3, 0, 1);
+        
+        this->lane_gen.set_cutoff(countingClock.getElapsedTime().asMilliseconds());
         
         //end of initialization
     }
@@ -152,6 +156,8 @@ void GameState::handle_input() {
                     case (sf::Keyboard::W):
                         isShifting = true;
                         this->people.move_forward(this->data->resource_manager);
+                        this->lane_gen.inc_multi_base();
+                        this->lane_gen.set_cutoff(countingClock.getElapsedTime().asMilliseconds());
                         break;
                     default:
                         break;
@@ -164,20 +170,28 @@ void GameState::handle_input() {
 
 void GameState::update(float dt) {
     
-    this->lane_gen.updating(((this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
-    people.move(sf::Vector2f(0, ((this->people.is_mid_height()) ? SHIFT_MOVING_SPEED : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    float mov_spd = std::min(2.0f * SHIFT_MOVING_SPEED, this->lane_gen.get_base() * SHIFT_MOVING_SPEED);
+    
+    
+    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) mov_spd = 2.1f * SHIFT_MOVING_SPEED;
+    
+    this->lane_gen.updating(((this->people.is_mid_height()) ? mov_spd : LANE_MOVING_SPEED), countingClock, isShifting, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5));
+    
+    people.move(sf::Vector2f(0, ((this->people.is_mid_height()) ? mov_spd : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    
+    if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) this->lane_gen.reset_base();
     
     for (int i = 0; i < lane_gen.counting_lanes(); i++) {
         lane_gen[i]->adjust_objects();
     }
     if (countingClock.getElapsedTime().asSeconds() >= 6) {
         for (int i = 0; i < lane_gen.counting_lanes(); i++) {
-            lane_gen[i]->update_traffic(this->data->resource_manager, 0, countingClock);
+            lane_gen[i]->update_traffic(this->data->resource_manager, 0, countingClock, light_circle);
         }
     }
     if (countingClock.getElapsedTime().asSeconds() > 15) {
         for (int i = 0; i < lane_gen.counting_lanes(); i++) {
-            lane_gen[i]->update_traffic(this->data->resource_manager, 1, countingClock);
+            lane_gen[i]->update_traffic(this->data->resource_manager, 1, countingClock, light_circle);
         }
         countingClock.restart();
     }
@@ -189,6 +203,8 @@ void GameState::draw(float dt) {
     this->data->display_lane(lane_gen);
     
     this->data->window.draw(this->people.get_sprite());
+    
+    this->data->window.draw(light_circle);
     
     this->data->window.display();
 }
