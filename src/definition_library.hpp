@@ -45,12 +45,6 @@
 #define MARIO_RIGHT_FILE_PATH WORKING_DIR+"/src_design/people/mario_right.png"
 #define MARIO_LEFT_FILE_PATH WORKING_DIR+"/src_design/people/mario_left.png"
 
-#define HIPPO_RIGHT_FILE_PATH WORKING_DIR+"/src_design/animal/hippo_right.png"
-#define HIPPO_LEFT_FILE_PATH WORKING_DIR+"/src_design/animal/hippo_left.png"
-#define CROC_RIGHT_FILE_PATH WORKING_DIR+"/src_design/animal/croc_right.png"
-#define CROC_LEFT_FILE_PATH WORKING_DIR+"/src_design/animal/croc_left.png"
-
-
 #define PATHWAY_TYPE 0
 #define PATHWAYLIGHT_TYPE 1
 #define ROAD_TYPE 2
