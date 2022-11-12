@@ -20,7 +20,7 @@ private:
 public:
     River(sf::Texture& texture);
     int get_lane_type();
-    void allocate_lane_position(float x, float y);
+    void allocate_lane_position(ResourceManager& resource_manager, float x, float y);
     void adjust_objects();
     std::vector<sf::Sprite> all_relative_object();
     

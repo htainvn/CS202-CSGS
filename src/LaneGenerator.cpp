@@ -16,25 +16,25 @@ void LaneGenerator::add_lane(ResourceManager& resource_manager, float oy, int ty
     switch(type_of_lane) {
         case 0: {
             Pathway* new_lanep = new Pathway(resource_manager.get_texture("PAVEMENT"));
-            new_lanep->allocate_lane_position(0, oy);
+            new_lanep->allocate_lane_position( resource_manager, 0, oy);
             lanes.push_back(new_lanep);
             break;
         }
         case 1: {
              PathwayLight* new_lane = new PathwayLight(resource_manager.get_texture("PAVEMENT"), resource_manager.get_texture("TRAFFIC_RED"));
-             new_lane->allocate_lane_position(0, oy);
+             new_lane->allocate_lane_position(resource_manager, 0, oy);
              lanes.push_back(new_lane);
             break;
         }
         case 2: {
             Road* new_lanero = new Road(resource_manager);
-            new_lanero->allocate_lane_position(0, oy);
+            new_lanero->allocate_lane_position(resource_manager, 0, oy);
             lanes.push_back(new_lanero);
             break;
         }
         case 3: {
             River* new_laneri = new River(resource_manager.get_texture("RIVER"));
-            new_laneri->allocate_lane_position(0, oy);
+            new_laneri->allocate_lane_position(resource_manager, 0, oy);
             lanes.push_back(new_laneri);
             break;
         }
@@ -51,11 +51,18 @@ void LaneGenerator::delete_bottom_lane() {
     this->lanes.resize(number_of_lanes);
 }
 
-void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShifting, ResourceManager& resource_manager, bool is_green) {
+void LaneGenerator::updating(float moving_speed, sf::Clock& clock, int& isShifting, bool& has_shifted, ResourceManager& resource_manager, bool is_green, int& real_level) {
+    
+    std::cout << isShifting << "\n";
+    
+    int able_shift = (isShifting) ? std::min(isShifting, 7)-1 : 0;
+    
     float movement = moving_speed * FRAME_RATE_SECOND;
+    
     for (int i = 0; i < this->lanes.size(); i++) {
         this->lanes[i]->sprite.move(sf::Vector2f(0, movement));
     }
+    
     if (this->lanes[0]->sprite.getPosition().y >= BOUNDARY_LANE) {
         if (lanes.size() == SCREEN_HEIGHT / HEIGHT_TITLE) {
             int type_of_spawn_lane = 0;
@@ -68,14 +75,21 @@ void LaneGenerator::updating(float moving_speed, sf::Clock& clock, bool& isShift
                 this->road_left--;
             }
             this->lanes.push_back(prediction[0]);
-            lanes[lanes.size()-1]->allocate_lane_position(0, -100 + this->lanes[0]->sprite.getPosition().y - BOUNDARY_LANE);
+            lanes[lanes.size()-1]->allocate_lane_position( resource_manager, 0, -100 + this->lanes[0]->sprite.getPosition().y - BOUNDARY_LANE);
             prediction.erase(prediction.begin());
             add_prediction(resource_manager, type_of_spawn_lane);
         }
         
         if (this->lanes[0]->sprite.getPosition().y >= SCREEN_HEIGHT) {
             delete_bottom_lane();
-            isShifting = false;
+            if (isShifting) isShifting--;
+            has_shifted = true;
+            if ((this->lanes[2]->get_lane_type() == 0) || (this->lanes[2]->get_lane_type() == 1)) {
+                real_level += (real_level & 0x1);
+            }
+            else {
+                real_level += 1 - (real_level & 0x1);
+            }
         }
     }
     
@@ -160,9 +174,29 @@ void LaneGenerator::set_level(int x) {
     srand((int) time(0));
     this->level = x;
     this->path_left = rand() % 3 + 1;
-    this->road_left = (x-1)/5 + 1;
+    this->road_left = (x-1)/CAR_PER_LANE + 1;
 }
 
 Lane*& LaneGenerator::get_prediction(int index) {
     return this->prediction[index];
+}
+
+void LaneGenerator::inc_multi_base() {
+    this->multi_base += 0.1f;
+}
+
+void LaneGenerator::reset_base() {
+    this->multi_base = 1.0f;
+}
+
+float LaneGenerator::get_base() {
+    return this->multi_base;
+}
+
+void LaneGenerator::set_cutoff(int time_x) {
+    this->cutoff_time = time_x;
+}
+
+int LaneGenerator::get_cutoff() {
+    return this->cutoff_time;
 }

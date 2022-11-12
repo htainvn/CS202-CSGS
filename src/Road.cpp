@@ -7,6 +7,7 @@
 
 #include "src/Road.hpp"
 #include <string>
+#include <algorithm>
 
 int Road::get_lane_type() {
     return ROAD_TYPE;
@@ -88,16 +89,20 @@ Road::Road(ResourceManager& resource_manager) {
     sprite.setTexture(resource_manager.get_texture(this->get_texture_code()));
 }
 
-void Road::allocate_lane_position(float x, float y) {
+void Road::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     sprite.setPosition(sf::Vector2f(x,y));
+    spawn(resource_manager);
 }
 
 void Road::adjust_objects() {
-    
+    for (int i = 0; i < vehicles.size(); i++) {
+        vehicles[i]->go_to_position(vehicles[i]->sprite.getPosition().x, sprite.getPosition().y + 25);
+    }
 }
 
 std::vector<sf::Sprite> Road::all_relative_object() {
     std::vector<sf::Sprite> res;
+    for (int i = 0; i < vehicles.size(); ++i) res.push_back(vehicles[i]->sprite);
     return res;
 }
 
@@ -151,4 +156,51 @@ int Road::see_top_type() {
 
 void Road::change_dir(int x) {
     this->dir = x;
+}
+
+
+// Vehicle
+void Road::set_max_car(int cnt) { max_car = cnt; }
+
+void Road::spawn(ResourceManager& resource_manager)
+{
+    //std::cout << "OK max" << '\n';
+    const int MAX_SPEED = 300;
+    srand(time(0));
+    if (vehicles.size() == max_car) return;
+    if (vehicles.empty())
+    {
+
+        int speed = rand() % (MAX_SPEED * 3 / 2) - MAX_SPEED;
+        std::vector<int> init_position(3);
+        for (int i = 0; i < 3; ++i)
+        {
+            bool check = false;
+            while (!check)
+            {
+                check = true;
+                int index = rand() % 10;
+                for (int _i = 0; _i < i; ++_i)
+                    if (index == init_position[_i]) 
+                        check = false;
+                if (check) init_position[i] = index;
+            }
+        }
+        sort(init_position.begin(), init_position.end());
+        for (int i = 0; i <= 2; ++i)
+        {
+            //srand(time(NULL));
+            add_vehicle(resource_manager, speed, init_position[i] * 100);
+        }
+            
+    }
+    else if (vehicles.size() < max_car) 
+        add_vehicle(resource_manager, vehicles[0]->see_velocity(), -100);
+}
+
+void Road::add_vehicle(ResourceManager& resource_manager, int speed, int pos_x) {
+    //srand(time(0));
+    Vehicle* new_vehicle = new Vehicle(resource_manager, dir, speed, sprite.getPosition().y);
+    new_vehicle->go_to_position(pos_x, sprite.getPosition().y + 25 );
+    this->vehicles.push_back(new_vehicle);
 }

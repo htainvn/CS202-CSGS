@@ -13,12 +13,15 @@
 
 class Vehicle {
 private:
-    sf::Sprite sprite;
     int position_x = 0;
+    int velocity; // speed
+    std::string get_car_texture(int dir, int index);
 public:
+    sf::Sprite sprite;
     Vehicle() = default;
-    Vehicle(ResourceManager& resource_manager) {}
-    void go_to_position(int x) {}
+    Vehicle(ResourceManager& resource_manager, int dir, int speed, int y); 
+    void go_to_position(int x, int y = 0);
+    int see_velocity();
 };
 
 class Log : public Vehicle {

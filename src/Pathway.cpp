@@ -11,7 +11,7 @@ Pathway::Pathway(sf::Texture& texture) {
     this->sprite.setTexture(texture);
 }
 
-void Pathway::allocate_lane_position(float x, float y) {
+void Pathway::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     this->sprite.setPosition(sf::Vector2f(x, y));
 }
 
@@ -28,7 +28,7 @@ PathwayLight::PathwayLight(sf::Texture& texture_path, sf::Texture& texture_light
     this->light = TrafficLight(texture_light);
 }
 
-void PathwayLight::allocate_lane_position(float x, float y) {
+void PathwayLight::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     this->sprite.setPosition(sf::Vector2f(x, y));
     this->light.allocate_position(y);
 }
@@ -43,14 +43,12 @@ std::vector<sf::Sprite> PathwayLight::all_relative_object() {
     return res;
 }
 
-void PathwayLight::update_traffic(ResourceManager& resource_manager, int status, sf::Clock& clock) {
-    if (status == 0) {
-        if (clock.getElapsedTime().asSeconds() >= 14) {
-            this->light.turn_yellow(resource_manager.get_texture("TRAFFIC_YELLOW"));
-        }
-        else this->light.turn_green(resource_manager.get_texture("TRAFFIC_GREEN"));
+void PathwayLight::update_traffic(ResourceManager& resource_manager, int& cnt_time) {
+    if (cnt_time >= RED_TIME_END) {
+        if (cnt_time >= YELLOW_TIME_START) this->light.turn_yellow(resource_manager.get_texture("TRAFFIC_YELLOW"));
+        else
+            this->light.turn_green(resource_manager.get_texture("TRAFFIC_GREEN"));
     }
-    else {
-            this->light.turn_red(resource_manager.get_texture("TRAFFIC_RED"));
-    }
+    else
+        this->light.turn_red(resource_manager.get_texture("TRAFFIC_RED"));
 }

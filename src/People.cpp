@@ -2,7 +2,7 @@
 
 People::People(ResourceManager& resource_manager, bool alive, std::string type){
     sp.setTexture(resource_manager.get_texture(type));
-    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT - 300));
+    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2+25, SCREEN_HEIGHT - 300 + 20));
     alive_ = alive;
     type_ = type;
 }
@@ -23,7 +23,7 @@ sf::Vector2f People::get_position() const{
 
 bool People::can_move_right(){
     sf::Vector2f v = sp.getPosition();
-    if (v.x + dsize>= SCREEN_WIDTH)
+    if (v.x + dsize >= SCREEN_WIDTH)
         return false;
     else
         return true;
@@ -31,7 +31,7 @@ bool People::can_move_right(){
 
 bool People::can_move_left(){
     sf::Vector2f v = sp.getPosition();
-    if (v.x <= 0)
+    if (v.x <= 25)
         return false;
     else
         return true;

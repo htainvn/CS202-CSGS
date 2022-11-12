@@ -34,6 +34,7 @@ public:
             auto cus = lane_gen[i]->all_relative_object();
             for (int j = 0; j < cus.size(); j++) {
                 window.draw(cus[j]);
+                //if (lane_gen[i]->get_lane_type() == 2) std::cout << cus[j].getPosition().x << " " << cus[j].getPosition().y << '\n';
             }
         }
     }
