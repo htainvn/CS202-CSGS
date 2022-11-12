@@ -15,32 +15,38 @@
 
 class Animal {
 private:
-    float pos_x;
-    bool type; //0:left  1:right
+    bool type; 
 public:
     Animal(){}
-    void go_to_position(int x) {}
-    Animal(bool type, float pos_x);
+    virtual void go_to_position(float x, float y, bool type) {}
+    Animal(bool type);
     virtual sf::Sprite& getSprite() { sf::Sprite dummy; return dummy; }
+    bool getType();
 };
 
 class Hippo :public Animal {
 private:
     //sound
+    float pos_x;
+    float pos_y;
     sf::Sprite sprite;
 public:
     Hippo(){}
-    Hippo(ResourceManager& resource_manager,bool type, float pos_x);
+    void go_to_position(float x, float y, bool type);
+    Hippo(ResourceManager& resource_manager,bool type, float pos_y);
     sf::Sprite& getSprite();
 };
 
 class Croc :public Animal {
 private:
     //sound
+    float pos_x;
+    float pos_y;
     sf::Sprite sprite;
 public:
     Croc() {}
-    Croc(ResourceManager& resource_manager, bool type, float pos_x);
+    void go_to_position(float x, float y, bool type);
+    Croc(ResourceManager& resource_manager, bool type, float pos_y);
     sf::Sprite& getSprite();
 };
 

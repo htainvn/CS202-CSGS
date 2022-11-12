@@ -7,25 +7,38 @@
 
 #include "Animal.hpp"
 
-Animal::Animal(bool type, float pos_x) {
+Animal::Animal(bool type) {
 	this->type = type;
-	this->pos_x = pos_x;
 }
 
-Hippo::Hippo(ResourceManager& resource_manager, bool type, float pos_x) : Animal(type, pos_x) {
+bool Animal::getType() {
+	return type;
+}
+
+Hippo::Hippo(ResourceManager& resource_manager, bool type, float pos_y) : Animal(type) {
+	this->pos_y = pos_y;
 	std::string hash_name;
-	if (type) hash_name = "HIPPO_RIGHT";
+	pos_x = 850;
+	if (type) {
+		hash_name = "HIPPO_RIGHT";
+		pos_x = 0;
+	}
 	else hash_name = "HIPPO_LEFT";
 	sprite.setTexture(resource_manager.get_texture(hash_name));
-	sprite.setPosition(sf::Vector2f(pos_x,0));
+	sprite.setPosition(sf::Vector2f(pos_x,pos_y));
 }
 
-Croc::Croc(ResourceManager& resource_manager, bool type, float pos_x) : Animal(type, pos_x) {
+Croc::Croc(ResourceManager& resource_manager, bool type, float pos_y) : Animal(type) {
+	this->pos_y = pos_y;
 	std::string hash_name;
-	if (type) hash_name = "CROC_RIGHT";
+	pos_x = 900;
+	if (type) {
+		hash_name = "CROC_RIGHT"; 
+		pos_x = 0;
+	}
 	else hash_name = "CROC_LEFT";
 	sprite.setTexture(resource_manager.get_texture(hash_name));
-	sprite.setPosition(sf::Vector2f(pos_x, 0));
+	sprite.setPosition(sf::Vector2f(pos_x, pos_y));
 }
 
 sf::Sprite& Hippo::getSprite() {
@@ -34,5 +47,19 @@ sf::Sprite& Hippo::getSprite() {
 
 sf::Sprite& Croc::getSprite() {
 	return sprite;
+}
+
+void Croc::go_to_position(float x, float y, bool type) {
+	if (!type)
+		sprite.setPosition(sf::Vector2f(900, y));
+	else
+		sprite.setPosition(sf::Vector2f(0, y));
+}
+
+void Hippo::go_to_position(float x, float y, bool type) {
+	if (!type)
+		sprite.setPosition(sf::Vector2f(850, y));
+	else
+		sprite.setPosition(sf::Vector2f(0, y));
 }
 
