@@ -39,7 +39,7 @@ public:
     void draw(float dt);
     void pause();
     void resume();
-    
+    bool lost();
     ~GameState();
 };
 

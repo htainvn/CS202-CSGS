@@ -143,13 +143,26 @@ void GameState::handle_input() {
                     case (sf::Keyboard::D):
                         this->people.move_right(this->data->resource_manager);
                         break;
+                    case (sf::Keyboard::Right):
+                        this->people.move_right(this->data->resource_manager);
+                        break;
                     case (sf::Keyboard::A):
+                        this->people.move_left(this->data->resource_manager);
+                        break;
+                    case (sf::Keyboard::Left):
                         this->people.move_left(this->data->resource_manager);
                         break;
                     case (sf::Keyboard::S):
                         this->people.move_down(this->data->resource_manager);
                         break;
+                    case (sf::Keyboard::Down):
+                        this->people.move_down(this->data->resource_manager);
+                        break;
                     case (sf::Keyboard::W):
+                        isShifting = true;
+                        this->people.move_forward(this->data->resource_manager);
+                        break;
+                    case (sf::Keyboard::Up):
                         isShifting = true;
                         this->people.move_forward(this->data->resource_manager);
                         break;
@@ -181,6 +194,7 @@ void GameState::update(float dt) {
         }
         countingClock.restart();
     }
+    lost();
 }
 
 void GameState::draw(float dt) {
@@ -199,6 +213,15 @@ void GameState::pause() {
 
 void GameState::resume() {
     
+}
+
+bool GameState::lost() 
+{
+    if (this->people.touch_border()){ // if collision, if fall into water are being missed
+        this->data->window.close();
+        return true;
+    }
+    return true;
 }
 
 GameState::~GameState() {
