@@ -17,12 +17,13 @@ River::River(sf::Texture& texture) {
 
 void River::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
     sprite.setPosition(sf::Vector2f(x,y));
-    spawn_animal(resource_manager,x);
+    int num_of_animals = 1 + rand() % 7;
+    spawn_animal(resource_manager,y, num_of_animals);
 }
 
 void River::adjust_objects() {
     for (auto i : animals) 
-        i->go_to_position(this->sprite.getPosition().x, this->sprite.getPosition().y,i->getType());
+            i->go_to_position(0, this->sprite.getPosition().y, i->getType());
 }
 
 std::vector<sf::Sprite> River::all_relative_object() {
@@ -31,16 +32,18 @@ std::vector<sf::Sprite> River::all_relative_object() {
     return res;
 }
 
-void River::spawn_animal(ResourceManager& resourcemanager, float x){
+void River::spawn_animal(ResourceManager& resourcemanager, float y, int num_of_animals){
     bool i = rand() % 2;
     bool j = rand() % 2;
     Animal* animal = nullptr;
-    std::cout << i << " " << j;
-    if (i) {
-        animal = new Hippo(resourcemanager, j, x);
+    for (int k = 0; k < num_of_animals; ++k) {
+        if (i) {
+            animal = new Hippo(resourcemanager, j, y);
+        }
+        else animal = new Croc(resourcemanager, j, y);
+        animal->go_to_position(300 * (k + 1), y, j);
+        animals.push_back(animal);
     }
-    else animal = new Croc(resourcemanager, j, x);
-    animals.push_back(animal);
 }
 
 

@@ -50,16 +50,18 @@ sf::Sprite& Croc::getSprite() {
 }
 
 void Croc::go_to_position(float x, float y, bool type) {
-	if (!type)
-		sprite.setPosition(sf::Vector2f(900, y));
+	if (type)
+		pos_x += speed + x;
 	else
-		sprite.setPosition(sf::Vector2f(0, y));
+		pos_x -= speed + x;
+	sprite.setPosition(sf::Vector2f(pos_x, y));
 }
 
 void Hippo::go_to_position(float x, float y, bool type) {
-	if (!type)
-		sprite.setPosition(sf::Vector2f(850, y));
+	if (type)
+		pos_x += speed + x;
 	else
-		sprite.setPosition(sf::Vector2f(0, y));
+		pos_x -= speed + x;
+	sprite.setPosition(sf::Vector2f(pos_x, y));
 }
 

@@ -28,7 +28,7 @@ public:
     void add_log(Log*& log) {}
     void add_animal(Animal*& animal) {}
     void stop_traffic() {}
-    void spawn_animal(ResourceManager& resourmanager, float x);
+    void spawn_animal(ResourceManager& resourmanager, float x, int num_of_animals);
     
     
     ~River();
