@@ -29,6 +29,7 @@ private:
     //sound
     float pos_x;
     float pos_y;
+    float speed = 0.08;
     sf::Sprite sprite;
 public:
     Hippo(){}
@@ -42,6 +43,7 @@ private:
     //sound
     float pos_x;
     float pos_y;
+    float speed = 0.03;
     sf::Sprite sprite;
 public:
     Croc() {}
