@@ -53,7 +53,6 @@ void LaneGenerator::delete_bottom_lane() {
 
 void LaneGenerator::updating(float moving_speed, sf::Clock& clock, int& isShifting, bool& has_shifted, ResourceManager& resource_manager, bool is_green, int& real_level) {
     
-    std::cout << isShifting << "\n";
     
     int able_shift = (isShifting) ? std::min(isShifting, 7)-1 : 0;
     

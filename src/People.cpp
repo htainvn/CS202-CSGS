@@ -88,19 +88,20 @@ void People::move_down(ResourceManager& resource_manager){
     }
 }
 
-void People::move_forward(ResourceManager& resource_manager){
-    sf::Vector2f v = sp.getPosition();
-    if(can_move_forward()){
-        sp.setPosition(sf::Vector2f(v.x, v.y - 100));
-        type_ = "MARIO_FORWARD";
-        sp.setTexture(resource_manager.get_texture(type_));
-    }
-}
 
 int People::lane() const{
     sf::Vector2f v = sp.getPosition();
     int lane_top = v.y/100;
     return 6-lane_top;
+}
+
+void People::move_forward(sf::Vector2f vec, ResourceManager& resource_manager){
+    sf::Vector2f v = sp.getPosition();
+    if(can_move_forward()){
+        sp.setPosition(vec);
+        type_ = "MARIO_FORWARD";
+        sp.setTexture(resource_manager.get_texture(type_));
+    }
 }
 
 bool People::touch_border(){

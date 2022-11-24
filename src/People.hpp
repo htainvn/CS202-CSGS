@@ -27,7 +27,7 @@ public:
     void move_right(ResourceManager& resource_manager);
     void move_left(ResourceManager& resource_manager);
     void move_down(ResourceManager& resource_manager);
-    void move_forward(ResourceManager& resource_manager);
+    void move_forward(sf::Vector2f vec, ResourceManager& resource_manager);
     void change_type (std::string type);
     void scroll();
     bool touch_border();

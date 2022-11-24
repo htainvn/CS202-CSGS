@@ -213,15 +213,13 @@ void GameState::handle_input() {
                     case (sf::Keyboard::W):
                         has_shifted = false;
                         if (people.can_move_forward()) {
-                            this->people.move_forward(this->data->resource_manager);
-                            if (people.get_position().y <= lane_gen[2]->sprite.getPosition().y) ++isShifting;
+                            if (people.get_position().y < lane_gen[2]->sprite.getPosition().y){
+                                ++isShifting;
+                            }
+                            people.move_forward(sf::Vector2f(people.get_position().x, lane_gen[people.lane()+1]->sprite.getPosition().y), this->data->resource_manager);
                             this->lane_gen.inc_multi_base();
                             this->lane_gen.set_cutoff(countingClock.getElapsedTime().asMilliseconds());
                         }
-                        break;
-                    case (sf::Keyboard::Up):
-                        isShifting = true;
-                        this->people.move_forward(this->data->resource_manager);
                         break;
                     default:
                         break;
@@ -233,20 +231,20 @@ void GameState::handle_input() {
 }
 
 void GameState::update(float dt) {
-    
     //camera moving
-    
-    if (isShifting < 4) has_shifted = 1;
+    if (isShifting < 4){
+        has_shifted = 1;
+    }
     
     float mov_spd = ((isShifting < 4) ? (isShifting) : (isShifting + 1)) * SHIFT_MOVING_SPEED;
     
     if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) mov_spd = 3.0f * SHIFT_MOVING_SPEED;
-    
+        
     this->lane_gen.updating(((isShifting) ? mov_spd : LANE_MOVING_SPEED), countingClock, isShifting, has_shifted, data->resource_manager, (countingClock.getElapsedTime().asSeconds() >= 5), level);
     
-    t_lev.setString("Level: " + std::to_string(level/2));
-    
     people.move(sf::Vector2f(0, ((isShifting) ? mov_spd : LANE_MOVING_SPEED)*FRAME_RATE_SECOND));
+    
+    t_lev.setString("Level: " + std::to_string(level/2));
     
     if (countingClock.getElapsedTime().asMilliseconds() > this->lane_gen.get_cutoff() + 300) {
         this->lane_gen.reset_base();
@@ -313,7 +311,7 @@ void GameState::resume() {
     
 }
 
-bool GameState::lost() 
+bool GameState::check_lost() 
 {
     if (this->people.touch_border()){ // if collision, if fall into water are being missed
         this->data->window.close();
