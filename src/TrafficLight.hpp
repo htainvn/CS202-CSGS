@@ -11,24 +11,6 @@
 #include <SFML/Graphics.hpp>
 #include "src/Handler.hpp"
 
-/*
-
-class TrafficLight {
-private:
-    sf::Sprite sprite;
-    int status = 0;
-public:
-    TrafficLight() = default;
-    TrafficLight(sf::Texture& texture);
-    void turn_red(sf::Texture& texture);
-    void turn_yellow(sf::Texture& texture);
-    void turn_green(sf::Texture& texture);
-    void allocate_position(float oy);
-    sf::Sprite out_scr();
-};
-
-*/
-
 class TrafficLight {
     
 public:

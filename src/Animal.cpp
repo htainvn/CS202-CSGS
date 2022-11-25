@@ -70,8 +70,6 @@ void Hippo::go_to_position(float x, float y, bool type) {
 */
 
 
-
-
 Animal::Animal(Handler *_tools, bool dir, float y) { 
     tools = _tools;
     this->dir = dir;

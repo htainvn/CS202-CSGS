@@ -13,29 +13,6 @@
 #include "src/Vehicle.hpp"
 #include "src/Animal.hpp"
 
-/*
-class River : public Lane {
-private:
-    std::vector<Log*> logs;
-    std::vector<Animal*> animals;
-public:
-    River(sf::Texture& texture);
-    int get_lane_type();
-    void allocate_lane_position(ResourceManager& resource_manager, float x, float y);
-    void adjust_objects();
-    std::vector<sf::Sprite> all_relative_object();
-    
-    //undone
-    void add_log(Log*& log) {}
-    void add_animal(Animal*& animal) {}
-    void stop_traffic() {}
-    void spawn_animal(ResourceManager& resourmanager, float x, int num_of_animals);
-    
-    
-    ~River();
-};
-*/
-
 class River : public Lane {
     
 public:
