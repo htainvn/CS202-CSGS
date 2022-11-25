@@ -8,3 +8,74 @@
 #include "src/Lane.hpp"
 
 
+void Lane::change_image(sf::Texture &tex)
+{
+    sprite.setTexture(tex);
+}
+
+Position Lane::position()
+{
+    return Position(sprite.getPosition().x, sprite.getPosition().y);
+}
+
+void Lane::locate_at(float x, float y)
+{
+    sprite.setPosition(sf::Vector2f(x, y));
+}
+
+void Lane::draw_itself()
+{
+    tools->window.draw(sprite);
+}
+
+void Lane::draw()
+{
+    draw_itself();
+}
+
+bool Lane::out_scr() { 
+    return !((position().get_y() > -100) && (position().get_y() < SCREEN_HEIGHT));
+}
+
+Lane::Lane(handler_ptr _tools, float x, float y) : tools(_tools) {
+    locate_at(x, y);
+}
+
+Lane::Lane(handler_ptr _tools, Position pos) : tools(_tools) {
+    
+    locate_at(pos.get_x(), pos.get_y());
+}
+
+void Lane::set_current(People*& mario) {
+    people = mario;
+}
+
+void Lane::adjust_objects() {
+    if (people)
+    {
+        people->go_to_position(people->get_sprite().getPosition().x , position().get_y());
+    }
+}
+
+void Lane::unset() { 
+    people = nullptr;
+}
+
+bool Lane::is_current() { 
+    return (people != nullptr);
+}
+
+int Lane::level() { 
+    return lev.lev();
+}
+
+void Lane::set_level(const Level& lev) {
+    this->lev = lev;
+}
+
+void Lane::stop() {
+    
+}
+
+
+

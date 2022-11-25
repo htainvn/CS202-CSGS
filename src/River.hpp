@@ -13,6 +13,7 @@
 #include "src/Vehicle.hpp"
 #include "src/Animal.hpp"
 
+/*
 class River : public Lane {
 private:
     std::vector<Log*> logs;
@@ -32,6 +33,40 @@ public:
     
     
     ~River();
+};
+*/
+
+class River : public Lane {
+    
+public:
+    
+    /* CONSTRUCTORS & DESTRUCTORS */
+    
+    River(handler_ptr _tools, Position pos = Position());
+    
+    ~River() {}
+    
+    /* END HERE */
+    
+    /* BEHAVIOUR */
+    
+    void stop();
+    
+    void spawn();
+    
+    void adjust_objects();
+    
+    int type() { return RIVER_TYPE; }
+    
+    
+    /* END HERE */
+    
+private:
+    
+    std::vector<Log*> logs;
+    
+    std::vector<Animal*> animals;
+    
 };
 
 #endif /* River_hpp */

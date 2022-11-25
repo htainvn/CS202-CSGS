@@ -14,11 +14,17 @@
 #include <stdio.h>
 
 class ResourceManager {
-private:
-    std::vector<std::pair<std::string, sf::Texture>> storage;
 public:
+    
     void load_texture(std::string hash_name, std::string path);
+    
     sf::Texture& get_texture(std::string hash_name);
+    
+    void init();
+    
+private:
+    
+    std::vector<std::pair<std::string, sf::Texture>> storage;
 };
 
 #endif /* ResourceManager_hpp */

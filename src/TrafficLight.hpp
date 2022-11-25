@@ -9,7 +9,9 @@
 #define TrafficLight_hpp
 
 #include <SFML/Graphics.hpp>
-#include "src/ResourceManager.hpp"
+#include "src/Handler.hpp"
+
+/*
 
 class TrafficLight {
 private:
@@ -23,6 +25,40 @@ public:
     void turn_green(sf::Texture& texture);
     void allocate_position(float oy);
     sf::Sprite out_scr();
+};
+
+*/
+
+class TrafficLight {
+    
+public:
+    
+    /* CONSTRUCTORS & DESTRUCTORS */
+    
+    TrafficLight() = default;
+    
+    TrafficLight(handler_ptr tools);
+    
+    ~TrafficLight() {}
+    
+    /* BEHAVIOUR */
+    
+    void turn_red();
+    
+    void turn_yellow();
+    
+    void turn_green();
+    
+    void locate_at(float x, float y);
+    
+    void draw();
+    
+private:
+    
+    handler_ptr tools;
+    
+    sf::Sprite sprite;
+    
 };
 
 #endif /* TrafficLight_hpp */

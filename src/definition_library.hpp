@@ -1,12 +1,17 @@
 #pragma once
 
 #include <filesystem>
+#include <SFML/Graphics.hpp>
+using namespace sf;
 
 #include <src/ResourceManager.hpp>
 
 //define here
 #define state_ptr State*
 #define handler_ptr Handler*
+#define level_ptr Level*
+#define lane_ptr Lane*
+#define resource_ptr ResourceManager*
 
 #define FRAME_RATE_SECOND (1.0f/1000.0f)
 #define SCREEN_WIDTH 1000

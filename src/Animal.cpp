@@ -7,6 +7,8 @@
 
 #include "Animal.hpp"
 
+/*
+
 Animal::Animal(bool type) {
 	this->type = type;
 }
@@ -63,5 +65,24 @@ void Hippo::go_to_position(float x, float y, bool type) {
 	else
 		pos_x -= speed + x;
 	sprite.setPosition(sf::Vector2f(pos_x, y));
+}
+
+*/
+
+
+
+
+Animal::Animal(Handler *_tools, bool dir, float y) { 
+    tools = _tools;
+    this->dir = dir;
+    pos = Position(0, y);
+}
+
+void Animal::locate_at(float x, float y) { 
+    sprite.setPosition(sf::Vector2f(x, y));
+}
+
+Position Animal::position() { 
+    return pos;
 }
 

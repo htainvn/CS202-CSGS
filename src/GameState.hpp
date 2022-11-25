@@ -16,40 +16,41 @@
 #include "src/LaneGenerator.hpp"
 #include "src/definition_library.hpp"
 #include "src/People.hpp"
+#include "src/Traffic.hpp"
 
 class GameState : public State {
 private:
     
-    int level = 2;
-    
-    sf::Text count_down;
+    float level = 0;
     
     sf::Text t_lev;
     
-    sf::CircleShape light_circle = sf::CircleShape(15.f);
+    Traffic* traffic;
     
-    People people;
+    People* people = nullptr;
     
-    handler_ptr data;
+    handler_ptr tools;
     
-    sf::Clock countingClock = sf::Clock();
-    
-    LaneGenerator lane_gen;
-    
-    int isShifting = 0;
-    
-    bool has_shifted = false;
+    LaneFactory* lane_gen;
     
 public:
+    
     GameState(handler_ptr _data);
     
     void init(int status);
+    
     void handle_input();
+    
     void update(float dt);
+    
     void draw(float dt);
+    
     void pause();
+    
     void resume();
+    
     bool check_lost();
+    
     ~GameState();
 };
 

@@ -5,6 +5,7 @@
 #include "src/definition_library.hpp"
 
 int main() {
+    srand((int) time(0));
     Game CROSSING_ROAD = Game();
     return 0;
 }

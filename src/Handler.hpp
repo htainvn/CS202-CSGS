@@ -11,21 +11,21 @@
 #include <SFML/Graphics.hpp>
 #include "src/StateManager.hpp"
 #include "src/ResourceManager.hpp"
-#include "src/LaneGenerator.hpp"
-
-#include "Lane.hpp"
 
 class Handler {
 public:
+    
     StateManager state_manager;
+    
     ResourceManager resource_manager;
+    
     sf::RenderWindow window;
     
     Handler() {
         this->state_manager = StateManager();
     }
     
-    void display_lane(LaneGenerator& lane_gen) {
+    /*void display_lane(LaneGenerator& lane_gen) {
         int n = lane_gen.counting_lanes();
         for (int i = 0; i < n; i++) {
             window.draw(lane_gen[i]->sprite);
@@ -37,7 +37,7 @@ public:
                 //if (lane_gen[i]->get_lane_type() == 2) std::cout << cus[j].getPosition().x << " " << cus[j].getPosition().y << '\n';
             }
         }
-    }
+    }*/
     
 };
 

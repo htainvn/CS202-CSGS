@@ -10,32 +10,72 @@
 
 #include <stdio.h>
 #include "src/Lane.hpp"
+#include "src/Handler.hpp"
 #include "src/TrafficLight.hpp"
 
 class Pathway : public Lane {
 public:
-    Pathway() {}
-    int get_lane_type();
-    Pathway(sf::Texture& texture);
-    void allocate_lane_position( ResourceManager& resource_manager, float x, float y);
-    void adjust_object() {}
-    std::vector<sf::Sprite> all_relative_object() {
-        std::vector<sf::Sprite> res;
-        return res;
-    }
+    
+/* CONSTRUCTORS & DESTRUCTORS */
+    
+    Pathway(handler_ptr _tools);
+    
+    Pathway(handler_ptr _tools, float x, float y);
+    
+    Pathway(handler_ptr _tools, Position pos);
+
     ~Pathway() {}
+    
+/* END HERE */
+    
+/* OVERRIDEN FUNCTIONS */
+    
+    void draw();
+    
+    int type() { return PATHWAY_TYPE; }
+    
+/* END HERE */
 };
 
 class PathwayLight : public Pathway {
+    
 public:
-    TrafficLight light;
-    PathwayLight(sf::Texture& texture_path, sf::Texture& texture_light);
-    void allocate_lane_position(ResourceManager& resource_manager, float x, float y);
-    void adjust_objects();
-    std::vector<sf::Sprite> all_relative_object();
-    int get_lane_type();
-    void update_traffic(ResourceManager& resource_manager, int& cnt_time);
+    
+/* CONSTRUCTORS & DESTRUCTORS */
+    
+    PathwayLight(handler_ptr _tools);
+    
+    PathwayLight(handler_ptr _tools, float x, float y);
+    
+    PathwayLight(handler_ptr _tools, Position pos);
+
     ~PathwayLight() {}
+    
+/* END HERE */
+    
+/* OVERRIDEN FUNCTIONS */
+    
+    void draw();
+    
+    void adjust_objects();
+    
+    int type() { return PATHWAYLIGHT_TYPE; }
+    
+    void stop();
+    
+    void slowdown();
+    
+    void run();
+    
+/* END HERE */
+    
+    
+private:
+    TrafficLight light;
+    
+private:
+    void update_traffic(int sign); //sign = (0: red, 1: yellow, 2: green)
+    
 };
 
 #endif /* Pathway_hpp */

@@ -12,64 +12,68 @@
 
 #include <vector>
 
+#include "src/Handler.hpp"
 #include "src/ResourceManager.hpp"
 #include "src/Lane.hpp"
 #include "src/Pathway.hpp"
 #include "src/River.hpp"
+#include "src/Level.hpp"
 #include "src/Road.hpp"
-//#include "src/People.hpp"
 
-class LaneGenerator {
+class LaneFactory {
     
 private:
     
-    int level;
+    handler_ptr tools = nullptr;
     
-    int path_left = 0;
-    
-    int road_left = 0;
+    level_ptr level = nullptr;
     
     std::vector<Lane*> lanes;
     
-    std::vector<Lane*> prediction;
-    
-    float multi_base = 1.0;
-    
-    int cutoff_time = 0;
-    
 public:
     
-    void add_lane(ResourceManager& resource_manager, float oy, int type_of_lane);
+    LaneFactory() = default;
     
-    void add_prediction(ResourceManager& resource_manager, int type_of_lane);
+    LaneFactory(handler_ptr _tools) : tools(_tools)
+    {
+        level = new Level(3, 0, 1);
+    }
     
-    void delete_bottom_lane();
+    LaneFactory(handler_ptr _tools, level_ptr _level) : tools(_tools), level(_level) {};
     
-    void updating(float moving_speed, sf::Clock& clock, int& isShifting, bool& has_shifted, ResourceManager& resource_manager, bool is_green, int& real_level);
+    lane_ptr create_lane(int type, Position pos = Position());
     
-    int counting_lanes();
+    void pop_bottom_lane();
     
-    Lane*& operator[](const int index);
+    Lane*& at(int const index);
     
-    Lane*& get_prediction(int index);
+    void refactor(float& real_level);
     
-    int get_prediction_type();
+    bool detect_outscr();
     
-    void set_level(int x);
+    void add_lane(int type, Position pos = Position());
     
-    void set_level(int x, int path_left, int road_left);
+    void next_current(People*& mario);
     
-    void inc_multi_base();
+    void prev_current(People*& mario);
     
-    void reset_base();
+    int current();
     
-    float get_base();
+    void stop(); //stop traffic
     
-    void set_cutoff(int time_x);
+    void slowdown(); //objects run slowly
     
-    int get_cutoff();
+    void run(); //normal
     
-    ~LaneGenerator();
+    ~LaneFactory()
+    {
+        if (level)
+        {
+            delete level;
+            
+            level = nullptr;
+        }
+    }
 };
 
 #endif /* Background_hpp */

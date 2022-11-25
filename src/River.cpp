@@ -7,6 +7,7 @@
 
 #include "src/River.hpp"
 
+/*
 int River::get_lane_type() {
     return RIVER_TYPE;
 }
@@ -51,3 +52,50 @@ River::~River() {
     for (int i = 0; i << animals.size(); ++i) delete animals[i];
 }
 
+*/
+
+
+
+
+River::River(handler_ptr _tools, Position pos) : Lane(_tools, pos)
+{
+    Lane::change_image(tools->resource_manager.get_texture("RIVER"));
+}
+
+void River::stop() { 
+    
+}
+
+void River::spawn()
+{
+    /*
+    bool i = rand() % 2;
+    bool j = rand() % 2;
+    Animal* animal = nullptr;
+    for (int k = 0; k < num_of_animals; ++k) {
+        if (i) {
+            animal = new Hippo(resourcemanager, j, y);
+        }
+        else animal = new Croc(resourcemanager, j, y);
+        animal->go_to_position(300 * (k + 1), y, j);
+        animals.push_back(animal);
+    }
+    */
+}
+
+void River::adjust_objects()
+{
+    
+    Lane::adjust_objects();
+    
+    for (auto &log : logs)
+    {
+        //log->locate_at(log->)
+    }
+    
+    for (auto &animal : animals)
+    {
+        animal->locate_at(animal->position().get_x(), Lane::position().get_y());
+    }
+    
+}

@@ -2,7 +2,7 @@
 
 People::People(ResourceManager& resource_manager, bool alive, std::string type){
     sp.setTexture(resource_manager.get_texture(type));
-    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2+25, SCREEN_HEIGHT - 300 + 20));
+    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2 + 25, SCREEN_HEIGHT - 300 + 20));
     alive_ = alive;
     type_ = type;
 }
@@ -79,6 +79,7 @@ void People::move_left(ResourceManager& resource_manager){
 }
 
 void People::move_down(ResourceManager& resource_manager){
+    /*
     sf::Vector2f v = sp.getPosition();
     if (can_move_down())
     {
@@ -86,19 +87,35 @@ void People::move_down(ResourceManager& resource_manager){
         type_ = "MARIO_DOWNWARD";
         sp.setTexture(resource_manager.get_texture(type_));
     }
+     */
+    if (can_move_down())
+    {
+        index--;
+        type_ = "MARIO_DOWNWARD";
+        sp.setTexture(resource_manager.get_texture(type_));
+    }
 }
 
 
 int People::lane() const{
+    
+    /*
     sf::Vector2f v = sp.getPosition();
     int lane_top = v.y/100;
     return 6-lane_top;
+     */
+    return index;
 }
 
-void People::move_forward(sf::Vector2f vec, ResourceManager& resource_manager){
-    sf::Vector2f v = sp.getPosition();
+void People::move_forward(/*sf::Vector2f vec,*/ ResourceManager& resource_manager){
+    //sf::Vector2f v = sp.getPosition();
     if(can_move_forward()){
-        sp.setPosition(vec);
+        //sp.setPosition(vec);
+        
+        /* NEW */
+        index++;
+        //
+        
         type_ = "MARIO_FORWARD";
         sp.setTexture(resource_manager.get_texture(type_));
     }
@@ -129,6 +146,11 @@ sf::Sprite& People::get_sprite () {
 void People::move (sf::Vector2f vec){
     sp.move(vec);
 }
+
+int People::set_current_lane(int _index) {
+    index = _index;
+}
+
 
 sf::Sprite set_character(const People &character){
     sf::Sprite sp;

@@ -12,31 +12,38 @@
 const int car_number = 9;
 const int MAX_SPEED = 36; // maximum speed
 
-Vehicle::Vehicle(ResourceManager& resource_manager, int dir, int speed, int y )
-{
-	//srand(time(NULL));
-	int car_index = rand() % car_number;
-	this->velocity = speed;
-	sprite.setTexture(resource_manager.get_texture(get_car_texture(dir, car_index)));
-	sprite.setPosition(sf::Vector2f(0, y));
+
+Vehicle::Vehicle(Handler *_tools, int dir, int speed, int x) {
+    tools = _tools;
+    
+    this->speed = speed;
+    
+    sprite.setTexture(tools->resource_manager.get_texture(get_car_texture(dir, rand() % car_number)));
+    
+    locate_at(x, 0);
 }
 
-std::string Vehicle::get_car_texture(int dir, int index)
+void Vehicle::locate_at(int x, int y)
 {
-	// 0 left ; 1 right
-	std::string result = "C";
-	if (!dir) result += 'L'; else result += 'R';
-	result += '_';
-	result += char(48 + index);
-	return result;
+    sprite.setPosition(sf::Vector2f(x, y));
 }
 
-int Vehicle::see_velocity() 
-{ 
-	return velocity; 
+Position Vehicle::position()
+{
+    return Position(sprite.getPosition().x, sprite.getPosition().y);
 }
 
-void Vehicle::go_to_position( int x, int y )
-{
-	sprite.setPosition(sf::Vector2f(x, y));
+int Vehicle::get_speed() {
+    return speed;
 }
+
+std::string Vehicle::get_car_texture(const int dir, const int index) { 
+    std::string res = "";
+    res = res + "C" + ((!dir) ? "L" : "R") + "_" + char(48 + index);
+    return res;
+}
+
+void Vehicle::draw() { 
+    tools->window.draw(sprite);
+}
+
