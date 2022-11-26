@@ -26,7 +26,7 @@ void LaneFactory::add_lane(int type, Position pos) {
             
             int changed_type = -1;
             
-            newlane = (lanes.at(7)->type() != ROAD_TYPE) ? new Road(tools, 0, 0, 0, 0, pos) : new Road(tools, lanes.at(7)->direction(), changed_type, pos);
+            newlane = (lanes.at(7)->type() != ROAD_TYPE) ? new Road(tools, 0, 0, 0, 0, *level, pos) : new Road(tools, lanes.at(7)->direction(), changed_type, *level, pos);
             
             lanes.at(7)->change_status( -1 , -1 , -1 , changed_type);
         }
@@ -108,7 +108,7 @@ Lane *LaneFactory::create_lane(int type, Position pos) {
     
     ((type == PATHWAY_TYPE) &&  (result = new Pathway(tools, pos)));
     ((type == PATHWAYLIGHT_TYPE) && (result = new PathwayLight(tools, pos)));
-    ((type == ROAD_TYPE) && (result = new Road(tools, 0, 0, 0, 0, pos)));
+    ((type == ROAD_TYPE) && (result = new Road(tools, 0, 0, 0, 0, *level, pos)));
     
     return (result == nullptr ? new River(tools, pos) : result);
 }

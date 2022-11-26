@@ -56,7 +56,7 @@ int Level::lev() {
 }
 
 
-
+int Level::road_remain() { return this->road_left; }
 
 
 

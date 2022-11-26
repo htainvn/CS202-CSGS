@@ -85,14 +85,14 @@ public:
 protected:
     
     handler_ptr tools;
+
+    Level lev;
     
 private:
     
     Sprite sprite;
     
     People* people = nullptr;
-    
-    Level lev;
     
 private:
     

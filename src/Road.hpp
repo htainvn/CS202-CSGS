@@ -19,11 +19,11 @@ public:
     
 /* CONSTRUCTORS & DESTRUCTORS */
     
-    Road(handler_ptr _tools);
+    Road(handler_ptr _tools, Level level);
     
-    Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, Position pos = Position());
+    Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, Level level, Position pos = Position());
     
-    Road(handler_ptr _tools, int another_dir, int& changed_type, Position pos = Position());
+    Road(handler_ptr _tools, int another_dir, int& changed_type, Level level, Position pos = Position());
     
     ~Road() {}
     
@@ -62,11 +62,13 @@ private:
     
     std::vector<Vehicle*> vehicles;
 
-    int max_car = 5;
+    int max_car = 1;
     
 private:
     
     std::string get_texture_code();
+
+    void set_maxcar();
     
 };
 

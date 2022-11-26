@@ -34,6 +34,8 @@ public:
     void goto_next_level();
     
     int lev();
+
+    int road_remain(); // return number of road remain in level
     
     ~Level() {}
     
