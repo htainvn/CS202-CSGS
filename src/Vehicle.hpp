@@ -30,7 +30,7 @@ public:
     
 /* BEHAVIOUR */
     
-    void locate_at(int x, int y = 0);
+    void locate_at(float x, float y = 0);
     
     int get_speed();
     

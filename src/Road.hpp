@@ -61,6 +61,8 @@ private:
     int top_type = 0; //0 is nothing, 1 is dash, 2 is line
     
     std::vector<Vehicle*> vehicles;
+
+    int max_car = 5;
     
 private:
     

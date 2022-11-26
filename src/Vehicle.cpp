@@ -23,7 +23,7 @@ Vehicle::Vehicle(Handler *_tools, int dir, int speed, int x) {
     locate_at(x, 0);
 }
 
-void Vehicle::locate_at(int x, int y)
+void Vehicle::locate_at(float x, float y)
 {
     sprite.setPosition(sf::Vector2f(x, y));
 }

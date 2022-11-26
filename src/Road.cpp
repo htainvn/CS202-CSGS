@@ -52,8 +52,10 @@ void Road::spawn() {
     
     if (vehicles.empty())
     {
-        int speed = rand() % (MAX_SPEED * 3 / 2) - MAX_SPEED;
-        
+        int speed = rand() % MAX_SPEED + 100;
+
+        speed *= dir * 2 - 1;
+
         std::vector<int> rand_position;
         
         while (true)
@@ -87,7 +89,7 @@ void Road::spawn() {
     
     else if (vehicles.size() < CAR_PER_LANE)
     {
-        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100);
+        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100 + (!dir)*1200);
         
         new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
         
@@ -116,8 +118,28 @@ void Road::adjust_objects() {
     for (auto& each: vehicles)
     {
         
-        each->locate_at(each->position().get_x(), Lane::position().get_y() + 25);
+        each->locate_at(each->position().get_x() + each->get_speed() / 1000.0, Lane::position().get_y() + 25);
 
+    }
+    // Deallocate
+    if (!vehicles.empty())
+    {
+        if (!dir && vehicles[0]->position().get_x() < -100)
+        {
+            // std::cout << "Left" << '\n';
+            delete vehicles[0];
+            vehicles.erase(vehicles.begin());
+            spawn();
+            return;
+        }
+        if (dir && vehicles[0]->position().get_x() > 1000)
+        {
+            // std::cout << "Right" << '\n';
+            delete vehicles[0];
+            vehicles.erase(vehicles.begin());
+            spawn();
+            return;
+        }
     }
     
 }
