@@ -41,7 +41,9 @@ bool Level::out_of_road()
 void Level::goto_next_level()
 {
     ++level;
+    
     path_left = rand() % 3 + 1;
+    
     road_left = (level-1) / CAR_PER_LANE + 1;
 }
 
