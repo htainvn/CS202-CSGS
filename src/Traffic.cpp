@@ -8,7 +8,7 @@
 #include "Traffic.hpp"
 
 
-int Traffic::timing() { 
+void Traffic::timing() { 
     clock.restart();
 }
 
@@ -52,7 +52,7 @@ int Traffic::update() {
     return res;
 }
 
-int Traffic::init(sf::Font *font) { 
+void Traffic::init(sf::Font *font) { 
     light_circle.setFillColor(sf::Color::Red);
     light_circle.setPosition(sf::Vector2f(10, 10));
     

@@ -11,8 +11,10 @@
 
 
 Road::Road(handler_ptr _tools, int another_dir, int &changed_type, Position pos) : Lane(_tools, pos) {
+
+    this->dir = rand() % 2;
     
-    this->change_status(1, (this->dir = rand() % 2), this->dir == another_dir ? 1 : 2);
+    this->change_status(1, this->dir, this->dir == another_dir ? 1 : 2);
     
     changed_type = this->bottom_type;
     

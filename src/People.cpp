@@ -149,6 +149,7 @@ void People::move (sf::Vector2f vec){
 
 int People::set_current_lane(int _index) {
     index = _index;
+    return 0;
 }
 
 

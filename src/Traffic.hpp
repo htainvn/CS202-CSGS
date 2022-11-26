@@ -25,11 +25,11 @@ public:
 /* END */
     
 /* BEHAVIOUR */
-    int timing();
+    void timing();
     
     int update();
     
-    int init(sf::Font *font);
+    void init(sf::Font *font);
     
     void draw();
 /* END */

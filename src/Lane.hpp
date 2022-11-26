@@ -90,7 +90,7 @@ private:
     
     Sprite sprite;
     
-    People* people;
+    People* people = nullptr;
     
     Level lev;
     
