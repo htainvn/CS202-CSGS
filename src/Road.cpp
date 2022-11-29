@@ -34,7 +34,10 @@ void Road::set_maxcar() {
     int used = (lev.lev() + 2) / 3;
     used -= lev.road_remain();
 
-    if (lev.lev() <= 3) return;
+    if (lev.lev() <= 3) {
+        max_car = lev.lev();
+        return;
+    }
 
     if ((lev.road_remain() == 2 && lev.lev() - used * 3 <= 4) || (lev.road_remain() == 1 && lev.lev() - used * 3 <= 2) ) {
         max_car = 2;
@@ -135,6 +138,9 @@ void Road::spawn() {
         new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
         
         vehicles.push_back(new_vehicle);
+
+        std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
+        std::cout << "==========================================" << '\n';
         return;
     }
     
@@ -193,7 +199,9 @@ void Road::draw() {
     for (auto& each : vehicles)
     {
         each->draw();
+        // std::cout << each->position().get_x() << ' ';
     }
+    // std::cout << '\n';
     
 }
 
