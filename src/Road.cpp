@@ -41,7 +41,6 @@ void Road::set_maxcar() {
 
     if ((lev.road_remain() == 2 && lev.lev() - used * 3 <= 4) || (lev.road_remain() == 1 && lev.lev() - used * 3 <= 2) ) {
         max_car = 2;
-        std::cout << "YES" << '\n';
         return;
     }
     
@@ -76,9 +75,9 @@ void Road::spawn() {
     
     if (vehicles.size() == max_car) return;
     
-    if (vehicles.empty() )
+    if (vehicles.empty())
     {
-        int speed = rand() % MAX_SPEED + 100;
+        int speed = rand() % MAX_SPEED + 500;
 
         speed *= dir * 2 - 1;
 
@@ -89,6 +88,7 @@ void Road::spawn() {
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
 
             vehicles.push_back(new_vehicle);
+
             return;
         }
 
@@ -117,6 +117,7 @@ void Road::spawn() {
             
         });
         
+        // std::cout << "================== Initialize =======================" << '\n';
         for (int i = 0; i < max_car; ++i)
         {
             Vehicle* new_vehicle = new Vehicle(tools, dir, speed, rand_position[i] * 100);
@@ -124,23 +125,25 @@ void Road::spawn() {
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
             
             vehicles.push_back(new_vehicle);
-            std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
+            // std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
         }
-        std::cout << "==========================================" << '\n';
+        // std::cout << "==========================================" << '\n';
+        // system("pause");
         
         return;
     }
     
     if (vehicles.size() < max_car)
     {
-        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100 + (!dir)*1100);
+        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -1000 + (!dir)*2900);
         
         new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
         
         vehicles.push_back(new_vehicle);
 
-        std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
-        std::cout << "==========================================" << '\n';
+        // std::cout << "***************** Offspring *************" << '\n';
+        // std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
+        // std::cout << "==========================================" << '\n';
         return;
     }
     
@@ -195,13 +198,13 @@ void Road::adjust_objects() {
 void Road::draw() {
     
     Lane::draw();
-    
+    // std::cout << "************ Draw **************" << '\n';
     for (auto& each : vehicles)
     {
         each->draw();
-        // std::cout << each->position().get_x() << ' ';
+        // std::cout << each->position().get_x() << '\n';
     }
-    // std::cout << '\n';
+    // std::cout << "*********************************" << '\n';
     
 }
 
