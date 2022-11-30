@@ -125,31 +125,33 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    /* update position */
-    lane_gen->refactor(level);
-    
-    /* update level */
-    int status = traffic->update();
-    
-    switch(status)
-    {
-        case 0:
-            lane_gen->stop();
-            break;
-        case 1:
-            lane_gen->slowdown();
-            break;
-        case 2:
-            lane_gen->run();
-            break;
+    if(!is_pause){
+        /* update position */
+        lane_gen->refactor(level);
+        
+        /* update level */
+        int status = traffic->update();
+        
+        switch(status)
+        {
+            case 0:
+                lane_gen->stop();
+                break;
+            case 1:
+                lane_gen->slowdown();
+                break;
+            case 2:
+                lane_gen->run();
+                break;
+        }
+        
+        /* update level */
+        std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
+        
+        if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
+        
+        if(check_lost()) is_pause = true;
     }
-    
-    /* update level */
-    std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
-    
-    if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-    
-    check_lost();
 }
 
 void GameState::draw(float dt)
@@ -175,18 +177,17 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
-    
+    is_pause = true;
 }
 
 void GameState::resume()
 {
-    
+    is_pause = false;
 }
 
 bool GameState::check_lost() 
 {
     if (people->touch_border() || lane_gen->at(lane_gen->current())->check_lost()){
-        this->tools->window.close();
         return true;
     }
     return false;

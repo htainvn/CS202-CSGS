@@ -33,6 +33,8 @@ private:
     
     LaneFactory* lane_gen;
     
+    bool is_pause = false;
+    
 public:
     
     GameState(handler_ptr _data);

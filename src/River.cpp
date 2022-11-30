@@ -232,7 +232,7 @@ bool River::check_lost() {
     bool direction = dir;
     for(int i=0; i<float_objs.size(); i++){
         fpos = float_objs[i]->position();
-        if(float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 5 && people_pos.get_x() <= fpos.get_x()+102)
+        if(float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21<= fpos.get_x()+101)
             return false;
     }
     return true;
