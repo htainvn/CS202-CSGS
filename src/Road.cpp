@@ -222,3 +222,14 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
 void Road::stop() {
     
 }
+
+bool Road::check_lost() {
+    Position people_pos = people_position(), veh_pos;;
+    for(int i=0; i<vehicles.size(); i++){
+        veh_pos = vehicles[i]->position();
+        if((veh_pos.get_x() + 100 >= people_pos.get_x() && veh_pos.get_x() <= people_pos.get_x()))
+            return true;
+    }
+    return false;
+}
+

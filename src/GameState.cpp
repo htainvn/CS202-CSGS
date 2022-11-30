@@ -148,6 +148,8 @@ void GameState::update(float dt)
     std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
     
     if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
+    
+    check_lost();
 }
 
 void GameState::draw(float dt)
@@ -183,11 +185,11 @@ void GameState::resume()
 
 bool GameState::check_lost() 
 {
-    if (people->touch_border()){ // if collision, if fall into water are being missed
+    if (people->touch_border() || lane_gen->at(lane_gen->current())->check_lost()){
         this->tools->window.close();
         return true;
     }
-    return true;
+    return false;
 }
 
 GameState::~GameState() {

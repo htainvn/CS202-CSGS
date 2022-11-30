@@ -17,6 +17,7 @@
 #include "src/Animal.hpp"
 #include "src/Position.hpp"
 #include "src/People.hpp"
+#include "math.h"
 
 class Lane {
     
@@ -56,6 +57,8 @@ public:
     
     void set_level(const Level& lev);
     
+    Position people_position();
+    
 /* END HERE */
     
 /*----------------------------------------------------------------------------------------*/
@@ -79,6 +82,8 @@ public:
     virtual void slowdown() {}
     
     virtual void run() {}
+    
+    virtual bool check_lost(){return false;};
     
 /* END HERE */
     

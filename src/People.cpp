@@ -98,7 +98,6 @@ void People::move_down(ResourceManager& resource_manager){
 
 
 int People::lane() const{
-    
     /*
     sf::Vector2f v = sp.getPosition();
     int lane_top = v.y/100;

@@ -38,6 +38,8 @@ public:
     
     void draw();
     
+    bool check_lost();
+    
     /* END HERE */
     
 private:

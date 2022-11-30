@@ -77,5 +77,11 @@ void Lane::stop() {
     
 }
 
+Position Lane::people_position() {
+    return Position(people->get_position().x, people->get_position().y);
+}
+
+
+
 
 

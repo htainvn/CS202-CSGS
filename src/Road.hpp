@@ -47,6 +47,8 @@ public:
     
     int direction() { return dir; }
     
+    bool check_lost();
+    
     
 /* END HERE */
     
