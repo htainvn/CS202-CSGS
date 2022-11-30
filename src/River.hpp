@@ -40,6 +40,10 @@ public:
     
     bool check_lost();
     
+    void set_current(People*& mario);
+    
+    void unset();
+    
     /* END HERE */
     
 private:

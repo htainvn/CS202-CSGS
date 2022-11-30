@@ -13,7 +13,7 @@ std::string People::type_path () const{
     return type_;
 }
 
-void People::go_to_position(int x, int y){
+void People::go_to_position(float x, float y){
     sp.setPosition(sf::Vector2f(x, y));
 }
 

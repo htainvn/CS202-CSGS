@@ -33,6 +33,15 @@ public:
         if (!type) return ((x < -100) | (x > SCREEN_WIDTH));
        return ((y < -100) | (y > SCREEN_HEIGHT));
     }
+    
+    bool inRect(Position& another)
+    {
+        if (x > another.get_x() + dsize) return false;
+        if (x < another.get_x()) return false;
+        if (y > another.get_y() + dsize) return false;
+        if (y < another.get_y()) return false;
+        return true;
+    }
 };
 
 

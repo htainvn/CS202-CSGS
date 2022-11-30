@@ -209,6 +209,8 @@ void River::adjust_objects()
         
         else each->move_left();
         
+        each->adjust_objects();
+        
         if (each->position().out_of_screen(0))
         {
             delete float_objs[i];
@@ -230,13 +232,51 @@ void River::draw() {
 
 bool River::check_lost() {
     Position people_pos = people_position(), fpos;
+    
     bool direction = dir;
-    for(int i=0; i<float_objs.size(); i++){
+    
+    for(int i = 0; i < float_objs.size(); i++) {
+        
         fpos = float_objs[i]->position();
-        if(float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21<= fpos.get_x()+101)
+        if (float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101)
             return false;
     }
     return true;
 }
 
+void River::set_current(People*& mario)
+{
+    Lane::set_current(mario);
+    
+    Position mariop = Position(mario->get_position().x, mario->get_position().y);
+    
+    for (int i = 0; i < float_objs.size(); i++) {
+        
+        Position obj_p = float_objs[i]->position();
+        
+        if (mariop.inRect(obj_p))
+        {
+            float_objs[i]->setCurrent(mario);
+            
+            break;
+        }
+        
+    }
+    
+}
 
+void River::unset()
+{
+    
+    for (int i = 0; i < float_objs.size(); i++)
+    {
+        if (float_objs[i]->isCurrent())
+        {
+            float_objs[i]->unset();
+            break;
+        }
+    }
+    
+    
+    Lane::unset();
+}

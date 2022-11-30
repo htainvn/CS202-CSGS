@@ -137,7 +137,7 @@ void LaneFactory::next_current(People*& mario)
     {
         lanes[t]->unset();
         
-        this->lanes[t + 1]->set_current(mario);
+        lanes[t + 1]->set_current(mario);
     }
 }
 

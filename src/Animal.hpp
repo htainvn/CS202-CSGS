@@ -35,6 +35,12 @@ public:
     virtual int get_type() { return 0; }
 
     virtual void setCurrent(People*& people) {}
+    
+    virtual bool isCurrent() {return 0;}
+    
+    virtual void unset() {}
+    
+    virtual void adjust_objects() {}
 
     void locate_at(float x, float y);
     
@@ -79,6 +85,8 @@ public:
 
     int get_type();
     
+    void adjust();
+    
     /* END HERE */
 private:
     std::string get_hash_name();
@@ -98,7 +106,6 @@ public:
     ~Croc() {}
 
     int get_type();
-
     
     /* END HERE */
 private:

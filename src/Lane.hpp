@@ -47,15 +47,11 @@ public:
     
     bool out_scr();
     
-    void set_current(People*& mario);
-    
-    void unset();
+    void set_level(const Level& lev);
     
     bool is_current();
     
     int level();
-    
-    void set_level(const Level& lev);
     
     Position people_position();
     
@@ -83,7 +79,11 @@ public:
     
     virtual void run() {}
     
+    virtual void set_current(People*& mario);
+    
     virtual bool check_lost(){return false;};
+    
+    virtual void unset();
     
 /* END HERE */
     

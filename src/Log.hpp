@@ -9,11 +9,15 @@ public:
 
 	Log(handler_ptr tools, bool dir, Position pos, float _speed);
 
-	void adjust();
+	void adjust_objects();
 
 	int get_type();
 
 	void setCurrent(People*& people);
+    
+    bool isCurrent();
+    
+    void unset();
 
 	~Log();
 

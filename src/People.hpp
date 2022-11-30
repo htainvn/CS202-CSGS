@@ -35,7 +35,7 @@ public:
     void change_type (std::string type);
     void scroll();
     bool touch_border();
-    void go_to_position(int x, int y);
+    void go_to_position(float x, float y);
     void move (sf::Vector2f vec);
     bool is_alive();
     bool is_mid_height();
