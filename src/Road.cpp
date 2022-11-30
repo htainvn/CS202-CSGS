@@ -227,7 +227,7 @@ bool Road::check_lost() {
     Position people_pos = people_position(), veh_pos;;
     for(int i=0; i<vehicles.size(); i++){
         veh_pos = vehicles[i]->position();
-        if((veh_pos.get_x() + 100 >= people_pos.get_x() && veh_pos.get_x() <= people_pos.get_x()))
+        if(veh_pos.get_x() + 100 <= people_pos.get_x()+142 && veh_pos.get_x() + 100 >= people_pos.get_x())
             return true;
     }
     return false;

@@ -228,13 +228,14 @@ void River::draw() {
 }
 
 bool River::check_lost() {
-    Position people_pos = people_position(), fpos;;
+    Position people_pos = people_position(), fpos;
+    bool direction = dir;
     for(int i=0; i<float_objs.size(); i++){
         fpos = float_objs[i]->position();
-        if(fpos.get_x() + 100 >= people_pos.get_x() && fpos.get_x() <= people_pos.get_x() && float_objs[i]->get_type() != 2)
-            return true;
+        if(float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 5 && people_pos.get_x() <= fpos.get_x()+102)
+            return false;
     }
-    return false;
+    return true;
 }
 
 
