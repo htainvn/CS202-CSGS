@@ -35,16 +35,16 @@ void GameState::init(int status) {
     if (status == 0) {
         //initialization
         
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 600));
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 500));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 400));
-        lane_gen->add_lane(ROAD_TYPE, Position(0, 300));
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 200));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 100));
-        lane_gen->add_lane(ROAD_TYPE, Position(0, 0));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 600), Level(1, 3, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 500), Level(1, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 400), Level(1, 1, 1));
+        lane_gen->add_lane(ROAD_TYPE, Position(0, 300), Level(1, 0, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 200), Level(2, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 100), Level(2, 1, 1));
+        lane_gen->add_lane(ROAD_TYPE, Position(0, 0), Level(2, 0, 1));
         
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, -100));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, -200));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(0, -100), Level(3, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, -200), Level(3, 1, 1));
     }
     else
     {
@@ -151,6 +151,13 @@ void GameState::update(float dt)
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
         if(check_lost()) is_pause = true;
+    }
+    
+    /* update level */
+    std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
+    
+    if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) {
+        t_lev.setString(t);
     }
 }
 

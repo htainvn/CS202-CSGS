@@ -19,13 +19,10 @@ Road::Road(handler_ptr _tools, int another_dir, int& changed_type, Level level, 
     this->change_status(1, this->dir, this->dir == another_dir ? 1 : 2);
     
     changed_type = this->bottom_type;
-
-    // set car max
+    
     set_maxcar();
 
     spawn();
-
-    //std::cout << max_car << '\n';
     
 }
 
@@ -38,7 +35,6 @@ void Road::set_maxcar() {
 
     if ((lev.road_remain() == 2 && lev.lev() - used * 3 <= 4) || (lev.road_remain() == 1 && lev.lev() - used * 3 <= 2) ) {
         max_car = 2;
-        //std::cout << "YES" << '\n';
         return;
     }
     
@@ -57,17 +53,17 @@ void Road::change_status(int _position, int _dir, int _bottom, int _top) {
     
     reset_texture();
     
-    spawn();
-    
 }
 
-void Road::reset_texture() {
+void Road::reset_texture()
+{
     
     Lane::change_image(tools->resource_manager.get_texture(get_texture_code()));
     
 }
 
-void Road::spawn() { 
+void Road::spawn()
+{
     
     const int MAX_SPEED = 500;
     
@@ -86,6 +82,17 @@ void Road::spawn() {
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
 
             vehicles.push_back(new_vehicle);
+            
+            for (int i = 0; i < vehicles.size(); i++) {
+                for (int j = i+1; j < vehicles.size(); j++) {
+                    if (abs(vehicles[i]->position().get_x() - vehicles[j]->position().get_x()) <= 100) {
+                        std::cout << "\nProblems 1!!!!!!!!!!!!!!!!!!!\n" << i << " " << j;
+                        
+                        return;
+                    }
+                }
+            }
+            
             return;
         }
 
@@ -101,9 +108,14 @@ void Road::spawn() {
             }*/
 
             bool check = true;
+            
             for (int i = 0; i < rand_position.size(); ++i) 
-                if( rand_position[i] == index || rand_position[i] + 1 == index || rand_position[i] - 1 == index ) check = false;
-            if (check) rand_position.push_back(index);
+                if( (rand_position[i] == index) || (rand_position[i] + 1 == index) || (rand_position[i] - 1 == index) ) check = false;
+            
+            if (check)
+            {
+                rand_position.push_back(index);
+            }
 
             if (rand_position.size() == max_car) break;
         }
@@ -121,20 +133,20 @@ void Road::spawn() {
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
             
             vehicles.push_back(new_vehicle);
-            std::cout << new_vehicle->sprite.getPosition().x << ' ' << new_vehicle->sprite.getPosition().y << '\n';
         }
-        //std::cout << "==========================================" << '\n';
         
         return;
     }
     
     if (vehicles.size() < max_car)
     {
+        
         Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100 + (!dir)*1100);
         
         new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
         
         vehicles.push_back(new_vehicle);
+        
         return;
     }
     
@@ -160,9 +172,9 @@ void Road::adjust_objects() {
     for (auto& each: vehicles)
     {
         
-        each->locate_at(each->position().get_x() + each->get_speed() / 1000.0, Lane::position().get_y() + 25);
-
+        each->locate_at(each->position().get_x() + each->get_speed() * FRAME_RATE_SECOND, Lane::position().get_y() + 25);
     }
+    
     // Deallocate
     if (!vehicles.empty())
     {
@@ -200,10 +212,13 @@ void Road::draw() {
 Road::Road(handler_ptr _tools, Level level) : Lane(_tools, level )
 {
     Lane::set_level(level);
+    
     this->dir = rand() % 2;
+    
     Lane::change_image(_tools->resource_manager.get_texture(get_texture_code()));
     
     set_maxcar();
+    
     spawn();
     
 }
@@ -213,9 +228,11 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
     Lane::set_level(level);
 
     this->dir = rand() % 2;
+    
     Lane::change_image(_tools->resource_manager.get_texture(get_texture_code()));
     
     set_maxcar();
+    
     spawn();
 }
 
@@ -233,3 +250,13 @@ bool Road::check_lost() {
     return false;
 }
 
+Road::~Road() {
+    while (!vehicles.empty()) {
+        if (vehicles[0]) {
+            delete vehicles[0];
+            vehicles[0] = nullptr;
+        }
+        vehicles.erase(vehicles.begin());
+    }
+    max_car = 0;
+}

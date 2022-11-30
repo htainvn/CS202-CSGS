@@ -26,6 +26,7 @@ Vehicle::Vehicle(Handler *_tools, int dir, int speed, int x) {
 void Vehicle::locate_at(float x, float y)
 {
     sprite.setPosition(sf::Vector2f(x, y));
+    
 }
 
 Position Vehicle::position()

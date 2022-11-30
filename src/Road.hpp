@@ -25,7 +25,7 @@ public:
     
     Road(handler_ptr _tools, int another_dir, int& changed_type, Level level, Position pos = Position());
     
-    ~Road() {}
+    ~Road();
     
 /* END HERE */
     

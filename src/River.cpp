@@ -180,11 +180,12 @@ void River::spawn()
 }
 
 River::~River() {
-    for (auto& each : float_objs) {
-        if (each) {
-            delete each;
-            each = nullptr;
+    while (!float_objs.empty()) {
+        if (float_objs[0]) {
+            delete float_objs[0];
+            float_objs[0] = nullptr;
         }
+        float_objs.erase(float_objs.begin());
     }
 }
 
