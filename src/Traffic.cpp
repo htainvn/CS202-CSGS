@@ -30,7 +30,7 @@ int Traffic::update() {
         res = 0;
         
         light_circle.setFillColor(sf::Color::Red);
-        
+
         count_down.setString(std::to_string((6000 - t) / 1000));
     }
     else

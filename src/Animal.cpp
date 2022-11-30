@@ -1,5 +1,5 @@
 //
-//  Animal.cpp
+//  floatObject.cpp
 //  CROSSING_ROAD
 //
 //  Created by Hoang The Anh on 06/11/2022.
@@ -7,80 +7,71 @@
 
 #include "Animal.hpp"
 
-/*
 
-Animal::Animal(bool type) {
-	this->type = type;
+floatObject::floatObject(handler_ptr _tools, bool _dir, Position p, float _speed) : tools(_tools), dir(_dir), pos(p), speed(_speed) {
+	locate_at(p.get_x(), p.get_y());
 }
 
-bool Animal::getType() {
-	return type;
-}
-
-Hippo::Hippo(ResourceManager& resource_manager, bool type, float pos_y) : Animal(type) {
-	this->pos_y = pos_y;
-	std::string hash_name;
-	pos_x = 850;
-	if (type) {
-		hash_name = "HIPPO_RIGHT";
-		pos_x = 0;
-	}
-	else hash_name = "HIPPO_LEFT";
-	sprite.setTexture(resource_manager.get_texture(hash_name));
-	sprite.setPosition(sf::Vector2f(pos_x,pos_y));
-}
-
-Croc::Croc(ResourceManager& resource_manager, bool type, float pos_y) : Animal(type) {
-	this->pos_y = pos_y;
-	std::string hash_name;
-	pos_x = 900;
-	if (type) {
-		hash_name = "CROC_RIGHT"; 
-		pos_x = 0;
-	}
-	else hash_name = "CROC_LEFT";
-	sprite.setTexture(resource_manager.get_texture(hash_name));
-	sprite.setPosition(sf::Vector2f(pos_x, pos_y));
-}
-
-sf::Sprite& Hippo::getSprite() {
-	return sprite;
-}
-
-sf::Sprite& Croc::getSprite() {
-	return sprite;
-}
-
-void Croc::go_to_position(float x, float y, bool type) {
-	if (type)
-		pos_x += speed + x;
-	else
-		pos_x -= speed + x;
-	sprite.setPosition(sf::Vector2f(pos_x, y));
-}
-
-void Hippo::go_to_position(float x, float y, bool type) {
-	if (type)
-		pos_x += speed + x;
-	else
-		pos_x -= speed + x;
-	sprite.setPosition(sf::Vector2f(pos_x, y));
-}
-
-*/
-
-
-Animal::Animal(Handler *_tools, bool dir, float y) { 
-    tools = _tools;
-    this->dir = dir;
-    pos = Position(0, y);
-}
-
-void Animal::locate_at(float x, float y) { 
+void floatObject::locate_at(float x, float y) { 
     sprite.setPosition(sf::Vector2f(x, y));
+	pos = Position(x, y);
 }
 
-Position Animal::position() { 
+void floatObject::move_left() {
+	locate_at(pos.get_x() - speed * FRAME_RATE_SECOND, pos.get_y());
+}
+
+void floatObject::move_right() {
+	locate_at(pos.get_x() + speed * FRAME_RATE_SECOND, pos.get_y());
+}
+
+void floatObject::set_speed(float _speed) {
+	speed = _speed;
+}
+
+Position floatObject::position() { 
     return pos;
 }
 
+void floatObject::draw() { 
+    tools->window.draw(sprite);
+}
+
+
+Hippo::Hippo(handler_ptr _tools, bool _dir, Position p, float _speed) : floatObject(_tools, _dir, p, _speed) {
+	sprite.setTexture(_tools->resource_manager.get_texture(get_hash_name()));
+}
+
+std::string Hippo::get_hash_name() {
+	std::string hash_name;
+	if (!dir) {
+		hash_name = "HIPPO_LEFT";
+	}
+	else {
+		hash_name = "HIPPO_RIGHT";
+	}
+	return hash_name;
+}
+
+Croc::Croc(handler_ptr _tools, bool dir, Position p, float _speed) : floatObject(_tools, dir, p, _speed) {
+	sprite.setTexture(_tools->resource_manager.get_texture(get_hash_name()));
+}
+
+std::string Croc::get_hash_name() {
+	std::string hash_name;
+	if (!dir) {
+		hash_name = "CROC_LEFT";
+	}
+	else {
+		hash_name = "CROC_RIGHT";
+	}
+	return hash_name;
+}
+
+int Hippo::get_type() {
+	return 0;
+}
+
+int Croc::get_type() {
+	return 1;
+}

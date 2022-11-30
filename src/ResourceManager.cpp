@@ -81,5 +81,7 @@ void ResourceManager::init() {
     load_texture("CROC_RIGHT",CROC_RIGHT_FILE_PATH );
     load_texture("HIPPO_LEFT",HIPPO_LEFT_FILE_PATH );
     load_texture("HIPPO_RIGHT",HIPPO_RIGHT_FILE_PATH );
+
+    load_texture("LOG", LOG_PATH);
 }
 

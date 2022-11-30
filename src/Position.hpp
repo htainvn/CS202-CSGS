@@ -29,8 +29,9 @@ public:
         return y;
     }
     
-    bool out_of_screen() {
-        return ((x < 0) | (x > SCREEN_WIDTH) | (y < 0) | (y > SCREEN_HEIGHT));
+    bool out_of_screen(bool type) {
+        if (!type) return ((x < -100) | (x > SCREEN_WIDTH));
+       return ((y < -100) | (y > SCREEN_HEIGHT));
     }
 };
 

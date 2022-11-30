@@ -18,11 +18,11 @@ public:
     
 /* CONSTRUCTORS & DESTRUCTORS */
     
-    Pathway(handler_ptr _tools);
+    Pathway(handler_ptr _tools, Level level);
     
-    Pathway(handler_ptr _tools, float x, float y);
+    Pathway(handler_ptr _tools, float x, float y, Level level);
     
-    Pathway(handler_ptr _tools, Position pos);
+    Pathway(handler_ptr _tools, Position pos, Level level);
 
     ~Pathway() {}
     
@@ -43,11 +43,11 @@ public:
     
 /* CONSTRUCTORS & DESTRUCTORS */
     
-    PathwayLight(handler_ptr _tools);
+    PathwayLight(handler_ptr _tools, Level level);
     
-    PathwayLight(handler_ptr _tools, float x, float y);
+    PathwayLight(handler_ptr _tools, float x, float y, Level level);
     
-    PathwayLight(handler_ptr _tools, Position pos);
+    PathwayLight(handler_ptr _tools, Position pos, Level level);
 
     ~PathwayLight() {}
     

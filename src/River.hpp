@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "src/Lane.hpp"
 #include "src/Vehicle.hpp"
+#include "src/Log.hpp"
 #include "src/Animal.hpp"
 
 class River : public Lane {
@@ -19,9 +20,9 @@ public:
     
     /* CONSTRUCTORS & DESTRUCTORS */
     
-    River(handler_ptr _tools, Position pos = Position());
+    River(handler_ptr _tools, Level level, Position pos = Position());
     
-    ~River() {}
+    ~River();
     
     /* END HERE */
     
@@ -35,15 +36,25 @@ public:
     
     int type() { return RIVER_TYPE; }
     
+    void draw();
     
     /* END HERE */
     
 private:
+
+    std::vector<floatObject*> float_objs;
+
+    int max_log;
+
+    bool dir;
+
+    float speed;
     
-    std::vector<Log*> logs;
-    
-    std::vector<Animal*> animals;
-    
+
+private:
+
+    int get_maxlog();
+
 };
 
 #endif /* River_hpp */

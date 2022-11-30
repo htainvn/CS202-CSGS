@@ -37,11 +37,11 @@ bool Lane::out_scr() {
     return !((position().get_y() > -100) && (position().get_y() < SCREEN_HEIGHT));
 }
 
-Lane::Lane(handler_ptr _tools, float x, float y) : tools(_tools) {
+Lane::Lane(handler_ptr _tools, float x, float y, Level level) : tools(_tools), lev(level) {
     locate_at(x, y);
 }
 
-Lane::Lane(handler_ptr _tools, Position pos) : tools(_tools) {
+Lane::Lane(handler_ptr _tools, Position pos, Level level) : tools(_tools), lev(level) {
     
     locate_at(pos.get_x(), pos.get_y());
 }

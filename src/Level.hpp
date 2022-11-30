@@ -41,11 +41,14 @@ public:
     
 private:
     
-    int level = 0;
+    int level = 0; //number of cars/ logs
     
     int path_left = 0;
     
-    int road_left = 0;
+    int road_left = 0; //so luong road, river con lai
+
+    //road-left(s) = 2, level = 14, road_left(bd) = (14-1)/3 + 1 = 5 -> slx = 14 - 3*3 = 5
+    //
 };
 
 #endif /* Level_hpp */

@@ -41,7 +41,7 @@ public:
     
     LaneFactory(handler_ptr _tools, level_ptr _level) : tools(_tools), level(_level) {};
     
-    lane_ptr create_lane(int type, Position pos = Position());
+    lane_ptr create_lane(int type, Position pos = Position(), Level lev = Level());
     
     void pop_bottom_lane();
     
@@ -51,7 +51,7 @@ public:
     
     bool detect_outscr();
     
-    void add_lane(int type, Position pos = Position());
+    void add_lane(int type, Position pos = Position(), Level lev = Level());
     
     void next_current(People*& mario);
     

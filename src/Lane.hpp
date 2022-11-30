@@ -24,11 +24,11 @@ public:
     
 /* CONSTRUCTORS & DESTRUCTORS*/
     
-    Lane(handler_ptr _tools) : tools (_tools) {}
+    Lane(handler_ptr _tools, Level level) : tools (_tools), lev(level) {}
     
-    Lane(handler_ptr _tools, float x, float y);
+    Lane(handler_ptr _tools, float x, float y, Level level);
     
-    Lane(handler_ptr _tools, Position pos);
+    Lane(handler_ptr _tools, Position pos, Level level);
     
     virtual ~Lane() {}
     

@@ -7,15 +7,15 @@
 
 #include "src/Pathway.hpp"
 
-Pathway::Pathway(handler_ptr _tools) : Lane(_tools) {
+Pathway::Pathway(handler_ptr _tools, Level level) : Lane(_tools, level) {
     Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
 }
 
-Pathway::Pathway(handler_ptr _tools, float x, float y) : Lane(_tools, x, y) {
+Pathway::Pathway(handler_ptr _tools, float x, float y, Level level) : Lane(_tools, x, y, level) {
     Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
 }
 
-Pathway::Pathway(handler_ptr _tools, Position pos) : Lane(_tools, pos) {
+Pathway::Pathway(handler_ptr _tools, Position pos, Level level) : Lane(_tools, pos, level) {
     Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
 }
 
@@ -44,21 +44,21 @@ void PathwayLight::adjust_objects()
     
 }
 
-PathwayLight::PathwayLight(handler_ptr _tools) : Pathway(_tools)
+PathwayLight::PathwayLight(handler_ptr _tools, Level level) : Pathway(_tools, level)
 {
     light = TrafficLight(_tools);
     
     light.locate_at(800, Lane::position().get_y() - 70);
 }
 
-PathwayLight::PathwayLight(handler_ptr _tools, float x, float y) : Pathway(_tools, x, y)
+PathwayLight::PathwayLight(handler_ptr _tools, float x, float y, Level level) : Pathway(_tools, x, y, level)
 {
     light = TrafficLight(_tools);
     
     light.locate_at(800, Lane::position().get_y() - 70);
 }
 
-PathwayLight::PathwayLight(handler_ptr _tools, Position pos) : Pathway(_tools, pos)
+PathwayLight::PathwayLight(handler_ptr _tools, Position pos, Level level) : Pathway(_tools, pos, level)
 {
     light = TrafficLight(_tools);
     

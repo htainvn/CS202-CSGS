@@ -8,9 +8,9 @@
 #include <time.h>
 #include "src/LaneGenerator.hpp"
 
-void LaneFactory::add_lane(int type, Position pos) {
+void LaneFactory::add_lane(int type, Position pos, Level level) {
     
-    Lane* newlane = create_lane(type, pos);
+    Lane* newlane = create_lane(type, pos, level);
     
     if (lanes.size() >= 8) {
         
@@ -26,14 +26,12 @@ void LaneFactory::add_lane(int type, Position pos) {
             
             int changed_type = -1;
             
-            newlane = (lanes.at(7)->type() != ROAD_TYPE) ? new Road(tools, 0, 0, 0, 0, *level, pos) : new Road(tools, lanes.at(7)->direction(), changed_type, *level, pos);
+            newlane = (lanes.at(7)->type() != ROAD_TYPE) ? new Road(tools, 0, 0, 0, 0, level, pos) : new Road(tools, lanes.at(7)->direction(), changed_type, level, pos);
             
             lanes.at(7)->change_status( -1 , -1 , -1 , changed_type);
         }
         
     }
-    
-    newlane->set_level(*level);
     
     lanes.push_back(newlane);
     
@@ -52,9 +50,11 @@ bool LaneFactory::detect_outscr()
     {
         if (lanes.size() < 9)
         {
+            Level tmp = *level;
+
             int type = level->spawn_next_lane();
             
-            add_lane(type, Position(0, -100 + lanes.at(lanes.size()-1)->position().get_y()));
+            add_lane(type, Position(0, -100 + lanes.at(lanes.size()-1)->position().get_y()), tmp);
         }
     }
     
@@ -102,15 +102,15 @@ void LaneFactory::pop_bottom_lane()
 }
 
 
-Lane *LaneFactory::create_lane(int type, Position pos) {
+Lane *LaneFactory::create_lane(int type, Position pos, Level level) {
     
     Lane *result = nullptr;
     
-    ((type == PATHWAY_TYPE) &&  (result = new Pathway(tools, pos)));
-    ((type == PATHWAYLIGHT_TYPE) && (result = new PathwayLight(tools, pos)));
-    ((type == ROAD_TYPE) && (result = new Road(tools, 0, 0, 0, 0, *level, pos)));
+    ((type == PATHWAY_TYPE) &&  (result = new Pathway(tools, pos, level)));
+    ((type == PATHWAYLIGHT_TYPE) && (result = new PathwayLight(tools, pos, level)));
+    ((type == ROAD_TYPE) && (result = new Road(tools, 0, 0, 0, 0, level, pos)));
     
-    return (result == nullptr ? new River(tools, pos) : result);
+    return (result == nullptr ? new River(tools, level, pos) : result);
 }
 
 Lane*& LaneFactory::at(const int index) {

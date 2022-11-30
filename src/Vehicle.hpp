@@ -55,12 +55,4 @@ private:
     
 };
 
-class Log : public Vehicle {
-private:
-    
-public:
-    Log(ResourceManager& resource_manager) {}
-    void go_to_position(int x) {}
-};
-
 #endif /* Vehicle_hpp */
