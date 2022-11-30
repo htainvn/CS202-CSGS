@@ -18,11 +18,11 @@ void floatObject::locate_at(float x, float y) {
 }
 
 void floatObject::move_left() {
-	locate_at(pos.get_x() - speed * FRAME_RATE_SECOND, pos.get_y());
+	locate_at(pos.get_x() - speed / 1000.f, pos.get_y());
 }
 
 void floatObject::move_right() {
-	locate_at(pos.get_x() + speed * FRAME_RATE_SECOND, pos.get_y());
+	locate_at(pos.get_x() + speed / 1000.f, pos.get_y());
 }
 
 void floatObject::set_speed(float _speed) {
