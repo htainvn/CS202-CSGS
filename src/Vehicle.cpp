@@ -35,7 +35,7 @@ Position Vehicle::position()
 }
 
 int Vehicle::get_speed() {
-    return speed;
+    return speed * (!redlight) * ( 1 - yellowlight * 0.7 );
 }
 
 std::string Vehicle::get_car_texture(const int dir, const int index) { 
@@ -48,3 +48,17 @@ void Vehicle::draw() {
     tools->window.draw(sprite);
 }
 
+void Vehicle::traffic_light(int light) { // 0 green 1 yellow 2 red
+    if (light == 0) {
+        redlight = yellowlight = false;
+        return;
+    }
+    if (light == 1) {
+        yellowlight = true;
+        return;
+    }
+    if (light == 2) {
+        redlight = true;
+        return;
+    }
+}

@@ -35,6 +35,8 @@ public:
     int get_speed();
     
     void draw();
+
+    void traffic_light(int light);
     
     Position position();
     
@@ -48,6 +50,8 @@ private:
     
     int speed = 0;
     
+    bool redlight = false;
+    bool yellowlight = false;
     
 private:
     

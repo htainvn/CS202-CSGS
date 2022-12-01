@@ -48,6 +48,8 @@ public:
     int direction() { return dir; }
     
     bool check_lost();
+
+    void traffic_light(int light);
     
     
 /* END HERE */

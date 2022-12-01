@@ -31,7 +31,10 @@ void Road::set_maxcar() {
     int used = (lev.lev() + 2) / 3;
     used -= lev.road_remain();
 
-    if (lev.lev() <= 3) return;
+    if (lev.lev() <= 3) {
+        max_car = lev.lev();
+        return;
+    }
 
     if ((lev.road_remain() == 2 && lev.lev() - used * 3 <= 4) || (lev.road_remain() == 1 && lev.lev() - used * 3 <= 2) ) {
         max_car = 2;
@@ -82,7 +85,7 @@ void Road::spawn()
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
 
             vehicles.push_back(new_vehicle);
-            
+            /*
             for (int i = 0; i < vehicles.size(); i++) {
                 for (int j = i+1; j < vehicles.size(); j++) {
                     if (abs(vehicles[i]->position().get_x() - vehicles[j]->position().get_x()) <= 100) {
@@ -92,7 +95,7 @@ void Road::spawn()
                     }
                 }
             }
-            
+            */
             return;
         }
 
@@ -260,6 +263,7 @@ Road::~Road() {
     }
     max_car = 0;
 }
+
 void Road::traffic_light(int light) { // 0 green 1 yellow 2 red
     for (auto& each : vehicles) each->traffic_light(light);
 }
