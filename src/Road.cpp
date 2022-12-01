@@ -260,3 +260,6 @@ Road::~Road() {
     }
     max_car = 0;
 }
+void Road::traffic_light(int light) { // 0 green 1 yellow 2 red
+    for (auto& each : vehicles) each->traffic_light(light);
+}
