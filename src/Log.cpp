@@ -1,7 +1,7 @@
 #include "Log.hpp"
 
 Log::Log(handler_ptr tools, bool dir, Position pos, float _speed) : floatObject(tools, dir, pos, _speed) {
-	sprite.setTexture(tools->resource_manager.get_texture("LOG"));
+    sprite.setTexture(tools->theme_controller.get("LOG"));
 }
 
 void Log::adjust_objects()

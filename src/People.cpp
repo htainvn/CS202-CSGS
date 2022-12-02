@@ -1,7 +1,8 @@
 #include "People.hpp"
 
-People::People(ResourceManager& resource_manager, bool alive, std::string type){
-    sp.setTexture(resource_manager.get_texture(type));
+People::People(handler_ptr _tools, bool alive, std::string type) : tools(_tools)
+{
+    sp.setTexture(_tools->theme_controller.get(type));
     sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2 + 25, SCREEN_HEIGHT - 300 + 20));
     alive_ = alive;
     type_ = type;
@@ -59,68 +60,47 @@ bool People::is_mid_height(){
     return false;
 }
 
-void People::move_right(ResourceManager& resource_manager){
+void People::move_right(){
     sf::Vector2f v = sp.getPosition();
     if (can_move_right())
     {
         sp.setPosition(sf::Vector2f(v.x + 100, v.y));
         type_ = "MARIO_RIGHT";
-        sp.setTexture(resource_manager.get_texture(type_));
+        sp.setTexture(tools->theme_controller.get(type_));
     }
 }
-void People::move_left(ResourceManager& resource_manager){
+void People::move_left(){
     sf::Vector2f v = sp.getPosition();
     if (can_move_left())
     {
         sp.setPosition(sf::Vector2f(v.x - 100, v.y));
         type_ = "MARIO_LEFT";
-        sp.setTexture(resource_manager.get_texture(type_));
+        sp.setTexture(tools->theme_controller.get(type_));
     }
 }
 
-void People::move_down(ResourceManager& resource_manager){
-    /*
-    sf::Vector2f v = sp.getPosition();
-    if (can_move_down())
-    {
-        sp.setPosition(sf::Vector2f(v.x, v.y + 100));
-        type_ = "MARIO_DOWNWARD";
-        sp.setTexture(resource_manager.get_texture(type_));
-    }
-     */
+void People::move_down(){
     if (can_move_down())
     {
         index--;
         type_ = "MARIO_DOWNWARD";
-        sp.setTexture(resource_manager.get_texture(type_));
+        sp.setTexture(tools->theme_controller.get(type_));
     }
 }
 
-
 int People::lane() const{
-    /*
-    sf::Vector2f v = sp.getPosition();
-    int lane_top = v.y/100;
-    return 6-lane_top;
-     */
     return index;
 }
 
-void People::move_forward(/*sf::Vector2f vec,*/ ResourceManager& resource_manager){
-    //sf::Vector2f v = sp.getPosition();
+void People::move_forward(/*sf::Vector2f vec,*/){
     if(can_move_forward()){
-        //sp.setPosition(vec);
-        
-        /* NEW */
         index++;
-        //
-        
         type_ = "MARIO_FORWARD";
-        sp.setTexture(resource_manager.get_texture(type_));
+        sp.setTexture(tools->theme_controller.get(type_));
     }
 }
 
-bool People::touch_border(){
+bool People::touch_border() {
     sf::Vector2f v = get_position();
     if (v.y + 60 >= SCREEN_HEIGHT || v.x < 0 || v.x + 40 > SCREEN_WIDTH)
     {

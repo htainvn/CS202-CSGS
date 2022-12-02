@@ -10,14 +10,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "src/StateManager.hpp"
-#include "src/ResourceManager.hpp"
+#include "src/ThemeController.hpp"
 
 class Handler {
 public:
     
     StateManager state_manager;
     
-    ResourceManager resource_manager;
+    ThemeController theme_controller;
     
     sf::RenderWindow window;
     

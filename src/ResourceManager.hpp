@@ -20,7 +20,7 @@ public:
     
     sf::Texture& get_texture(std::string hash_name);
     
-    void init();
+    void init(std::string theme);
     
 private:
     

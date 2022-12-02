@@ -69,7 +69,7 @@ int River::get_maxlog(){
 
 River::River(handler_ptr _tools, Level level, Position pos) : Lane(_tools, pos, level)
 {
-    Lane::change_image(tools->resource_manager.get_texture("RIVER"));
+    Lane::change_image(tools->theme_controller.get("RIVER"));
 
     speed = rand() % (200 - 50 + 1) + 50;
 

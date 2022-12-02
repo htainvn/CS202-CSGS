@@ -61,7 +61,7 @@ void Road::change_status(int _position, int _dir, int _bottom, int _top) {
 void Road::reset_texture()
 {
     
-    Lane::change_image(tools->resource_manager.get_texture(get_texture_code()));
+    Lane::change_image(tools->theme_controller.get(get_texture_code()));
     
 }
 
@@ -74,7 +74,7 @@ void Road::spawn()
     
     if (vehicles.empty() )
     {
-        int speed = rand() % MAX_SPEED + 500;
+        int speed = rand() % MAX_SPEED + 100;
 
         speed *= dir * 2 - 1;
 
@@ -218,7 +218,7 @@ Road::Road(handler_ptr _tools, Level level) : Lane(_tools, level )
     
     this->dir = rand() % 2;
     
-    Lane::change_image(_tools->resource_manager.get_texture(get_texture_code()));
+    Lane::change_image(_tools->theme_controller.get(get_texture_code()));
     
     set_maxcar();
     
@@ -232,7 +232,7 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
 
     this->dir = rand() % 2;
     
-    Lane::change_image(_tools->resource_manager.get_texture(get_texture_code()));
+    Lane::change_image(_tools->theme_controller.get(get_texture_code()));
     
     set_maxcar();
     

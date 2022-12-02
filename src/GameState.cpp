@@ -11,14 +11,17 @@
 
 GameState::GameState(handler_ptr _tools) : tools(_tools) {
     lane_gen = new LaneFactory(_tools);
+    
     traffic = new Traffic(_tools);
+    
+    tools->theme_controller.get_random_theme();
+    
+    tools->theme_controller.load();
 }
 
 void GameState::init(int status) {
     
-    tools->resource_manager.init();
-    
-    people = new People(this->tools->resource_manager);
+    people = new People(tools);
     
     font = new sf::Font();
     font->loadFromFile(FONT_PATH_FILE);
@@ -76,13 +79,13 @@ void GameState::handle_input() {
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
                         
-                        people->move_right(this->tools->resource_manager);
+                        people->move_right();
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
                         
-                        people->move_left(this->tools->resource_manager);
+                        people->move_left();
                         break;
                         
                     case (sf::Keyboard::S):
@@ -90,7 +93,7 @@ void GameState::handle_input() {
                         
                         if (people->can_move_down())
                         {
-                            people->move_down(this->tools->resource_manager);
+                            people->move_down();
                             lane_gen->prev_current(people);
                         }
                         
@@ -102,7 +105,7 @@ void GameState::handle_input() {
                         if (people->can_move_forward())
                         {
                             level+=0.8;
-                            people->move_forward(this->tools->resource_manager);
+                            people->move_forward();
                             lane_gen->next_current(people);
                             
                             //if (people->get_position().y < lane_gen->at(2)->position().get_y()){
@@ -114,7 +117,8 @@ void GameState::handle_input() {
                         }
                         
                         break;
-                        
+                    case (sf::Keyboard::R):
+                        tools->state_manager.receive_replace_request(new GameState(this->tools));
                     default:
                         break;
                 }

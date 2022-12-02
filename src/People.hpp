@@ -5,22 +5,25 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "src/definition_library.hpp"
+#include "src/Handler.hpp"
 //#include "src/LaneGenerator.hpp"
 
 
 class People
 {
+    
 private:
+    handler_ptr tools;
     sf::Sprite sp;
     bool alive_;
     std::string type_;
     int index = 0;
+    
 public:
     
     int set_current_lane(int index);
-    
     People() {}
-    People(ResourceManager& resource_manager, bool alive = true, std::string type = "MARIO_FORWARD");
+    People(handler_ptr tools, bool alive = true, std::string type = "MARIO_FORWARD");
     ~People();
     std::string type_path () const;
     sf::Vector2f get_position() const;
@@ -28,10 +31,10 @@ public:
     bool can_move_left();
     bool can_move_down();
     bool can_move_forward();
-    void move_right(ResourceManager& resource_manager);
-    void move_left(ResourceManager& resource_manager);
-    void move_down(ResourceManager& resource_manager);
-    void move_forward(/*sf::Vector2f vec,*/ ResourceManager& resource_manager);
+    void move_right();
+    void move_left();
+    void move_down();
+    void move_forward(/*sf::Vector2f vec,*/ );
     void change_type (std::string type);
     void scroll();
     bool touch_border();

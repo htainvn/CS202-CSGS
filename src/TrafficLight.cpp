@@ -9,15 +9,15 @@
 
 
 void TrafficLight::turn_red() { 
-    sprite.setTexture(tools->resource_manager.get_texture("TRAFFIC_RED"));
+    sprite.setTexture(tools->theme_controller.get("TRAFFIC_RED"));
 }
 
 void TrafficLight::turn_yellow() { 
-    sprite.setTexture(tools->resource_manager.get_texture("TRAFFIC_YELLOW"));
+    sprite.setTexture(tools->theme_controller.get("TRAFFIC_YELLOW"));
 }
 
 void TrafficLight::turn_green() { 
-    sprite.setTexture(tools->resource_manager.get_texture("TRAFFIC_GREEN"));
+    sprite.setTexture(tools->theme_controller.get("TRAFFIC_GREEN"));
 }
 
 void TrafficLight::locate_at(float x, float y) { 
@@ -29,7 +29,7 @@ void TrafficLight::draw() {
 }
 
 TrafficLight::TrafficLight(Handler *_tools) : tools(_tools) {
-    sprite.setTexture(_tools->resource_manager.get_texture("TRAFFIC_RED"));
+    sprite.setTexture(tools->theme_controller.get("TRAFFIC_RED"));
 }
 
 

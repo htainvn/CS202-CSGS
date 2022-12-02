@@ -8,15 +8,15 @@
 #include "src/Pathway.hpp"
 
 Pathway::Pathway(handler_ptr _tools, Level level) : Lane(_tools, level) {
-    Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
+    Lane::change_image(_tools->theme_controller.get("PAVEMENT"));
 }
 
 Pathway::Pathway(handler_ptr _tools, float x, float y, Level level) : Lane(_tools, x, y, level) {
-    Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
+    Lane::change_image(_tools->theme_controller.get("PAVEMENT"));
 }
 
 Pathway::Pathway(handler_ptr _tools, Position pos, Level level) : Lane(_tools, pos, level) {
-    Lane::change_image(_tools->resource_manager.get_texture("PAVEMENT"));
+    Lane::change_image(_tools->theme_controller.get("PAVEMENT"));
 }
 
 void Pathway::draw()

@@ -39,7 +39,7 @@ void floatObject::draw() {
 
 
 Hippo::Hippo(handler_ptr _tools, bool _dir, Position p, float _speed) : floatObject(_tools, _dir, p, _speed) {
-	sprite.setTexture(_tools->resource_manager.get_texture(get_hash_name()));
+    sprite.setTexture(tools->theme_controller.get(get_hash_name()));
 }
 
 std::string Hippo::get_hash_name() {
@@ -54,7 +54,7 @@ std::string Hippo::get_hash_name() {
 }
 
 Croc::Croc(handler_ptr _tools, bool dir, Position p, float _speed) : floatObject(_tools, dir, p, _speed) {
-	sprite.setTexture(_tools->resource_manager.get_texture(get_hash_name()));
+	sprite.setTexture(tools->theme_controller.get(get_hash_name()));
 }
 
 std::string Croc::get_hash_name() {

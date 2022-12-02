@@ -18,7 +18,7 @@ Vehicle::Vehicle(Handler *_tools, int dir, int speed, int x) {
     
     this->speed = speed;
     
-    sprite.setTexture(tools->resource_manager.get_texture(get_car_texture(dir, rand() % car_number)));
+    sprite.setTexture(tools->theme_controller.get(get_car_texture(dir, rand() % car_number)));
     
     locate_at(x, 0);
 }
@@ -48,7 +48,8 @@ void Vehicle::draw() {
     tools->window.draw(sprite);
 }
 
-void Vehicle::traffic_light(int light) { // 0 green 1 yellow 2 red
+void Vehicle::traffic_light(int light) { // 0 green 1 yellow 2 red'
+    
     if (light == 0) {
         redlight = yellowlight = false;
         return;
