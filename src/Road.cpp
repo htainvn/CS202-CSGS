@@ -74,7 +74,7 @@ void Road::spawn()
     
     if (vehicles.empty() )
     {
-        int speed = rand() % MAX_SPEED + 100;
+        int speed = rand() % MAX_SPEED + 500;
 
         speed *= dir * 2 - 1;
 
@@ -239,10 +239,6 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
     spawn();
 }
 
-void Road::stop() {
-    
-}
-
 bool Road::check_lost() {
     Position people_pos = people_position(), veh_pos;;
     for(int i=0; i<vehicles.size(); i++){
@@ -266,4 +262,16 @@ Road::~Road() {
 
 void Road::traffic_light(int light) { // 0 green 1 yellow 2 red
     for (auto& each : vehicles) each->traffic_light(light);
+}
+
+void Road::stop() {
+    traffic_light(2);
+}
+
+void Road::slowdown() {
+    traffic_light(1);
+}
+
+void Road::run() {
+    traffic_light(0);
 }

@@ -37,7 +37,11 @@ public:
     
     void spawn();
     
-    void stop(); //undone
+    void stop();
+
+    void slowdown();
+
+    void run();
     
     void draw();
     
