@@ -122,7 +122,7 @@ void People::move_forward(/*sf::Vector2f vec,*/ ResourceManager& resource_manage
 
 bool People::touch_border(){
     sf::Vector2f v = get_position();
-    if (v.y + 100 >= SCREEN_HEIGHT)
+    if (v.y + 60 >= SCREEN_HEIGHT || v.x < 0 || v.x + 40 > SCREEN_WIDTH)
     {
         alive_ = false;
         return true;
