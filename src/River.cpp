@@ -254,7 +254,7 @@ void River::set_current(People*& mario)
         
         Position obj_p = float_objs[i]->position();
         
-        if (mariop.inRect(obj_p))
+        if (mariop.inRect(obj_p) || obj_p.inRect(mariop))
         {
             float_objs[i]->setCurrent(mario);
             
