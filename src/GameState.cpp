@@ -95,7 +95,8 @@ void GameState::handle_input() {
                         }
                         
                         break;
-                        
+                    
+                    case (sf::Keyboard::Up):
                     case (sf::Keyboard::W):
                         
                         if (people->can_move_forward())
