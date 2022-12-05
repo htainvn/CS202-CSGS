@@ -29,6 +29,10 @@ public:
     /* BEHAVIOUR */
     
     void stop();
+
+    void slowdown();
+
+    void run();
     
     void spawn();
     
@@ -55,7 +59,8 @@ private:
     bool dir;
 
     float speed;
-    
+
+    int traffic_light; //0:red 1:green 2: yellow
 
 private:
 

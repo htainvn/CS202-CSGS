@@ -37,6 +37,17 @@ void floatObject::draw() {
     tools->window.draw(sprite);
 }
 
+void floatObject::stop() {
+	speed = 0;
+}
+
+void floatObject::run() {
+	speed = rand() % (200 - 50 + 1) + 50;
+}
+
+void floatObject::slowndown() {
+	speed *= 0.2;
+}
 
 Hippo::Hippo(handler_ptr _tools, bool _dir, Position p, float _speed) : floatObject(_tools, _dir, p, _speed) {
     sprite.setTexture(tools->theme_controller.get(get_hash_name()));

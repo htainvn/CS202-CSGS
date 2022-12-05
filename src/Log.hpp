@@ -18,6 +18,10 @@ public:
     bool isCurrent();
     
     void unset();
+	
+	void stop();
+
+	bool is_animal() { return 0;}
 
 	~Log();
 

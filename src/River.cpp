@@ -81,7 +81,21 @@ River::River(handler_ptr _tools, Level level, Position pos) : Lane(_tools, pos, 
 }
 
 void River::stop() { 
+    traffic_light = 1;
+
+    for (auto& i : float_objs) i->stop();
+}
+
+void River::slowdown() {
+    traffic_light = 2;
+
+    for (auto& i : float_objs) i->slowndown();
+}
+
+void River::run() {
+    traffic_light = 0;
     
+    for (auto& i : float_objs) i->run();
 }
 
 void River::spawn()
@@ -226,7 +240,7 @@ void River::draw() {
     
     for (auto& each: float_objs)
     {
-        each->draw();
+        if (traffic_light != 1 || !each->is_animal()) each->draw();
     }
 }
 

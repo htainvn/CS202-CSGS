@@ -53,9 +53,15 @@ public:
     void set_speed(float _speed);
     
     void draw();
+
+    void stop();
+
+    void slowndown();
+
+    void run();
     //void sound();
     
-    
+    virtual bool is_animal() { return 0;}
 protected:
     
     Position pos;
@@ -84,8 +90,8 @@ public:
     ~Hippo() {}
 
     int get_type();
-    
-    void adjust();
+
+    bool is_animal() { return 1;}
     
     /* END HERE */
 private:
@@ -106,6 +112,8 @@ public:
     ~Croc() {}
 
     int get_type();
+
+    bool is_animal() { return 1;}
     
     /* END HERE */
 private:
