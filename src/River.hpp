@@ -60,11 +60,15 @@ private:
 
     float speed;
 
-    int traffic_light; //0:red 1:green 2: yellow
+    int traffic_light; //0:green 1:red 2: yellow
 
 private:
 
+    sf::Sound river_sound;
+
     int get_maxlog();
+        
+    std::string river_sound_hash_name = "RIVER_SOUND";
 
 };
 
