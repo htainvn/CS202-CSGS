@@ -42,8 +42,6 @@ public:
     
     virtual void adjust_objects() {}
 
-    virtual void tell(){}
-
     void locate_at(float x, float y);
     
     Position position();
@@ -94,14 +92,10 @@ public:
     int get_type();
 
     bool is_animal() { return 1;}
-
-    void tell();
     
     /* END HERE */
 private:
     std::string get_hash_name();
-    sf::Sound sound;
-    std::string sound_hash_name = "ZOMBIE_SOUND";
 };
 
 class Croc : public floatObject {
@@ -120,14 +114,10 @@ public:
     int get_type();
 
     bool is_animal() { return 1;}
-
-    void tell();
     
     /* END HERE */
 private:
     std::string get_hash_name();
-    sf::Sound sound;
-    std::string sound_hash_name = "CROC_SOUND";
     
 };
 

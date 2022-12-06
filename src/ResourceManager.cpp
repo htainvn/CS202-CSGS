@@ -19,16 +19,6 @@ void ResourceManager::load_texture(std::string hash_name, std::string path) {
     }
 }
 
-void ResourceManager::load_sound_buffer(std::string hash_name, std::string path) {
-    sf::SoundBuffer buffer;
-    if (buffer.loadFromFile(path)) {
-        this->sound_storage.push_back(make_pair(hash_name, buffer));
-    }
-    else {
-        std::cout << "error at: " << path << "\n";
-    }
-}
-
 sf::Texture& ResourceManager::get_texture(std::string hash_name) {
     for (int i = 0; i < storage.size(); i++) {
         if (storage[i].first == hash_name) {
@@ -36,15 +26,6 @@ sf::Texture& ResourceManager::get_texture(std::string hash_name) {
         }
     }
     return storage[0].second;
-}
-
-sf::SoundBuffer& ResourceManager::get_sound_buffer(std::string hash_name) {
-    for (int i = 0; i < sound_storage.size(); ++i) {
-        if (sound_storage[i].first == hash_name) {
-            return sound_storage[i].second;
-        }
-    }
-    return sound_storage[0].second;
 }
 
 void ResourceManager::init(std::string theme)
@@ -104,10 +85,6 @@ void ResourceManager::init(std::string theme)
     load_texture("CROC_RIGHT", WORKING_DIR + "/src_design/animal/" + theme + CROC_RIGHT_FILE_PATH );
     load_texture("HIPPO_LEFT", WORKING_DIR + "/src_design/animal/" + theme + HIPPO_LEFT_FILE_PATH );
     load_texture("HIPPO_RIGHT", WORKING_DIR + "/src_design/animal/" + theme + HIPPO_RIGHT_FILE_PATH );
-
-    load_sound_buffer("CROC_SOUND", WORKING_DIR + "/src_design/animal/" + CROC_SOUND_FILE_PATH);
-    load_sound_buffer("ZOMBIE_SOUND", WORKING_DIR + "/src_design/animal/" + ZOMBIE_SOUND_FILE_PATH);
-    load_sound_buffer("RIVER_SOUND",WORKING_DIR + "/src_design/environment/" + RIVER_SOUND_FILE_PATH);
 
     load_texture("LOG", WORKING_DIR + "/src_design/vehicle/" + theme + LOG_PATH);
 }

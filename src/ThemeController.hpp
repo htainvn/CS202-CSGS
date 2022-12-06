@@ -25,8 +25,6 @@ public:
     sf::Texture& get(std::string hash_name);
     
     void set(std::string _theme);
-
-    sf::SoundBuffer& get_buffer(std::string hash_name);
     
 private:
     
