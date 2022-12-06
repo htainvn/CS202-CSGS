@@ -41,6 +41,7 @@ public:
     void go_to_position(float x, float y);
     void move (sf::Vector2f vec);
     bool is_alive();
+    void lost();
     bool is_mid_height();
     int lane() const;
     sf::Sprite& get_sprite ();

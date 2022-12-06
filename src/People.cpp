@@ -131,6 +131,12 @@ int People::set_current_lane(int _index) {
     return 0;
 }
 
+void People::lost() {
+    if(is_alive())
+        alive_ = false;
+}
+
+
 
 sf::Sprite set_character(const People &character){
     sf::Sprite sp;

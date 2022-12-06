@@ -119,25 +119,25 @@ Lane*& LaneFactory::at(const int index) {
 
 void LaneFactory::prev_current(People*& mario)
 {
-    int t = current();
+    int current_lane = current();
     
-    if (t != 0)
+    if (current_lane != 0)
     {
-        lanes[t]->unset();
+        lanes[current_lane]->unset();
         
-        this->lanes[t - 1]->set_current(mario);
+        this->lanes[current_lane - 1]->set_current(mario);
     }
 }
 
 void LaneFactory::next_current(People*& mario)
 {
-    int t = current();
+    int current_lane = current();
     
-    if (t < 5)
+    if (current_lane < 5)
     {
-        lanes[t]->unset();
+        lanes[current_lane]->unset();
         
-        lanes[t + 1]->set_current(mario);
+        lanes[current_lane + 1]->set_current(mario);
     }
 }
 
@@ -174,4 +174,15 @@ void LaneFactory::run() {
         each->run();
     }
 }
+
+void LaneFactory::right_current(People *&mario) { 
+    int current_lane = current();
+    lanes[current_lane]->set_current(mario);
+}
+
+void LaneFactory::left_current(People *&mario) { 
+    int current_lane = current();
+    
+}
+
 

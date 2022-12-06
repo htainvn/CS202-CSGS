@@ -78,14 +78,16 @@ void GameState::handle_input() {
                         
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
-                        
-                        people->move_right();
+                        if (people->is_alive()){
+                            people->move_right();
+                        }
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
-                        
-                        people->move_left();
+                        if (people->is_alive()){
+                            people->move_left();
+                        }
                         break;
                         
                     case (sf::Keyboard::S):
@@ -155,7 +157,10 @@ void GameState::update(float dt)
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
-        if(check_lost()) is_pause = true;
+        if(check_lost()) {
+            is_pause = true;
+            people->lost();
+        }
     }
     
     /* update level */
