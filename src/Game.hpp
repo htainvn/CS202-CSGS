@@ -27,6 +27,7 @@ private:
     
 public:
     Game();
+
 };
 
 #endif /* Game_hpp */

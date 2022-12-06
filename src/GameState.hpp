@@ -53,6 +53,8 @@ public:
     void pause();
     
     void resume();
+
+    void save(std::string filename);
     
     bool check_lost();
     

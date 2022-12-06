@@ -86,6 +86,8 @@ public:
     virtual void unset();
     
     virtual void loading(std::ifstream& fin);
+
+    virtual void save(std::ofstream & fout){}
     
 /* END HERE */
     

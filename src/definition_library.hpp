@@ -101,3 +101,5 @@ using namespace sf;
 #define GREEN_COUNT_DOWN RED_TIME_END-3
 
 #define FONT_PATH_FILE WORKING_DIR+"/src_design/font/TextaPro-Medium.otf"
+
+#define DATA_FILE_PATH WORKING_DIR + "/datagame/"

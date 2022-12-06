@@ -96,7 +96,7 @@ void River::slowdown() {
 void River::run() {
     traffic_light = 0;
     
-    for (auto& i : float_objs) i->run();
+    for (auto& i : float_objs) i->run(speed);
 }
 
 void River::spawn()
@@ -352,4 +352,21 @@ void River::loading(std::ifstream& fin)
             float_objs.push_back(newLog);
         }
     }
+}
+
+
+void River::save(std::ofstream& fout) {
+    fout << type() << " " << level() << " " << lev.path_remain() << " " << lev.road_remain() << std::endl;
+
+    fout << Lane::position().get_x() << " " << Lane::position().get_y() << std::endl;
+
+    fout << is_current() << std::endl;
+
+    fout << dir << " " << max_log << std::endl;
+
+    fout << speed << std::endl;
+
+    fout << is_current() << std::endl;
+
+    for (auto& i : float_objs) i->save(fout);
 }

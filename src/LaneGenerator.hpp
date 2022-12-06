@@ -59,6 +59,8 @@ public:
     void horizontal_movement(People *&mario);
     
     void prev_current(People*& mario);
+
+    void save(std::ofstream& fout);
     
     int current();
     

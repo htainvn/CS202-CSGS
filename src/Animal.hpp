@@ -60,8 +60,9 @@ public:
 
     void slowndown();
 
-    void run();
-    //void sound();
+    void run(float speed);
+    
+    void save(std::ofstream& fout);
     
     virtual bool is_animal() { return 0;}
 protected:

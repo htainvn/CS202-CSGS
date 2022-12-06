@@ -300,3 +300,19 @@ void Road::loading(std::ifstream& fin, bool LANE_DIR)
         vehicles.push_back(newVehicle);
     }
 }
+
+void Road::save(std::ofstream& fout) {
+    fout << type() << " " << level() << " " << lev.path_remain() << " " << lev.road_remain() << std::endl;
+
+    fout << Lane::position().get_x() << " " << Lane::position().get_y() << std::endl;
+
+    fout << is_current() << std::endl;
+
+    fout << position << " " << dir << " " << bottom_type << " " << top_type << " " << max_car << std::endl;
+
+    fout << get_speed() << std::endl;
+}
+
+float Road::get_speed() {
+    return vehicles[0]->get_speed();
+}

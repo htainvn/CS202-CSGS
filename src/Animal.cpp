@@ -41,8 +41,8 @@ void floatObject::stop() {
 	speed = 0;
 }
 
-void floatObject::run() {
-	speed = rand() % (200 - 50 + 1) + 50;
+void floatObject::run(float speed) {
+	this->speed = speed;
 }
 
 void floatObject::slowndown() {
@@ -95,4 +95,10 @@ void Croc::tell() {
 
 void Hippo::tell() {
 	sound.play();
+}
+
+void floatObject::save(std::ofstream& fout) {
+	fout << this->get_type() << std::endl;
+
+	fout << this->position().get_x() << std::endl;
 }
