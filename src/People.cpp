@@ -82,6 +82,7 @@ void People::move_left(){
 void People::move_down(){
     if (can_move_down())
     {
+        sp.move(sf::Vector2f(0, 100));
         index--;
         type_ = "MARIO_DOWNWARD";
         sp.setTexture(tools->theme_controller.get(type_));
@@ -94,6 +95,7 @@ int People::lane() const{
 
 void People::move_forward(/*sf::Vector2f vec,*/){
     if(can_move_forward()){
+        sp.move(sf::Vector2f(0, -100));
         index++;
         type_ = "MARIO_FORWARD";
         sp.setTexture(tools->theme_controller.get(type_));

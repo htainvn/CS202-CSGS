@@ -157,10 +157,10 @@ void GameState::update(float dt)
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
-        if(check_lost()) {
+        /*if(check_lost()) {
             is_pause = true;
             people->lost();
-        }
+        }*/
     }
     
     /* update level */

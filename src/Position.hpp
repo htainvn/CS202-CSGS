@@ -36,10 +36,15 @@ public:
     
     bool inRect(Position& another)
     {
-        if (x > another.get_x() + dsize) return false;
-        if (x < another.get_x()) return false;
-        if (y > another.get_y() + dsize) return false;
-        if (y < another.get_y()) return false;
+        int xPeople = (int) x;
+        int yPeople = (int) y;
+        int xObject = (int) another.x;
+        int yObject = (int) another.y;
+        
+        if (xPeople > xObject + dsize) return false;
+        if (xPeople < xObject) return false;
+        if (yPeople > yObject + dsize) return false;
+        if (yPeople < yObject) return false;
         return true;
     }
 };

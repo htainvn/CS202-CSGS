@@ -239,7 +239,8 @@ void River::adjust_objects()
     spawn();
 }
 
-void River::draw() {
+void River::draw()
+{
     Lane::draw();
     
     for (auto& each: float_objs)
@@ -282,16 +283,22 @@ void River::set_current(People*& mario)
     Lane::set_current(mario);
     
     Position mariop = Position(mario->get_position().x, mario->get_position().y);
-    
-    for (int i = 0; i < float_objs.size(); i++) {
-        
-        Position obj_p = float_objs[i]->position();
-        
-        if (mariop.inRect(obj_p) || obj_p.inRect(mariop))
+    for (int i = 0; i < float_objs.size(); i++)
+    {
+        if (float_objs[i]->get_type() == 2)
         {
-            float_objs[i]->setCurrent(mario);
             
-            break;
+            std::cout << "LOG!!! \n";
+            
+            Position obj_p = float_objs[i]->position();
+            
+            
+            if (mariop.inRect(obj_p))
+            {
+                float_objs[i]->setCurrent(mario);
+                
+                break;
+            }
         }
         
     }
