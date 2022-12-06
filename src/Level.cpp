@@ -58,6 +58,10 @@ int Level::lev() {
 
 int Level::road_remain() { return this->road_left; }
 
+int Level::path_remain() {
+    return path_left;
+}
+
 
 
 

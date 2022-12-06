@@ -56,6 +56,10 @@ public:
     void traffic_light(int light);
     
     void loading(std::ifstream& fin, bool LANE_DIR);
+
+    void save(std::ofstream& fout);
+
+    float get_speed();
     
 /* END HERE */
     

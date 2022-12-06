@@ -49,6 +49,8 @@ public:
     void unset();
     
     void loading(std::ifstream& fin);
+
+    void save(std::ofstream& fout);
     
     /* END HERE */
     

@@ -61,6 +61,8 @@ public:
     void left_current(People*& mario);
     
     void prev_current(People*& mario);
+
+    void save(std::ofstream& fout);
     
     int current();
     

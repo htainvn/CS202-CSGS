@@ -38,3 +38,4 @@ void Game::run() {
     float interpolator = runningTime / FRAME_RATE_SECOND;
     this->machine->state_manager.get_current_state()->draw(interpolator);
 }
+

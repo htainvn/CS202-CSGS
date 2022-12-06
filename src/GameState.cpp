@@ -241,3 +241,12 @@ void GameState::load_game(std::string filename)
     fin.close();
 }
 
+void GameState::save(std::string filename) {
+
+    std::ofstream fout(DATA_FILE_PATH + filename + ".txt");
+
+    fout << tools->theme_controller.get_theme_name() << std::endl;
+
+    lane_gen->save(fout);
+
+}

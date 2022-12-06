@@ -202,3 +202,10 @@ void LaneFactory::loading(std::ifstream& fin) {
         
     }
 }
+
+
+void LaneFactory::save(std::ofstream& fout) {
+    fout << lanes.size() << std::endl;
+
+    for (auto& i : lanes) i->save(fout);
+}

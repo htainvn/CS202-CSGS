@@ -36,6 +36,8 @@ public:
     int lev();
 
     int road_remain(); // return number of road remain in level
+
+    int path_remain();
     
     ~Level() {}
     
