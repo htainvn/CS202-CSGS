@@ -11,7 +11,7 @@ std::string ThemeController::get_random_theme()
 {
     
     
-    int theme_index = rand() % 3;
+    int theme_index = rand() % 4;
     
     switch(theme_index)
     {
@@ -23,6 +23,10 @@ std::string ThemeController::get_random_theme()
             break;
         case 2:
             current_theme = "neon";
+            break;
+        case 3:
+            current_theme = "lava";
+            break;
     }
 
     return current_theme;
@@ -39,8 +43,9 @@ std::string ThemeController::get_theme_name()
     return current_theme;
 }
 
-sf::Texture& ThemeController::get(std::string hash_name)
+sf::Texture& ThemeController::get(std::string hash_name, bool dir)
 {
+    
     return resource_manager.get_texture(hash_name);
 }
 
@@ -52,3 +57,8 @@ void ThemeController::set(std::string _theme)
 {
     current_theme = _theme;
 }
+
+void ThemeController::add(std::string _theme) { 
+    
+}
+

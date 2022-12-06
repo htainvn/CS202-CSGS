@@ -22,11 +22,13 @@ public:
     
     std::string get_theme_name();
     
-    sf::Texture& get(std::string hash_name);
+    sf::Texture& get(std::string hash_name, bool dir = 0);
     
     void set(std::string _theme);
 
     sf::SoundBuffer& get_buffer(std::string hash_name);
+    
+    void add(std::string _theme);
     
 private:
     

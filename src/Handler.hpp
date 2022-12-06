@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include "src/StateManager.hpp"
 #include "src/ThemeController.hpp"
+#include <fstream>
 
 class Handler {
 public:
@@ -23,6 +24,13 @@ public:
     
     Handler() {
         this->state_manager = StateManager();
+    }
+    
+    void load_theme(std::ifstream& fin)
+    {
+        std::string _theme; fin >> _theme;
+        theme_controller.set(_theme);
+        theme_controller.load();
     }
     
 };

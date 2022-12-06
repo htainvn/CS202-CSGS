@@ -48,6 +48,8 @@ public:
     
     void unset();
     
+    void loading(std::ifstream& fin);
+    
     /* END HERE */
     
 private:

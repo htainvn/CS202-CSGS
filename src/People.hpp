@@ -6,6 +6,7 @@
 #include <string>
 #include "src/definition_library.hpp"
 #include "src/Handler.hpp"
+#include <fstream>
 //#include "src/LaneGenerator.hpp"
 
 
@@ -43,7 +44,10 @@ public:
     bool is_alive();
     bool is_mid_height();
     int lane() const;
+    
     sf::Sprite& get_sprite ();
+    
+    void loading(std::ifstream& fin);
 };
 
 sf::Sprite set_character (const People &character);

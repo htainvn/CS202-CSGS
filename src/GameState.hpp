@@ -17,6 +17,7 @@
 #include "src/definition_library.hpp"
 #include "src/People.hpp"
 #include "src/Traffic.hpp"
+#include <fstream>
 
 class GameState : public State {
 private:
@@ -42,6 +43,8 @@ public:
     void init(int status);
     
     void handle_input();
+    
+    void load_game(std::string filename);
     
     void update(float dt);
     

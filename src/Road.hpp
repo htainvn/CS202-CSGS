@@ -55,6 +55,7 @@ public:
 
     void traffic_light(int light);
     
+    void loading(std::ifstream& fin, bool LANE_DIR);
     
 /* END HERE */
     

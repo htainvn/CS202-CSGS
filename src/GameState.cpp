@@ -219,3 +219,20 @@ GameState::~GameState() {
         lane_gen = nullptr;
     }
 }
+
+void GameState::load_game(std::string filename)
+{
+    std::ifstream fin; fin.open(filename);
+    
+    // #theme loading# //
+    tools->load_theme(fin);
+    
+    // #lane loading# //
+    lane_gen->loading(fin);
+    
+    // #people loading# //
+    people->loading(fin);
+    
+    fin.close();
+}
+
