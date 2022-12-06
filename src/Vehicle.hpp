@@ -32,7 +32,7 @@ public:
     
     void locate_at(float x, float y = 0);
     
-    int get_speed();
+    float get_speed();
     
     void draw();
 

@@ -34,7 +34,7 @@ Position Vehicle::position()
     return Position(sprite.getPosition().x, sprite.getPosition().y);
 }
 
-int Vehicle::get_speed() {
+float Vehicle::get_speed() {
     return speed * (!redlight) * ( 1 - yellowlight * 0.7 );
 }
 
