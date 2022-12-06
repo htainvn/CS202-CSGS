@@ -78,29 +78,20 @@ void GameState::handle_input() {
                         
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
-                        if (people->is_alive()){
-                            people->move_right();
-                            lane_gen->horizontal_movement(people);
-                        }
+                        people->move_right();
+                        lane_gen->horizontal_movement(people);
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
-                        if (people->is_alive()){
-                            people->move_left();
-                            lane_gen->horizontal_movement(people);
-                        }
+                        people->move_left();
+                        lane_gen->horizontal_movement(people);
                         break;
                         
                     case (sf::Keyboard::S):
                     case (sf::Keyboard::Down):
-                        
-                        if (people->can_move_down())
-                        {
-                            people->move_down();
-                            lane_gen->prev_current(people);
-                        }
-                        
+                        people->move_down();
+                        lane_gen->prev_current(people);
                         break;
                     
                     case (sf::Keyboard::Up):
@@ -123,6 +114,8 @@ void GameState::handle_input() {
                         break;
                     case (sf::Keyboard::R):
                         tools->state_manager.receive_replace_request(new GameState(this->tools));
+                    case (sf::Keyboard::P):
+                        pause();
                     default:
                         break;
                 }
@@ -196,7 +189,11 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
-    is_pause = true;
+    if (is_pause == true){
+        resume();
+        is_pause = false;
+    }
+    else is_pause = true;
 }
 
 void GameState::resume()
