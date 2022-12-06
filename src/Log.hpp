@@ -19,9 +19,11 @@ public:
     
     void unset();
 	
-	void stop();
+	void stop(){}
 
 	bool is_animal() { return 0;}
+
+	void tell(){}
 
 	~Log();
 

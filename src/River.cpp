@@ -77,12 +77,13 @@ River::River(handler_ptr _tools, Level level, Position pos) : Lane(_tools, pos, 
 
     max_log = get_maxlog();
 
+    river_sound.setBuffer(tools->theme_controller.get_buffer(river_sound_hash_name));
+
     spawn();
 }
 
 void River::stop() { 
     traffic_light = 1;
-
     for (auto& i : float_objs) i->stop();
 }
 
@@ -249,12 +250,27 @@ bool River::check_lost() {
     
     bool direction = dir;
     
-    for(int i = 0; i < float_objs.size(); i++) {
-        
+    for (int i = 0; i < float_objs.size(); i++) {
+
         fpos = float_objs[i]->position();
         if (float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101)
             return false;
+
+        else if (people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101) {
+
+            if (traffic_light != 1)
+
+                float_objs[i]->tell();
+
+            else river_sound.play();
+
+            return true;
+        }
+
     }
+
+    river_sound.play();
+
     return true;
 }
 

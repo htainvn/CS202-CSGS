@@ -47,6 +47,8 @@ using namespace sf;
 #define TRAFFIC_SIGN_YELLOW_FILE_PATH "_trafficsign_yellow.png"
 #define TRAFFIC_SIGN_GREEN_FILE_PATH "_trafficsign_green.png"
 
+#define RIVER_SOUND_FILE_PATH "river_sound.wav"
+
 #define MARIO_FORWARD_FILE_PATH "_mario_forward.png"
 #define MARIO_DOWNWARD_FILE_PATH "_mario_down.png"
 #define MARIO_RIGHT_FILE_PATH "_mario_right.png"
@@ -75,6 +77,9 @@ using namespace sf;
 #define HIPPO_LEFT_FILE_PATH "_zombie_left.png"
 #define CROC_RIGHT_FILE_PATH "_croc_right.png"
 #define CROC_LEFT_FILE_PATH "_croc_left.png"
+
+#define ZOMBIE_SOUND_FILE_PATH "zombie_sound.wav"
+#define CROC_SOUND_FILE_PATH "croc_sound.wav"
 
 #define LOG_PATH "_log.png"
 

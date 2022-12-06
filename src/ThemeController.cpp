@@ -44,6 +44,10 @@ sf::Texture& ThemeController::get(std::string hash_name)
     return resource_manager.get_texture(hash_name);
 }
 
+sf::SoundBuffer& ThemeController::get_buffer(std::string hash_name) {
+    return resource_manager.get_sound_buffer(hash_name);
+}
+
 void ThemeController::set(std::string _theme)
 {
     current_theme = _theme;
