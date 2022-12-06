@@ -13,7 +13,6 @@
 #include <vector>
 
 #include "src/Handler.hpp"
-#include "src/ResourceManager.hpp"
 #include "src/Lane.hpp"
 #include "src/Pathway.hpp"
 #include "src/River.hpp"
@@ -44,6 +43,8 @@ public:
     lane_ptr create_lane(int type, Position pos = Position(), Level lev = Level());
     
     void pop_bottom_lane();
+    
+    void loading(std::ifstream& fin);
     
     Lane*& at(int const index);
     

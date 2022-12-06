@@ -158,3 +158,8 @@ bool is_collision(sf::Vector2f vector, sf::Vector2f character){
     }
     return false;
 }
+
+void People::loading(std::ifstream& fin)
+{
+    
+}

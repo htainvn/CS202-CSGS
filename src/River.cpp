@@ -150,7 +150,8 @@ void River::spawn()
             
             if (float_objs.size() == max_log + 3)
             {
-                sort(float_objs.begin(), float_objs.end(), [&](floatObject* a, floatObject* b) {
+                sort(float_objs.begin(), float_objs.end(), [&](floatObject* a, floatObject* b)
+                {
                     return ((!dir) ? (a->position().get_y() < b->position().get_y()) : (a->position().get_y() > b->position().get_y()));
                 });
                 break;
@@ -195,8 +196,10 @@ void River::spawn()
 }
 
 River::~River() {
-    while (!float_objs.empty()) {
-        if (float_objs[0]) {
+    while (!float_objs.empty())
+    {
+        if (float_objs[0])
+        {
             delete float_objs[0];
             float_objs[0] = nullptr;
         }
@@ -214,7 +217,7 @@ void River::adjust_objects()
         
         auto each = float_objs[i];
         
-        if (each->get_type() == 2) each->locate_at(each->position().get_x(), position().get_y() + 25);
+        if (each->get_type() == 2) each->locate_at(each->position().get_x(), position().get_y());
         
         else if (each->get_type() == 1) each->locate_at(each->position().get_x(), position().get_y() + 30);
         
@@ -309,4 +312,37 @@ void River::unset()
     
     
     Lane::unset();
+}
+
+void River::loading(std::ifstream& fin)
+{
+    fin >> dir >> max_log >> speed;
+    
+    for (int i = 0; i < max_log + 3; i++)
+    {
+        int OBJECT_TYPE;
+        
+        float OBJECT_COOR_X;
+        
+        fin >> OBJECT_TYPE >> OBJECT_COOR_X;
+        
+        if (OBJECT_TYPE == 0)
+        {
+            Croc* newCroc = new Croc(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
+            
+            float_objs.push_back(newCroc);
+        }
+        else if (OBJECT_TYPE == 1)
+        {
+            Hippo* newHippo = new Hippo(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
+            
+            float_objs.push_back(newHippo);
+        }
+        else
+        {
+            Log* newLog = new Log(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
+                                  
+            float_objs.push_back(newLog);
+        }
+    }
 }

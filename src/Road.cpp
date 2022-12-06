@@ -275,3 +275,28 @@ void Road::slowdown() {
 void Road::run() {
     traffic_light(0);
 }
+
+void Road::loading(std::ifstream& fin, bool LANE_DIR)
+{
+    
+    fin >> position >> dir >> bottom_type >> top_type >> max_car;
+    
+    change_status(position, dir, bottom_type, top_type);
+    
+    float VEHICLE_SPEED;
+    
+    fin >> VEHICLE_SPEED;
+    
+    for (int i = 0; i < max_car; i++) {
+        
+        float VEHICLE_COOR_X;
+        
+        fin >> VEHICLE_COOR_X;
+        
+        Vehicle* newVehicle = new Vehicle(tools, dir, VEHICLE_SPEED, VEHICLE_COOR_X);
+        
+        newVehicle->locate_at(VEHICLE_COOR_X, Lane::position().get_y() + 25);
+        
+        vehicles.push_back(newVehicle);
+    }
+}

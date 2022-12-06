@@ -186,3 +186,19 @@ void LaneFactory::left_current(People *&mario) {
 }
 
 
+void LaneFactory::loading(std::ifstream& fin) {
+    int LANE_SIZE;
+    fin >> LANE_SIZE;
+    for (int i = 0; i < LANE_SIZE; i++)
+    {
+        int LANE_TYPE, LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD;
+        float LANE_COOR_X, LANE_COOR_Y;
+        
+        fin >> LANE_TYPE >> LEVEL_NUM >> LEVEL_PATH >> LEVEL_ROAD >> LANE_COOR_X >> LANE_COOR_Y;
+        
+        add_lane(LANE_TYPE, Position(LANE_COOR_X, LANE_COOR_Y), Level(LEVEL_NUM, LEVEL_ROAD, LEVEL_PATH));
+        
+        lanes[lanes.size()-1]->loading(fin);
+        
+    }
+}
