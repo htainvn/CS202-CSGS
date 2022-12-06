@@ -135,9 +135,11 @@ void LaneFactory::next_current(People*& mario)
     
     if (current_lane < 5)
     {
+        
         lanes[current_lane]->unset();
         
         lanes[current_lane + 1]->set_current(mario);
+        
     }
 }
 
@@ -175,13 +177,10 @@ void LaneFactory::run() {
     }
 }
 
-void LaneFactory::right_current(People *&mario) { 
+void LaneFactory::horizontal_movement(People *&mario) {
     int current_lane = current();
+    lanes[current_lane]->unset();
     lanes[current_lane]->set_current(mario);
-}
-
-void LaneFactory::left_current(People *&mario) { 
-    int current_lane = current();
     
 }
 

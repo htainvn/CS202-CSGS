@@ -8,7 +8,7 @@ void Log::adjust_objects()
 {
     if(people)
     {
-        people->go_to_position(position().get_x() + 25, position().get_y() - 10);
+        people->go_to_position(position().get_x() + 25, position().get_y());
     }
 }
 

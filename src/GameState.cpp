@@ -80,6 +80,7 @@ void GameState::handle_input() {
                     case (sf::Keyboard::Right):
                         if (people->is_alive()){
                             people->move_right();
+                            lane_gen->horizontal_movement(people);
                         }
                         break;
                         
@@ -87,6 +88,7 @@ void GameState::handle_input() {
                     case (sf::Keyboard::Left):
                         if (people->is_alive()){
                             people->move_left();
+                            lane_gen->horizontal_movement(people);
                         }
                         break;
                         
@@ -157,10 +159,10 @@ void GameState::update(float dt)
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
-        /*if(check_lost()) {
+        if(check_lost()) {
             is_pause = true;
             people->lost();
-        }*/
+        }
     }
     
     /* update level */
