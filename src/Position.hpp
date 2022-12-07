@@ -42,7 +42,7 @@ public:
         int yObject = (int) another.y;
         
         if (xPeople > xObject + dsize) return false;
-        if (xPeople < xObject) return false;
+        if (xPeople < xObject - people_size) return false;
         if (yPeople > yObject + dsize) return false;
         if (yPeople < yObject) return false;
         return true;
