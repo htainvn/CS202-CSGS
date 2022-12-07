@@ -251,13 +251,12 @@ void River::draw()
 
 bool River::check_lost() {
     Position people_pos = people_position(), fpos;
-    
     bool direction = dir;
     
     for (int i = 0; i < float_objs.size(); i++) {
 
         fpos = float_objs[i]->position();
-        if (float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101)
+        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101) || traffic_light == 1)
             return false;
 
         else if (people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101) {

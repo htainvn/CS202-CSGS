@@ -127,7 +127,7 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    if(!is_pause){
+    if(!is_pause && people->is_alive()){
         /* update position */
         lane_gen->refactor(level);
         
@@ -153,7 +153,6 @@ void GameState::update(float dt)
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
         if(check_lost()) {
-            is_pause = true;
             people->lost();
         }
     }
@@ -168,23 +167,25 @@ void GameState::update(float dt)
 
 void GameState::draw(float dt)
 {
-    tools->window.clear();
-    
-    for (int i = 8; i >= 0; i--)
-    {
-        if (!lane_gen->at(i)->out_scr())
+    if (is_pause == false){
+        tools->window.clear();
+        
+        for (int i = 8; i >= 0; i--)
         {
-            lane_gen->at(i)->draw();
+            if (!lane_gen->at(i)->out_scr())
+            {
+                lane_gen->at(i)->draw();
+            }
         }
+        
+        tools->window.draw(people->get_sprite());
+        
+        tools->window.draw(t_lev);
+        
+        traffic->draw();
+        
+        tools->window.display();
     }
-    
-    tools->window.draw(people->get_sprite());
-    
-    tools->window.draw(t_lev);
-    
-    traffic->draw();
-    
-    tools->window.display();
 }
 
 void GameState::pause()
