@@ -17,6 +17,7 @@
 #include "src/definition_library.hpp"
 #include "src/People.hpp"
 #include "src/Traffic.hpp"
+#include "src/LostState.hpp"
 #include <fstream>
 
 class GameState : public State {

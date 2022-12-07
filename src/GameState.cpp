@@ -127,7 +127,7 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    if(!is_pause && people->is_alive()){
+    if(!is_pause){
         /* update position */
         lane_gen->refactor(level);
         
@@ -154,6 +154,7 @@ void GameState::update(float dt)
         
         if(check_lost()) {
             people->lost();
+            tools->state_manager.receive_replace_request(new LostMenu(tools));
         }
     }
     
