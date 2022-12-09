@@ -8,7 +8,8 @@
 #include "src/StateManager.hpp"
 
 void StateManager::process_request() {
-    switch(this->syntax) {
+    switch(this->syntax)
+    {
         case -1:
             break;
         case 0: //add

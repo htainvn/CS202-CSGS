@@ -175,7 +175,7 @@ void Road::adjust_objects() {
     for (auto& each: vehicles)
     {
         
-        each->locate_at(each->position().get_x() + each->get_speed() * FRAME_RATE_SECOND, Lane::position().get_y() + 25);
+        each->locate_at(each->position().get_x() + each->get_speed() * FRAME_RATE_SECOND, Lane::position().get_y());
     }
     
     // Deallocate
