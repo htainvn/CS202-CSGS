@@ -112,8 +112,6 @@ void GameState::handle_input() {
                         }
                         
                         break;
-                    case (sf::Keyboard::R):
-                        tools->state_manager.receive_replace_request(new GameState(this->tools));
                     case (sf::Keyboard::P):
                         pause();
                     default:
@@ -152,9 +150,17 @@ void GameState::update(float dt)
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
         
-        if(check_lost()) {
+        if (lost_count || check_lost())
+        {
+            lost_count = ((lost_count) ? lost_count-1 : 1000);
+            
             people->lost();
-            tools->state_manager.receive_replace_request(new LostMenu(tools));
+            
+            if (lost_count) pre_lost();
+            else {
+                tools->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING MODE", sf::Style::Close);
+                tools->state_manager.receive_replace_request(new LostMenu(tools));
+            }
         }
     }
     
@@ -250,4 +256,13 @@ void GameState::save(std::string filename) {
 
     lane_gen->save(fout);
 
+    fout.close();
+}
+
+void GameState::pre_lost()
+{
+    view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
+    view.setSize(sf::Vector2f(100, 100));
+    view.zoom(0.8 + 0.002 * lost_count); //transition from 1 to 0.5f
+    tools->window.setView(view);
 }

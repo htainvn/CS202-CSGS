@@ -37,6 +37,14 @@ private:
     
     bool is_pause = false;
     
+    int lost_count = 0;
+    
+    int mario_lost_count = 0;
+    
+    bool is_TouchBounder = false;
+    
+    sf::View view; 
+    
 public:
     
     GameState(handler_ptr _data);
@@ -58,6 +66,8 @@ public:
     void save(std::string filename);
     
     bool check_lost();
+    
+    void pre_lost();
     
     ~GameState();
 };

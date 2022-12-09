@@ -24,6 +24,9 @@ using namespace sf;
 #define CAR_PER_LANE 3
 
 #define WORKING_DIR std::filesystem::current_path().string()
+
+#define LOST_BACKGROUND "_lost_background.png"
+
 #define PAVEMENT_IMAGE_FILE_PATH "_pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH "_left-bottomdash-normal.png"
 #define LEFT_BOTTOMDASH_TOP_FILE_PATH "_left-bottomdash-top.png"

@@ -52,6 +52,8 @@ void ResourceManager::init(std::string theme)
     
     storage.clear();
     
+    load_texture("LOST_SCREEN", WORKING_DIR + "/src_design/background/" + LOST_BACKGROUND);
+    
     load_texture("PAVEMENT", WORKING_DIR + "/src_design/environment/" + theme + PAVEMENT_IMAGE_FILE_PATH);
     load_texture("ROAD_LEFT_BOTTOMDASH_NORMAL", WORKING_DIR + "/src_design/environment/" + theme + LEFT_BOTTOMDASH_NORMAL_FILE_PATH);
     load_texture("ROAD_LEFT_BOTTOMDASH_TOP", WORKING_DIR + "/src_design/environment/" + theme + LEFT_BOTTOMDASH_TOP_FILE_PATH);
