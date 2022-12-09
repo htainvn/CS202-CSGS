@@ -7,53 +7,6 @@
 
 #include "src/River.hpp"
 
-/*
-int River::get_lane_type() {
-    return RIVER_TYPE;
-}
-
-River::River(sf::Texture& texture) {
-    sprite.setTexture(texture);
-}
-
-void River::allocate_lane_position(ResourceManager& resource_manager, float x, float y) {
-    sprite.setPosition(sf::Vector2f(x,y));
-    int num_of_animals = 1 + rand() % 7;
-    spawn_animal(resource_manager,y, num_of_animals);
-}
-
-void River::adjust_objects() {
-    for (auto i : animals) 
-            i->go_to_position(0, this->sprite.getPosition().y, i->getType());
-}
-
-std::vector<sf::Sprite> River::all_relative_object() {
-    std::vector<sf::Sprite> res;
-    for (auto i : animals) res.push_back(i->getSprite());
-    return res;
-}
-
-void River::spawn_animal(ResourceManager& resourcemanager, float y, int num_of_animals){
-    bool i = rand() % 2;
-    bool j = rand() % 2;
-    Animal* animal = nullptr;
-    for (int k = 0; k < num_of_animals; ++k) {
-        if (i) {
-            animal = new Hippo(resourcemanager, j, y);
-        }
-        else animal = new Croc(resourcemanager, j, y);
-        animal->go_to_position(300 * (k + 1), y, j);
-        animals.push_back(animal);
-    }
-}
-
-
-River::~River() {
-    for (int i = 0; i << animals.size(); ++i) delete animals[i];
-}
-
-*/
-
 int River::get_maxlog(){
     int road_bd = (lev.lev() - 1) / 3 + 1;
     int car_left = 0;
@@ -152,8 +105,9 @@ void River::spawn()
             {
                 sort(float_objs.begin(), float_objs.end(), [&](floatObject* a, floatObject* b)
                 {
-                    return ((!dir) ? (a->position().get_y() < b->position().get_y()) : (a->position().get_y() > b->position().get_y()));
+                    return ((!dir) ? (a->position().get_x() < b->position().get_x()) : (a->position().get_x() > b->position().get_x()));
                 });
+                
                 break;
             }
 
@@ -277,79 +231,65 @@ bool River::check_lost() {
     return true;
 }
 
-void River::set_current(People*& mario)
+void River::set_current(People*& mario, int type)
 {
-    Lane::set_current(mario);
-    
-    Position mariop = Position(mario->get_position().x, mario->get_position().y);
-    for (int i = 0; i < float_objs.size(); i++)
+    if (!is_current())
     {
-        if (float_objs[i]->get_type() == 2)
+        Lane::set_current(mario);
+        
+        Position mariop = Position(mario->get_position().x, mario->get_position().y);
+        
+        bool check = false;
+        
+        for (int i = 0; i < float_objs.size(); i++)
         {
-            
-            std::cout << "LOG!!! \n";
-            
-            Position obj_p = float_objs[i]->position();
-            
-            
-            if (mariop.inRect(obj_p))
+            if (float_objs[i]->get_type() == 2)
             {
-                float_objs[i]->setCurrent(mario);
                 
-                break;
+                Position obj_p = float_objs[i]->position();
+                
+                
+                if (mariop.inRect(obj_p))
+                {
+                    float_objs[i]->setCurrent(mario);
+                    
+                    check = true;
+                    
+                    break;
+                }
             }
+            
         }
         
-    }
-    
-}
-
-void River::unset()
-{
-    
-    for (int i = 0; i < float_objs.size(); i++)
-    {
-        if (float_objs[i]->isCurrent())
+        if (check == false)
         {
-            float_objs[i]->unset();
-            break;
+            tools->state_manager.get_current_state()->pause();
         }
     }
-    
-    
-    Lane::unset();
-}
-
-void River::loading(std::ifstream& fin)
-{
-    fin >> dir >> max_log >> speed;
-    
-    for (int i = 0; i < max_log + 3; i++)
+    else
     {
-        int OBJECT_TYPE;
+        int currentLog = get_currentlog();
         
-        float OBJECT_COOR_X;
+        if ( (type == 0 && currentLog == 0) || (type == 0 && currentLog == float_objs.size() - 1) ) {
+            tools->state_manager.get_current_state()->pause();
+            return;
+        }
         
-        fin >> OBJECT_TYPE >> OBJECT_COOR_X;
+        int movObj = (type == 0) ? get_prevobj(currentLog) : get_nextobj(currentLog);
         
-        if (OBJECT_TYPE == 0)
-        {
-            Croc* newCroc = new Croc(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
-            
-            float_objs.push_back(newCroc);
+        if (float_objs[movObj]->get_type() != 2) {
+            tools->state_manager.get_current_state()->pause();
+            return;
         }
-        else if (OBJECT_TYPE == 1)
-        {
-            Hippo* newHippo = new Hippo(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
-            
-            float_objs.push_back(newHippo);
+        int currentPos = float_objs[movObj]->position().get_x();
+        int movPos = float_objs[currentLog]->position().get_x();
+        if (abs(movPos - currentPos) > 100) {
+            tools->state_manager.get_current_state()->pause();
+            return;
         }
-        else
-        {
-            Log* newLog = new Log(tools, dir, Position(OBJECT_COOR_X, Lane::position().get_y()), speed);
-                                  
-            float_objs.push_back(newLog);
-        }
+        
+        float_objs[currentLog]->unset();
+        float_objs[movObj]->setCurrent(mario);
     }
 }
 
@@ -368,4 +308,46 @@ void River::save(std::ofstream& fout) {
     fout << is_current() << std::endl;
 
     for (auto& i : float_objs) i->save(fout);
+}
+
+int River::get_currentlog() {
+    for (int i = 0; i < float_objs.size(); i++) {
+        if (float_objs[i]->isCurrent()) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int River::get_nextobj(int current_log_index)
+{
+    if (dir == 0)
+    {
+        return current_log_index + 1;
+    }
+    else
+    {
+        return current_log_index - 1;
+    }
+}
+
+int River::get_prevobj(int current_log_index)
+{
+    if (dir == 0)
+    {
+        return current_log_index - 1;
+    }
+    else return current_log_index + 1;
+}
+
+
+void River::unset() {
+    Lane::unset();
+    int current_index = get_currentlog();
+    if (current_index == -1) return;
+    float_objs[current_index]->unset();
+}
+
+void River::loading(std::ifstream& fin) {
+    
 }

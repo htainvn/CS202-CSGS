@@ -19,6 +19,10 @@ private:
     bool alive_;
     std::string type_;
     int index = 0;
+    bool is_moving;
+    sf::Vector2f newPos;
+    int cnt_movement = 0;
+    int type_movement = 0;
     
 public:
     
@@ -45,10 +49,16 @@ public:
     void lost();
     bool is_mid_height();
     int lane() const;
+    void change_moving();
+    bool moving();
     
     sf::Sprite& get_sprite ();
     
+    void start_movement(int type_);
+    
     void loading(std::ifstream& fin);
+    
+    int update();
 };
 
 sf::Sprite set_character (const People &character);

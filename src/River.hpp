@@ -44,7 +44,7 @@ public:
     
     bool check_lost();
     
-    void set_current(People*& mario);
+    void set_current(People*& mario, int _type = 0);
     
     void unset();
     
@@ -65,15 +65,20 @@ private:
     float speed;
 
     int traffic_light; //0:green 1:red 2: yellow
-
-private:
-
-    sf::Sound river_sound;
-
-    int get_maxlog();
         
     std::string river_sound_hash_name = "RIVER_SOUND";
+    
+    sf::Sound river_sound;
+    
+private:
 
+    int get_maxlog();
+    
+    int get_currentlog();
+    
+    int get_nextobj(int current_log_index);
+    
+    int get_prevobj(int current_log_index);
 };
 
 #endif /* River_hpp */

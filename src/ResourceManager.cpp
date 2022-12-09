@@ -75,11 +75,22 @@ void ResourceManager::init(std::string theme)
     load_texture("TRAFFIC_RED", WORKING_DIR + "/src_design/environment/" + theme + TRAFFIC_SIGN_RED_FILE_PATH);
     load_texture("TRAFFIC_YELLOW", WORKING_DIR + "/src_design/environment/" + theme + TRAFFIC_SIGN_YELLOW_FILE_PATH);
     load_texture("TRAFFIC_GREEN", WORKING_DIR + "/src_design/environment/" + theme + TRAFFIC_SIGN_GREEN_FILE_PATH);
+    
     // people
     load_texture("MARIO_FORWARD", WORKING_DIR + "/src_design/people/" + theme + MARIO_FORWARD_FILE_PATH);
     load_texture("MARIO_DOWNWARD", WORKING_DIR + "/src_design/people/" + theme + MARIO_DOWNWARD_FILE_PATH);
     load_texture("MARIO_RIGHT", WORKING_DIR + "/src_design/people/" + theme + MARIO_RIGHT_FILE_PATH);
     load_texture("MARIO_LEFT", WORKING_DIR + "/src_design/people/" + theme + MARIO_LEFT_FILE_PATH);
+    load_texture("MARIO_FORWARDGO", WORKING_DIR + "/src_design/people/" + theme + MARIO_MOVEFORWARD_FILE_PATH);
+    load_texture("MARIO_DOWNWARDGO", WORKING_DIR + "/src_design/people/" + theme + MARIO_MOVEDOWNWARD_FILE_PATH);
+    load_texture("MARIO_RIGHTGO", WORKING_DIR + "/src_design/people/" + theme + MARIO_MOVERIGHT_FILE_PATH);
+    load_texture("MARIO_RIGHTRUN", WORKING_DIR + "/src_design/people/" + theme + MARIO_RUNRIGHT_FILE_PATH);
+    load_texture("MARIO_LEFTRUN", WORKING_DIR + "/src_design/people/" + theme + MARIO_RUNLEFT_FILE_PATH);
+    load_texture("MARIO_FORWARDRUN", WORKING_DIR + "/src_design/people/" + theme + MARIO_RUNFORWARD_FILE_PATH);
+    load_texture("MARIO_DOWNRUN", WORKING_DIR + "/src_design/people/" + theme + MARIO_RUNDOWN_FILE_PATH);
+    load_texture("MARIO_LEFTGO", WORKING_DIR + "/src_design/people/" + theme + MARIO_MOVELEFT_FILE_PATH);
+    
+    
     // vehicle
     load_texture("CL_0", WORKING_DIR + "/src_design/vehicle/" + theme + CL_0);
     load_texture("CL_1", WORKING_DIR + "/src_design/vehicle/" + theme + CL_1);

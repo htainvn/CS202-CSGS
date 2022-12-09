@@ -50,10 +50,18 @@ using namespace sf;
 
 #define RIVER_SOUND_FILE_PATH "river_sound.wav"
 
-#define MARIO_FORWARD_FILE_PATH "_mario_forward.png"
-#define MARIO_DOWNWARD_FILE_PATH "_mario_down.png"
-#define MARIO_RIGHT_FILE_PATH "_mario_right.png"
-#define MARIO_LEFT_FILE_PATH "_mario_left.png"
+#define MARIO_FORWARD_FILE_PATH "_people_StandForward.png"
+#define MARIO_DOWNWARD_FILE_PATH "_people_StandDown.png"
+#define MARIO_RIGHT_FILE_PATH "_people_StandRight.png"
+#define MARIO_LEFT_FILE_PATH "_people_StandLeft.png"
+#define MARIO_MOVEFORWARD_FILE_PATH "_people_GoForward.png"
+#define MARIO_RUNFORWARD_FILE_PATH "_people_RunForward.png"
+#define MARIO_MOVEDOWNWARD_FILE_PATH "_people_GoDown.png"
+#define MARIO_RUNDOWN_FILE_PATH "_people_RunDown.png"
+#define MARIO_MOVERIGHT_FILE_PATH "_people_GoRight.png"
+#define MARIO_RUNRIGHT_FILE_PATH "_people_RunRight.png"
+#define MARIO_MOVELEFT_FILE_PATH "_people_GoLeft.png"
+#define MARIO_RUNLEFT_FILE_PATH "_people_RunLeft.png"
 
 #define CL_0 "_CL_0.png"
 #define CL_1 "_CL_1.png"

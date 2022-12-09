@@ -78,18 +78,21 @@ void GameState::handle_input() {
                         
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
+                        people->start_movement(1);
                         people->move_right();
-                        lane_gen->horizontal_movement(people);
+                        lane_gen->horizontal_movement(people, 1);
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
+                        people->start_movement(2);
                         people->move_left();
-                        lane_gen->horizontal_movement(people);
+                        lane_gen->horizontal_movement(people, 0);
                         break;
                         
                     case (sf::Keyboard::S):
                     case (sf::Keyboard::Down):
+                        people->start_movement(3);
                         people->move_down();
                         lane_gen->prev_current(people);
                         break;
@@ -99,10 +102,10 @@ void GameState::handle_input() {
                         
                         if (people->can_move_forward())
                         {
+                            people->start_movement(0);
                             level+=0.8;
                             people->move_forward();
                             lane_gen->next_current(people);
-                            
                             //if (people->get_position().y < lane_gen->at(2)->position().get_y()){
                             //    ++isShifting;
                             //}
@@ -127,12 +130,14 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    if(!is_pause){
+    if(!is_pause) {
         /* update position */
         lane_gen->refactor(level);
         
         /* update level */
         int status = traffic->update();
+        
+        int return_code = people->update();
         
         switch(status)
         {
@@ -178,7 +183,6 @@ void GameState::draw(float dt)
                 lane_gen->at(i)->draw();
             }
         }
-        
         tools->window.draw(people->get_sprite());
         
         tools->window.draw(t_lev);
