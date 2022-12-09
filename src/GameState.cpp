@@ -157,14 +157,27 @@ void GameState::update(float dt)
         
         if (lost_count || check_lost())
         {
-            lost_count = ((lost_count) ? lost_count-1 : 1000);
-            
-            people->lost();
-            
-            if (lost_count) pre_lost();
-            else {
-                tools->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING MODE", sf::Style::Close);
-                tools->state_manager.receive_replace_request(new LostMenu(tools));
+            if(!is_TouchBounder){
+                lost_count = ((lost_count) ? lost_count-1 : 1000);
+                
+                people->lost();
+                
+                if (lost_count) pre_lost();
+                else {
+                    tools->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING MODE", sf::Style::Close);
+                    tools->state_manager.receive_replace_request(new LostMenu(tools));
+                }
+            }
+            else{
+                lost_count = ((lost_count) ? lost_count-1 : 1000);
+                
+                people->lost();
+                
+                if (lost_count) pre_lost();
+                else {
+                    tools->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING MODE", sf::Style::Close);
+                    tools->state_manager.receive_replace_request(new LostMenu(tools));
+                }
             }
         }
     }
@@ -265,8 +278,10 @@ void GameState::save(std::string filename) {
 
 void GameState::pre_lost()
 {
-    view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
-    view.setSize(sf::Vector2f(100, 100));
-    view.zoom(0.8 + 0.002 * lost_count); //transition from 1 to 0.5f
-    tools->window.setView(view);
+    if (!is_TouchBounder){
+        view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
+        view.setSize(sf::Vector2f(100, 100));
+        view.zoom(0.8 + 0.002 * lost_count); //transition from 1 to 0.5f
+        tools->window.setView(view);
+    }
 }
