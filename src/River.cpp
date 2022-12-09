@@ -237,7 +237,7 @@ void River::set_current(People*& mario, int type)
     {
         Lane::set_current(mario);
         
-        Position mariop = Position(mario->get_position().x, mario->get_position().y);
+        Position mariop = Position(mario->get_position().x, Lane::position().get_y());
         
         bool check = false;
         
@@ -283,7 +283,7 @@ void River::set_current(People*& mario, int type)
         }
         int currentPos = float_objs[movObj]->position().get_x();
         int movPos = float_objs[currentLog]->position().get_x();
-        if (abs(movPos - currentPos) > 100) {
+        if (abs(movPos - currentPos) > 101) {
             tools->state_manager.get_current_state()->pause();
             return;
         }
