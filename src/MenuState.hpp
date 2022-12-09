@@ -5,7 +5,7 @@
 #include "src/GameState.hpp"
 #include "src/AboutState.hpp"
 
-#define BUTTON 4
+#define BUTTON 3
 
 class MenuState : public State {
 
