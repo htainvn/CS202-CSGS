@@ -177,11 +177,15 @@ void LaneFactory::run() {
     }
 }
 
-void LaneFactory::horizontal_movement(People *&mario) {
+void LaneFactory::horizontal_movement(People *&mario, int type) {
     int current_lane = current();
-    lanes[current_lane]->unset();
-    lanes[current_lane]->set_current(mario);
     
+    if (lanes[current_lane]->type() == RIVER_TYPE) {
+        lanes[current_lane]->set_current(mario, type);
+    }
+    else {
+        lanes[current_lane]->set_current(mario);
+    }
 }
 
 

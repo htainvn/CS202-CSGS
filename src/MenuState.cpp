@@ -7,25 +7,44 @@ MenuState::MenuState(handler_ptr _tools) : tools(_tools) {};
 void MenuState::init(int status) {
 	
 	font = new sf::Font();
-	if (!font->loadFromFile(FONT_PATH_FILE)) {
+	if (!font->loadFromFile(FONT_MENU_PATH_FILE)) {
 		std::cout << "Error";
 		return;
 	}
 
+	if (!background.loadFromFile(MENU_BACKGROUND_PATH_FILE)) {
+		std::cout << "Error";
+		return;
+	}
+	background.setSmooth(true);
+	background_sprite = Sprite(background);
+
+	Title.setFont(*font);
+	Title.setCharacterSize(80);
+	Title.setPosition(Vector2f(190, 70));
+	Title.setStyle(sf::Text::Regular);
+	Title.setFillColor(sf::Color(105, 105, 105));
+	Title.setString("| CROSSING ROAD |");
+
+
 	for (int i = 0; i < BUTTON; ++i) {
 		button[i].setFont(*font);
-		button[i].setCharacterSize(70);
-		button[i].setPosition(sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / (BUTTON + 1) * (i + 1)));
+		button[i].setCharacterSize(50);
+		button[i].setPosition(sf::Vector2f(SCREEN_WIDTH * 2 / 3 + 100, 285 + 75 * i));
 		button[i].setStyle(sf::Text::Regular);
-		button[i].setFillColor(sf::Color::White);
+		button[i].setFillColor(sf::Color::Transparent);
 	}
 
-	button[0].setFillColor(sf::Color::Blue);
+	button_color[0] = sf::Color(128, 128, 128);
+	button_color[1] = sf::Color(188, 143, 143);
+	button_color[2] = sf::Color(184, 134, 11);
+
+	button[0].setFillColor(button_color[0]);
 
 	button[0].setString("PLAY");
-	button[1].setString("OPTIONS");
-	button[2].setString("ABOUT");
-	button[3].setString("EXIT");
+	// button[1].setString("OPTIONS");
+	button[1].setString("ABOUT");
+	button[2].setString("EXIT");
 
 }
 
@@ -55,6 +74,12 @@ void MenuState::handle_input() {
 					if (buttonSelected == 0) {
 						tools->state_manager.receive_add_request(new GameState(this->tools));
 					}
+					if (buttonSelected == 1) {
+						tools->state_manager.receive_add_request(new AboutState(this->tools));
+					}
+					if (buttonSelected == 2) {
+						this->tools->window.close();
+					}
 					break;
 				default:
 					break;
@@ -66,17 +91,21 @@ void MenuState::handle_input() {
 }
 
 void MenuState::update(float dt) {
-	button[buttonSelected].setFillColor(sf::Color::White);
+	button[buttonSelected].setFillColor(sf::Color::Transparent);
 
 	buttonSelected += dt + BUTTON;
 	buttonSelected %= BUTTON;
 
-	button[buttonSelected].setFillColor(sf::Color::Blue);
+	button[buttonSelected].setFillColor(button_color[buttonSelected]);
 }
 
 void MenuState::draw(float dt) 
 {
-	tools->window.clear();
+	tools->window.clear(sf::Color::Black);
+
+	tools->window.draw(background_sprite);
+	tools->window.draw(Title);
+
 	for (int i = 0; i < BUTTON; ++i) tools->window.draw(button[i]);
 
 	tools->window.display();

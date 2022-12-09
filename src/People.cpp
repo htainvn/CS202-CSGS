@@ -64,27 +64,85 @@ void People::move_right(){
     sf::Vector2f v = sp.getPosition();
     if (can_move_right())
     {
-        sp.setPosition(sf::Vector2f(v.x + 100, v.y));
-        type_ = "MARIO_RIGHT";
+        sf::Vector2f v = sp.getPosition();
+        sp.move(sf::Vector2f(0.5, 0));
+        type_movement = 1;
+        cnt_movement--;
+        switch(cnt_movement) {
+            case 101 ... 199:
+            {
+                type_ = "MARIO_RIGHTGO";
+            }
+            break;
+            case 1 ... 100:
+            {
+                type_ = "MARIO_RIGHTRUN";
+            }
+            break;
+            case 0:
+            {
+                type_ = "MARIO_RIGHT";
+            }
+            break;
+        }
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
+
 void People::move_left(){
     sf::Vector2f v = sp.getPosition();
     if (can_move_left())
     {
-        sp.setPosition(sf::Vector2f(v.x - 100, v.y));
-        type_ = "MARIO_LEFT";
+        sf::Vector2f v = sp.getPosition();
+        sp.move(sf::Vector2f(-0.5, 0));
+        type_movement = 2;
+        cnt_movement--;
+        switch(cnt_movement) {
+            case 101 ... 199:
+            {
+                type_ = "MARIO_LEFTGO";
+            }
+            break;
+            case 1 ... 100:
+            {
+                type_ = "MARIO_LEFTRUN";
+            }
+            //break;
+            case 0:
+            {
+                type_ = "MARIO_LEFT";
+            }
+            break;
+        }
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
 
 void People::move_down(){
-    if (can_move_down())
+    sf::Vector2f v = sp.getPosition();
+    if (can_move_forward())
     {
-        sp.move(sf::Vector2f(0, 100));
-        index--;
-        type_ = "MARIO_DOWNWARD";
+        sf::Vector2f v = sp.getPosition();
+        sp.move(sf::Vector2f(0, 0.5));
+        type_movement = 3;
+        cnt_movement--;
+        switch(cnt_movement) {
+            case 101 ... 199:
+            {
+                type_ = "MARIO_DOWNWARDGO";
+            }
+            break;
+            case 1 ... 100:
+            {
+                type_ = "MARIO_DOWNWARDRUN";
+            }
+            //break;
+            case 0:
+            {
+                type_ = "MARIO_DOWNWARD";
+            }
+            break;
+        }
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
@@ -94,10 +152,30 @@ int People::lane() const{
 }
 
 void People::move_forward(/*sf::Vector2f vec,*/){
-    if(can_move_forward()){
-        sp.move(sf::Vector2f(0, -100));
-        index++;
-        type_ = "MARIO_FORWARD";
+    sf::Vector2f v = sp.getPosition();
+    if (can_move_down())
+    {
+        sf::Vector2f v = sp.getPosition();
+        sp.move(sf::Vector2f(0, -0.5));
+        type_movement = 0;
+        cnt_movement--;
+        switch(cnt_movement) {
+            case 101 ... 199:
+            {
+                type_ = "MARIO_FORWARDGO";
+            }
+            break;
+            case 1 ... 100:
+            {
+                type_ = "MARIO_FORWARDRUN";
+            }
+            //break;
+            case 0:
+            {
+                type_ = "MARIO_FORWARD";
+            }
+            break;
+        }
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
@@ -161,7 +239,59 @@ bool is_collision(sf::Vector2f vector, sf::Vector2f character){
     return false;
 }
 
+void People::change_moving(){
+    is_moving = true;
+}
+
+bool People::moving(){
+    return is_moving;
+}
+
 void People::loading(std::ifstream& fin)
 {
     
+}
+
+void People::start_movement(int type_) {
+    cnt_movement = 200;
+}
+
+int People::update()
+{
+    if (type_movement != -1) {
+        
+        if (cnt_movement)
+        {
+            switch(type_movement) {
+                case 0:
+                {
+                    move_forward();
+                }
+                    break;
+                case 1:
+                {
+                    move_right();
+                }
+                break;
+                case 2:
+                {
+                    move_left();
+                }
+                break;
+                case 3:
+                {
+                    move_down();
+                }
+                break;
+            }
+            return -1;
+        }
+        else {
+            if (type_movement == 1) {
+                int tmp = type_movement;
+                type_movement = -1;
+                return tmp;
+            }
+        }
+    }
 }

@@ -79,7 +79,7 @@ public:
     
     virtual void run() {}
     
-    virtual void set_current(People*& mario);
+    virtual void set_current(People*& mario, int _type = 0);
     
     virtual bool check_lost(){return false;};
     

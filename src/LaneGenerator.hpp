@@ -56,7 +56,7 @@ public:
     
     void next_current(People*& mario);
     
-    void horizontal_movement(People *&mario);
+    void horizontal_movement(People *&mario, int type = 0);
     
     void prev_current(People*& mario);
 

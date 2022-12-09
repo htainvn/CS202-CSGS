@@ -11,7 +11,6 @@
 Game::Game() {
     //if (this->machine->window.isOpen()) this->machine->window.close();
     this->machine->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING SAIGON ROAD", sf::Style::Close);
-    //this->machine->state_manager.receive_add_request(new GameState(this->machine));
     this->machine->state_manager.receive_add_request(new MenuState(this->machine));
     this->run();
 }

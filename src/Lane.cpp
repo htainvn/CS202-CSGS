@@ -46,7 +46,7 @@ Lane::Lane(handler_ptr _tools, Position pos, Level level) : tools(_tools), lev(l
     locate_at(pos.get_x(), pos.get_y());
 }
 
-void Lane::set_current(People*& mario) {
+void Lane::set_current(People*& mario, int type) {
     people = mario;
 }
 
