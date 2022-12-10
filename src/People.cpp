@@ -155,7 +155,7 @@ void People::move_down(){
         //}
 
         if (!cnt_movement) type_ = "MARIO_DOWNWARD";
-        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_DOWNWARDRUN";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_DOWNWARDGO";
         if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_DOWNWARDGO";
 
         sp.setTexture(tools->theme_controller.get(type_));
@@ -202,7 +202,7 @@ void People::move_forward(/*sf::Vector2f vec,*/){
 
 bool People::touch_border() {
     sf::Vector2f v = get_position();
-    if (v.y + 60 >= SCREEN_HEIGHT || v.x < 0 || v.x + 40 > SCREEN_WIDTH)
+    if (v.y + 5 >= SCREEN_HEIGHT || v.x < 0 || v.x + people_size > SCREEN_WIDTH)
     {
         alive_ = false;
         return true;

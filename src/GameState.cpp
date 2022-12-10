@@ -78,14 +78,14 @@ void GameState::handle_input() {
                         
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
-                        people->moving();
+                        people->moving(); //change moving attribute in people class to true, in order to prevent the function abjust_object in log class run automatically, then we get rid of the position of people is not updated after moving.
                         people->start_movement(1);
                         people->move_right();
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
-                        people->moving();
+                        people->moving(); //change moving attribute in people class to true, in order to prevent the function abjust_object in log class run automatically, then we get rid of the position of people is not updated after moving.
                         people->start_movement(2);
                         people->move_left();
                         break;
@@ -162,7 +162,9 @@ void GameState::update(float dt)
         else{
             if (lost_count || !people->is_alive())
             {
-                lost_count = ((lost_count) ? lost_count-1 : 1000);
+                if (!is_TouchBounder)
+                    lost_count = ((lost_count) ? lost_count-1 : 1000);
+                else lost_count = ((lost_count) ? lost_count-1 : 1000);
                 
                 if (lost_count) pre_lost();
                 else {
@@ -212,7 +214,11 @@ void GameState::resume()
 
 bool GameState::check_lost() 
 {
-    if (people->touch_border() || lane_gen->at(lane_gen->current())->check_lost()){
+    if (lane_gen->at(lane_gen->current())->check_lost()){
+        return true;
+    }
+    if (people->touch_border()){
+        is_TouchBounder = true;
         return true;
     }
     return false;
@@ -266,6 +272,28 @@ void GameState::pre_lost()
         view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
         view.setSize(sf::Vector2f(100, 100));
         view.zoom(0.8 + 0.002 * lost_count); //transition from 1 to 0.5f
-        tools->window.setView(view);
     }
+    else{
+        view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        view.setSize(sf::Vector2f(1000, 700));
+        srand(time(NULL));
+        int temp = rand()%4;
+        switch (temp) {
+            case 0:
+                view.move(sf::Vector2f(lost_count % 10,lost_count % 10));
+                break;
+            case 1:
+                view.move(sf::Vector2f(-lost_count % 10,lost_count % 10));
+                break;
+            case 2:
+                view.move(sf::Vector2f(lost_count % 10,-lost_count % 10));
+                break;
+            case 3:
+                view.move(sf::Vector2f(-lost_count % 10,-lost_count % 10));
+                break;
+            default:
+                break;
+        }
+    }
+    tools->window.setView(view);
 }

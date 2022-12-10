@@ -243,7 +243,7 @@ bool Road::check_lost() {
     Position people_pos = people_position(), veh_pos;;
     for(int i=0; i<vehicles.size(); i++){
         veh_pos = vehicles[i]->position();
-        if(veh_pos.get_x() + 100 <= people_pos.get_x()+130 && veh_pos.get_x() + 100 >= people_pos.get_x())
+        if(veh_pos.get_x() + 100 <= people_pos.get_x()+125 && veh_pos.get_x() + 92 >= people_pos.get_x()) //numbers are using to estimated the size of people and objects. Particularly, 100 is size of vehicle, 25 is guessed to be the width of people sprite. The function returns false iff the car head is located inside the area of people (range from x-coordinate of people to 100 + people_size).
             return true;
     }
     return false;

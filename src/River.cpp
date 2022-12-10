@@ -210,16 +210,16 @@ bool River::check_lost() {
     for (int i = 0; i < float_objs.size(); i++) {
 
         fpos = float_objs[i]->position();
-        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) || traffic_light == 1)
+        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) || traffic_light == 1) /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
             return false;
 
-        if (float_objs[i]->get_type() != 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) {
+        if (float_objs[i]->get_type() != 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) /*on the other hand, it returns true*/ {
 
-            if (traffic_light != 1)
+            if (traffic_light != 1) //animal sound
 
                 float_objs[i]->tell();
 
-            else river_sound.play();
+            else river_sound.play(); // river sound
 
             return true;
         }
@@ -269,14 +269,18 @@ void River::set_current(People*& mario, int type)
     }
     else
     {*/
-    int currentLog = get_currentlog();
-    Position mariop = Position(mario->get_position().x, Lane::position().get_y());
-    j = mariop.get_x()/100 - 1;
     
-    int movObj = (type == 2) ? get_prevobj(j) : get_nextobj(j);
+    
+    int currentLog = get_currentlog(); //if people is standing on any log, return the log index. Otherwise, return -1.
+    Position mariop = Position(mario->get_position().x, Lane::position().get_y()); // current position of mario
+    
+    j = mariop.get_x()/100 - 1; //finding the cell that people is standing on the river.
+    
+    int movObj = (type == 2) ? get_prevobj(j) : get_nextobj(j); //if move right (type == 1), searching for the right cell on the river. On the contrary, searching for the cell on the left handside.
     
     if (currentLog != -1) float_objs[currentLog]->unset();
     
+    //lane set mario.
     Lane::unset();
     Lane::set_current(mario, type);
     
@@ -284,16 +288,18 @@ void River::set_current(People*& mario, int type)
     for (int i = 0; i < float_objs.size(); i++)
     {
         Position obj_p = float_objs[i]->position();
-        if (mariop.inRect(obj_p))
+        if (mariop.inRect(obj_p)) //if people is located inside the cell
         {
             float_objs[i]->setCurrent(mario);
-            if (float_objs[i]->get_type() == 2){
-                float_objs[i]->adjust_objects();
+            if (float_objs[i]->get_type() == 2)/*if log...*/{
+                float_objs[i]->adjust_objects(); //set people to the center of log.
             }
             break;
         }
     }
-    mario->stop_moving();
+    mario->stop_moving(); //change the moving attribute inside people class to false, meaning people is not move, in order to let adjust_object in the log class working to update the position of people following the log if standing on the log
+    
+    
         /*a
         int currentPos = float_objs[j]->position().get_x();
         int movPos = float_objs[movObj]->position().get_x();
