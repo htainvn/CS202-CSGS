@@ -29,7 +29,7 @@ void floatObject::set_speed(float _speed) {
 	speed = _speed;
 }
 
-Position floatObject::position() { 
+Position floatObject::position() {
     return pos;
 }
 
