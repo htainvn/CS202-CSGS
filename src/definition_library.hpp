@@ -26,6 +26,7 @@ using namespace sf;
 #define WORKING_DIR std::filesystem::current_path().string()
 
 #define LOST_BACKGROUND "_lost_background.png"
+#define HEADSTONE "_headstone"
 
 #define PAVEMENT_IMAGE_FILE_PATH "_pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH "_left-bottomdash-normal.png"

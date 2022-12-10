@@ -10,24 +10,32 @@
 
 void LostMenu::init(int status) {
     font = new sf::Font();
-    if (!font->loadFromFile(FONT_PATH_FILE)) {
+    if (!font->loadFromFile(FONT_MENU_PATH_FILE)) {
         std::cout << "Error";
         return;
     }
     
-    for (int i = 0; i < options; ++i) {
+    BackgroundSprite.setTexture(resource_->theme_controller.get("LOST_SCREEN"));
+    
+    HeadstoneSprite.setTexture(resource_->theme_controller.get("HEADSTONE"));
+    
+    HeadstoneSprite.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 200));
+    
+    option[0].setFillColor(sf::Color::Blue);
+    option[0].setString(option1);
+    option[1].setString(option2);
+    option[2].setString(option3);
+    
+    for (int i = 0; i < options; i++) {
         option[i].setFont(*font);
-        option[i].setCharacterSize(70);
-        option[i].setPosition(sf::Vector2f(i*SCREEN_WIDTH/4, SCREEN_HEIGHT / 2));
+        option[i].setCharacterSize(30);
+        std::string str;
+        if (i>0) str = option[i-1].getString();
+        std::cout << "str length: " << str.length() << std::endl;
+        option[i].setPosition(sf::Vector2f(((i>0) ? (option[i-1].getPosition().x + (double)str.length()*15 + 200) : 180), SCREEN_HEIGHT/2 + 150));
         option[i].setStyle(sf::Text::Regular);
         option[i].setFillColor(sf::Color::White);
     }
-
-    option[0].setFillColor(sf::Color::Blue);
-
-    option[0].setString("TRY \nAGAIN");
-    option[1].setString("MENU");
-    option[2].setString("EXIT");
 
 }
 
@@ -43,10 +51,12 @@ void LostMenu::handle_input() {
             break;
         case (sf::Event::KeyPressed):
             switch (event.key.code) {
-                case (sf::Keyboard::Right):
+                case (sf::Keyboard::Down):
+                case (sf::Keyboard::S):
                     update(1);
                     break;
-                case (sf::Keyboard::Left):
+                case (sf::Keyboard::W):
+                case (sf::Keyboard::Up):
                     update(-1);
                     break;
                 case (sf::Keyboard::Enter):
@@ -88,6 +98,8 @@ void LostMenu::update(float signal) {
 
 void LostMenu::draw(float dt) {
     resource_->window.clear();
+    resource_->window.draw(BackgroundSprite);
+    resource_->window.draw(HeadstoneSprite);
     resource_->window.draw(option[0]);
     resource_->window.draw(option[1]);
     resource_->window.draw(option[2]);

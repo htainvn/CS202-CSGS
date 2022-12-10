@@ -13,10 +13,17 @@
 #include "src/Handler.hpp"
 #include "src/GameState.hpp"
 #include "src/definition_library.hpp"
+#include <string>
 
 #define options 3
+#define option1 "Try Again"
+#define option2 "Menu"
+#define option3 "Exit"
+
+
 class LostMenu : public State{
 private:
+    sf::Sprite BackgroundSprite, HeadstoneSprite;
     handler_ptr resource_;
     sf::Text option [options];
     bool is_entered = false;
