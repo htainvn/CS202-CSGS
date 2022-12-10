@@ -210,10 +210,10 @@ bool River::check_lost() {
     for (int i = 0; i < float_objs.size(); i++) {
 
         fpos = float_objs[i]->position();
-        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() + people_size <= fpos.get_x() + 101) || traffic_light == 1)
+        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) || traffic_light == 1)
             return false;
 
-        else if (people_pos.get_x() >= fpos.get_x() - 21 && people_pos.get_x() + 21 <= fpos.get_x() + 101) {
+        if (float_objs[i]->get_type() != 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) {
 
             if (traffic_light != 1)
 
@@ -233,7 +233,8 @@ bool River::check_lost() {
 
 void River::set_current(People*& mario, int type)
 {
-    if (!is_current())
+    int j=0;
+    /*if (!is_current())
     {
         Lane::set_current(mario);
         
@@ -263,34 +264,44 @@ void River::set_current(People*& mario, int type)
         
         if (check == false)
         {
-            tools->state_manager.get_current_state()->pause();
+            check_lost();
         }
     }
     else
+    {*/
+    int currentLog = get_currentlog();
+    Position mariop = Position(mario->get_position().x, Lane::position().get_y());
+    j = mariop.get_x()/100 - 1;
+    
+    int movObj = (type == 2) ? get_prevobj(j) : get_nextobj(j);
+    
+    if (currentLog != -1) float_objs[currentLog]->unset();
+    
+    Lane::unset();
+    Lane::set_current(mario, type);
+    
+    if (check_lost()) return;
+    for (int i = 0; i < float_objs.size(); i++)
     {
-        int currentLog = get_currentlog();
-        
-        if ( (type == 0 && currentLog == 0) || (type == 0 && currentLog == float_objs.size() - 1) ) {
-            tools->state_manager.get_current_state()->pause();
-            return;
+        Position obj_p = float_objs[i]->position();
+        if (mariop.inRect(obj_p))
+        {
+            float_objs[i]->setCurrent(mario);
+            if (float_objs[i]->get_type() == 2){
+                float_objs[i]->adjust_objects();
+            }
+            break;
         }
-        
-        int movObj = (type == 0) ? get_prevobj(currentLog) : get_nextobj(currentLog);
-        
-        if (float_objs[movObj]->get_type() != 2) {
-            tools->state_manager.get_current_state()->pause();
-            return;
-        }
-        int currentPos = float_objs[movObj]->position().get_x();
-        int movPos = float_objs[currentLog]->position().get_x();
-        if (abs(movPos - currentPos) > 101) {
-            tools->state_manager.get_current_state()->pause();
-            return;
-        }
-        
-        float_objs[currentLog]->unset();
-        float_objs[movObj]->setCurrent(mario);
     }
+    mario->stop_moving();
+        /*a
+        int currentPos = float_objs[j]->position().get_x();
+        int movPos = float_objs[movObj]->position().get_x();
+        f (abs(movPos - currentPos) > 101) {
+         check_lost();
+         }*/
+    //}
+
 }
 
 
@@ -321,23 +332,12 @@ int River::get_currentlog() {
 
 int River::get_nextobj(int current_log_index)
 {
-    if (dir == 0)
-    {
-        return current_log_index + 1;
-    }
-    else
-    {
-        return current_log_index - 1;
-    }
+    return current_log_index + 1;
 }
 
 int River::get_prevobj(int current_log_index)
 {
-    if (dir == 0)
-    {
-        return current_log_index - 1;
-    }
-    else return current_log_index + 1;
+    return current_log_index - 1;
 }
 
 

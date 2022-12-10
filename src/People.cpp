@@ -32,7 +32,7 @@ bool People::can_move_right(){
 
 bool People::can_move_left(){
     sf::Vector2f v = sp.getPosition();
-    if (v.x - dsize <= 0 || alive_ == false)
+    if (v.x <= 0 || alive_ == false)
         return false;
     else
         return true;
@@ -239,12 +239,16 @@ bool is_collision(sf::Vector2f vector, sf::Vector2f character){
     return false;
 }
 
-void People::change_moving(){
-    is_moving = true;
+void People::moving(){
+    isMoving = true;
 }
 
-bool People::moving(){
-    return is_moving;
+void People::stop_moving(){
+    isMoving = false;
+}
+
+bool People::is_moving(){
+    return isMoving;
 }
 
 void People::loading(std::ifstream& fin)
@@ -258,40 +262,36 @@ void People::start_movement(int type_) {
 
 int People::update()
 {
-    if (type_movement != -1) {
-        
-        if (cnt_movement)
-        {
-            switch(type_movement) {
-                case 0:
-                {
-                    move_forward();
-                }
-                    break;
-                case 1:
-                {
-                    move_right();
-                }
-                break;
-                case 2:
-                {
-                    move_left();
-                }
-                break;
-                case 3:
-                {
-                    move_down();
-                }
-                break;
+    if (cnt_movement)
+    {
+        switch(type_movement) {
+            case 0:
+            {
+                move_forward();
             }
-            return -1;
-        }
-        else {
-            if (type_movement == 1) {
-                int tmp = type_movement;
-                type_movement = -1;
-                return tmp;
+                break;
+            case 1:
+            {
+                move_right();
             }
+                break;
+            case 2:
+            {
+                move_left();
+            }
+                break;
+            case 3:
+            {
+                move_down();
+            }
+                break;
         }
+        return -1;
     }
+    else {
+            int tmp = type_movement;
+            type_movement = -1;
+            return tmp;
+        }
+    
 }

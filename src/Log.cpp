@@ -6,7 +6,7 @@ Log::Log(handler_ptr tools, bool dir, Position pos, float _speed) : floatObject(
 
 void Log::adjust_objects()
 {
-    if(people)
+    if(people && !people->is_moving())
     {
         people->go_to_position(position().get_x() + 25, position().get_y());
     }

@@ -19,7 +19,7 @@ private:
     bool alive_;
     std::string type_;
     int index = 0;
-    bool is_moving;
+    bool isMoving = false;
     sf::Vector2f newPos;
     int cnt_movement = 0;
     int type_movement = 0;
@@ -49,8 +49,9 @@ public:
     void lost();
     bool is_mid_height();
     int lane() const;
-    void change_moving();
-    bool moving();
+    void moving();
+    void stop_moving();
+    bool is_moving();
     
     sf::Sprite& get_sprite ();
     

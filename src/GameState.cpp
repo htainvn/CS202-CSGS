@@ -78,20 +78,21 @@ void GameState::handle_input() {
                         
                     case (sf::Keyboard::D):
                     case (sf::Keyboard::Right):
+                        people->moving();
                         people->start_movement(1);
                         people->move_right();
-                        lane_gen->horizontal_movement(people, 1);
                         break;
                         
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
+                        people->moving();
                         people->start_movement(2);
                         people->move_left();
-                        lane_gen->horizontal_movement(people, 0);
                         break;
                         
                     case (sf::Keyboard::S):
                     case (sf::Keyboard::Down):
+                        people->moving();
                         people->start_movement(3);
                         people->move_down();
                         lane_gen->prev_current(people);
@@ -99,9 +100,9 @@ void GameState::handle_input() {
                     
                     case (sf::Keyboard::Up):
                     case (sf::Keyboard::W):
-                        
                         if (people->can_move_forward())
                         {
+                            people->moving();
                             people->start_movement(0);
                             level+=0.8;
                             people->move_forward();
@@ -129,49 +130,39 @@ void GameState::handle_input() {
 void GameState::update(float dt)
 {
     if(!is_pause) {
-        /* update position */
-        lane_gen->refactor(level);
-        
-        /* update level */
-        int status = traffic->update();
-        
-        int return_code = people->update();
-        
-        switch(status)
-        {
-            case 0:
-                lane_gen->stop();
-                break;
-            case 1:
-                lane_gen->slowdown();
-                break;
-            case 2:
-                lane_gen->run();
-                break;
-        }
-        
-        /* update level */
-        std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
-        
-        if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-        
-        if (lost_count || check_lost())
-        {
-            if(!is_TouchBounder){
-                lost_count = ((lost_count) ? lost_count-1 : 1000);
-                
-                people->lost();
-                
-                if (lost_count) pre_lost();
-                else {
-                    tools->window.create(sf::VideoMode({SCREEN_WIDTH, SCREEN_HEIGHT}), "CROSSING MODE", sf::Style::Close);
-                    tools->state_manager.receive_replace_request(new LostMenu(tools));
-                }
+        if(people->is_alive()){
+            /* update position */
+            lane_gen->refactor(level);
+            
+            /* update level */
+            int status = traffic->update();
+            
+            int return_code = people->update();
+            if (return_code == 1 || return_code == 2)lane_gen->horizontal_movement(people, return_code);
+            switch(status)
+            {
+                case 0:
+                    lane_gen->stop();
+                    break;
+                case 1:
+                    lane_gen->slowdown();
+                    break;
+                case 2:
+                    lane_gen->run();
+                    break;
             }
-            else{
+            
+            /* update level */
+            std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
+            
+            if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
+            
+            if(check_lost())people->lost();
+        }
+        else{
+            if (lost_count || !people->is_alive())
+            {
                 lost_count = ((lost_count) ? lost_count-1 : 1000);
-                
-                people->lost();
                 
                 if (lost_count) pre_lost();
                 else {
@@ -180,13 +171,6 @@ void GameState::update(float dt)
                 }
             }
         }
-    }
-    
-    /* update level */
-    std::string t = "Level: " + std::to_string(lane_gen->at(lane_gen->current())->level());
-    
-    if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) {
-        t_lev.setString(t);
     }
 }
 
