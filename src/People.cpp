@@ -68,23 +68,28 @@ void People::move_right(){
         sp.move(sf::Vector2f(0.5, 0));
         type_movement = 1;
         cnt_movement--;
-        switch(cnt_movement) {
-            case 101 ... 199:
-            {
-                type_ = "MARIO_RIGHTGO";
-            }
-            break;
-            case 1 ... 100:
-            {
-                type_ = "MARIO_RIGHTRUN";
-            }
-            break;
-            case 0:
-            {
-                type_ = "MARIO_RIGHT";
-            }
-            break;
-        }
+        ///*switch(cnt_movement) {
+        //    case 101 ... 199:
+        //    {
+        //        type_ = "MARIO_RIGHTGO";
+        //    }
+        //    break;
+        //    case 1 ... 100:
+        //    {
+        //        type_ = "MARIO_RIGHTRUN";
+        //    }
+        //    break;
+        //    case 0:
+        //    {
+        //        type_ = "MARIO_RIGHT";
+        //    }
+        //    break;
+        //}*/
+
+        if (!cnt_movement) type_ = "MARIO_RIGHT";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_RIGHTRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_RIGHTGO";
+
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
@@ -97,23 +102,28 @@ void People::move_left(){
         sp.move(sf::Vector2f(-0.5, 0));
         type_movement = 2;
         cnt_movement--;
-        switch(cnt_movement) {
-            case 101 ... 199:
-            {
-                type_ = "MARIO_LEFTGO";
-            }
-            break;
-            case 1 ... 100:
-            {
-                type_ = "MARIO_LEFTRUN";
-            }
-            //break;
-            case 0:
-            {
-                type_ = "MARIO_LEFT";
-            }
-            break;
-        }
+        //switch(cnt_movement) {
+        //    case 101 ... 199:
+        //    {
+        //        type_ = "MARIO_LEFTGO";
+        //    }
+        //    break;
+        //    case 1 ... 100:
+        //    {
+        //        type_ = "MARIO_LEFTRUN";
+        //    }
+        //    //break;
+        //    case 0:
+        //    {
+        //        type_ = "MARIO_LEFT";
+        //    }
+        //    break;
+        //}
+
+        if (!cnt_movement) type_ = "MARIO_LEFT";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_LEFTRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_LEFTGO";
+
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
@@ -126,23 +136,28 @@ void People::move_down(){
         sp.move(sf::Vector2f(0, 0.5));
         type_movement = 3;
         cnt_movement--;
-        switch(cnt_movement) {
-            case 101 ... 199:
-            {
-                type_ = "MARIO_DOWNWARDGO";
-            }
-            break;
-            case 1 ... 100:
-            {
-                type_ = "MARIO_DOWNWARDRUN";
-            }
-            //break;
-            case 0:
-            {
-                type_ = "MARIO_DOWNWARD";
-            }
-            break;
-        }
+        //switch(cnt_movement) {
+        //    case 101 ... 199:
+        //    {
+        //        type_ = "MARIO_DOWNWARDGO";
+        //    }
+        //    break;
+        //    case 1 ... 100:
+        //    {
+        //        type_ = "MARIO_DOWNWARDRUN";
+        //    }
+        //    //break;
+        //    case 0:
+        //    {
+        //        type_ = "MARIO_DOWNWARD";
+        //    }
+        //    break;
+        //}
+
+        if (!cnt_movement) type_ = "MARIO_DOWNWARD";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_DOWNWARDRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_DOWNWARDGO";
+
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
@@ -159,23 +174,28 @@ void People::move_forward(/*sf::Vector2f vec,*/){
         sp.move(sf::Vector2f(0, -0.5));
         type_movement = 0;
         cnt_movement--;
-        switch(cnt_movement) {
-            case 101 ... 199:
-            {
-                type_ = "MARIO_FORWARDGO";
-            }
-            break;
-            case 1 ... 100:
-            {
-                type_ = "MARIO_FORWARDRUN";
-            }
-            //break;
-            case 0:
-            {
-                type_ = "MARIO_FORWARD";
-            }
-            break;
-        }
+        //switch(cnt_movement) {
+        //    case 101 ... 199:
+        //    {
+        //        type_ = "MARIO_FORWARDGO";
+        //    }
+        //    break;
+        //    case 1 ... 100:
+        //    {
+        //        type_ = "MARIO_FORWARDRUN";
+        //    }
+        //    //break;
+        //    case 0:
+        //    {
+        //        type_ = "MARIO_FORWARD";
+        //    }
+        //    break;
+        //}
+
+        if (!cnt_movement) type_ = "MARIO_FORWARD";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_FORWARDRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_FORWARDGO";
+
         sp.setTexture(tools->theme_controller.get(type_));
     }
 }
