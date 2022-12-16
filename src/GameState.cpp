@@ -38,16 +38,16 @@ void GameState::init(int status) {
     if (status == 0) {
         //initialization
         
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 600), Level(1, 3, 1));
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 500), Level(1, 2, 1));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 400), Level(1, 1, 1));
-        lane_gen->add_lane(ROAD_TYPE, Position(0, 300), Level(1, 0, 1));
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, 200), Level(2, 2, 1));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, 100), Level(2, 1, 1));
-        lane_gen->add_lane(ROAD_TYPE, Position(0, 0), Level(2, 0, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(-500, 600), Level(1, 3, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(-500, 500), Level(1, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(-500, 400), Level(1, 1, 1));
+        lane_gen->add_lane(ROAD_TYPE, Position(-500, 300), Level(1, 0, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(-500, 200), Level(2, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(-500, 100), Level(2, 1, 1));
+        lane_gen->add_lane(ROAD_TYPE, Position(-500, 0), Level(2, 0, 1));
         
-        lane_gen->add_lane(PATHWAY_TYPE, Position(0, -100), Level(3, 2, 1));
-        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(0, -200), Level(3, 1, 1));
+        lane_gen->add_lane(PATHWAY_TYPE, Position(-500, -100), Level(3, 2, 1));
+        lane_gen->add_lane(PATHWAYLIGHT_TYPE, Position(-500, -200), Level(3, 1, 1));
     }
     else
     {
@@ -129,8 +129,10 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    if(!is_pause) {
-        if(people->is_alive()){
+    if(!is_pause)
+    {
+        if(people->is_alive())
+        {
             /* update position */
             lane_gen->refactor(level);
             
@@ -176,7 +178,8 @@ void GameState::update(float dt)
 
 void GameState::draw(float dt)
 {
-    if (is_pause == false){
+    if (is_pause == false) {
+        
         tools->window.clear();
         
         for (int i = 8; i >= 0; i--)
@@ -266,12 +269,15 @@ void GameState::save(std::string filename) {
 
 void GameState::pre_lost()
 {
-    if (!is_TouchBounder){
+    if (!is_TouchBounder)
+    {
         view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
         view.setSize(sf::Vector2f(100, 100));
         view.zoom(0.8 + 0.002 * lost_count);
+        view.setSize(sf::Vector2f(350, 350));
+        view.zoom(0.98 + 0.0002 * lost_count); //transition from 1 to 0.5f
     }
-    else{
+    else {
         view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
         view.setSize(sf::Vector2f(1000, 700));
         srand(time(NULL));

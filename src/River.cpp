@@ -20,11 +20,32 @@ int River::get_maxlog(){
 }
 
 
-River::River(handler_ptr _tools, Level level, Position pos) : Lane(_tools, pos, level)
+River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : Lane(_tools, pos, level)
 {
     Lane::change_image(tools->theme_controller.get("RIVER"));
 
-    speed = rand() % (200 - 50 + 1) + 50;
+    if (last_speed != -1)
+    {
+        bool option = rand() % 2;
+        
+        if (option) {
+            
+            int cutoff = fmax(200, last_speed * 1.2);
+            
+            speed = rand() % (300 - cutoff + 1) + cutoff;
+            
+        }
+        
+        else
+        {
+            
+            int cutoff = (last_speed / 1.2f);
+            
+            speed = rand() % (cutoff - 50 + 1) + 50;
+            
+        }
+    }
+    else speed = rand() % (300 - 50 + 1) + 50;
 
     dir = rand() % 2;
 
@@ -58,7 +79,8 @@ void River::spawn()
 
     if (float_objs.size() == max_log + 3) return;
 
-    else if (float_objs.size() == 0) {
+    else if (float_objs.size() == 0)
+    {
         while (true) 
         {
             int index = rand() % 10;
