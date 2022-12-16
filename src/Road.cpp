@@ -80,7 +80,7 @@ void Road::spawn()
 
         if (max_car == 1)
         {
-            Vehicle* new_vehicle = new Vehicle(tools, dir, speed, -100 + (!dir) * 1100);
+            Vehicle* new_vehicle = new Vehicle(tools, dir, speed, -100 + (!dir) * (SCREEN_WIDTH + 100));
 
             new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
 
@@ -103,7 +103,7 @@ void Road::spawn()
         
         while (true)
         {
-            int index = rand() % 10;
+            int index = rand() % (SCREEN_WIDTH / 100);
             
             /*if (std::find(rand_position.begin(), rand_position.end(), index) == rand_position.end())
             {
@@ -144,7 +144,7 @@ void Road::spawn()
     if (vehicles.size() < max_car)
     {
         
-        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100 + (!dir)*1100);
+        Vehicle* new_vehicle = new Vehicle(tools, dir, vehicles[0]->get_speed(), -100 + (!dir) * (SCREEN_WIDTH + 100));
         
         new_vehicle->locate_at(new_vehicle->sprite.getPosition().x, Lane::position().get_y() + 25);
         
@@ -189,7 +189,7 @@ void Road::adjust_objects() {
             spawn();
             return;
         }
-        if (dir && vehicles[0]->position().get_x() > 1000)
+        if (dir && vehicles[0]->position().get_x() > SCREEN_WIDTH)
         {
             // std::cout << "Right" << '\n';
             delete vehicles[0];
