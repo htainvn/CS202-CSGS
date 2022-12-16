@@ -20,7 +20,7 @@ public:
     
     /* CONSTRUCTORS & DESTRUCTORS */
     
-    River(handler_ptr _tools, Level level, Position pos = Position(), float last_speed = -1);
+    River(handler_ptr _tools, Level level, Position pos = Position());
     
     ~River();
     
@@ -51,8 +51,6 @@ public:
     void loading(std::ifstream& fin);
 
     void save(std::ofstream& fout);
-    
-    float get_speed() {return speed;}
     
     /* END HERE */
     

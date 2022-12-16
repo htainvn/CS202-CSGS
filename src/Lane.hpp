@@ -88,8 +88,6 @@ public:
     virtual void loading(std::ifstream& fin);
 
     virtual void save(std::ofstream & fout){}
-
-    virtual float get_speed() {return 0;}
     
 /* END HERE */
     

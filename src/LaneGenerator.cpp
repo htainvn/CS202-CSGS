@@ -54,7 +54,7 @@ bool LaneFactory::detect_outscr()
 
             int type = level->spawn_next_lane();
             
-            add_lane(type, Position(-500, -100 + lanes.at(lanes.size()-1)->position().get_y()), tmp);
+            add_lane(type, Position(0, -100 + lanes.at(lanes.size()-1)->position().get_y()), tmp);
         }
     }
     
@@ -75,7 +75,7 @@ void LaneFactory::refactor(float& shift_level) {
     
     for (int i = 0; i < this->lanes.size(); i++) {
         
-        lanes.at(i)->locate_at(-500, lanes.at(i)->Lane::position().get_y() + movement);
+        lanes.at(i)->locate_at(0, lanes.at(i)->Lane::position().get_y() + movement);
         
         lanes.at(i)->adjust_objects();
         
@@ -110,7 +110,7 @@ Lane *LaneFactory::create_lane(int type, Position pos, Level level) {
     ((type == PATHWAYLIGHT_TYPE) && (result = new PathwayLight(tools, pos, level)));
     ((type == ROAD_TYPE) && (result = new Road(tools, 0, 0, 0, 0, level, pos)));
     
-    return (result == nullptr ? new River(tools, level, pos, (lanes[lanes.size()-1]->type() == RIVER_TYPE) ? lanes[lanes.size()-1]->get_speed() : -1) : result);
+    return (result == nullptr ? new River(tools, level, pos) : result);
 }
 
 Lane*& LaneFactory::at(const int index) {
@@ -183,8 +183,7 @@ void LaneFactory::horizontal_movement(People *&mario, int type) {
     if (lanes[current_lane]->type() == RIVER_TYPE) {
         lanes[current_lane]->set_current(mario, type);
     }
-    else
-    {
+    else {
         lanes[current_lane]->set_current(mario);
     }
 }
