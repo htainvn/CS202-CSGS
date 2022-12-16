@@ -50,12 +50,12 @@ void LostMenu::handle_input() {
             break;
         case (sf::Event::KeyPressed):
             switch (event.key.code) {
-                case (sf::Keyboard::Down):
-                case (sf::Keyboard::S):
+                case (sf::Keyboard::Right):
+                case (sf::Keyboard::D):
                     update(1);
                     break;
-                case (sf::Keyboard::W):
-                case (sf::Keyboard::Up):
+                case (sf::Keyboard::A):
+                case (sf::Keyboard::Left):
                     update(-1);
                     break;
                 case (sf::Keyboard::Enter):

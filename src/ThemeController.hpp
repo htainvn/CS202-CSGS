@@ -11,6 +11,7 @@
 #include <string>
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include "Position.hpp"
 #include "src/ResourceManager.hpp"
 
 class ThemeController {
@@ -29,6 +30,8 @@ public:
     sf::SoundBuffer& get_buffer(std::string hash_name);
     
     void add(std::string _theme);
+    
+    Position getSize(std::string type);
     
 private:
     

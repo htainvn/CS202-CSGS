@@ -62,3 +62,10 @@ void ThemeController::add(std::string _theme) {
     
 }
 
+Position ThemeController::getSize(std::string type) {
+    return Position(get(type).getSize().x, get(type).getSize().y);
+}
+
+
+
+

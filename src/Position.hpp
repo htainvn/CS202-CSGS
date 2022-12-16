@@ -34,7 +34,7 @@ public:
        return ((y < -100) | (y > SCREEN_HEIGHT));
     }
     
-    bool inRect(Position& another)
+    bool inRect(Position& another, Position size)
     {
         int xPeople = (int) x;
         int yPeople = (int) y;
@@ -42,7 +42,7 @@ public:
         int yObject = (int) another.y;
         
         if (xPeople > xObject + dsize) return false;
-        if (xPeople < xObject - people_size - 2) return false;
+        if (xPeople < xObject - size.x) return false;
         if (yPeople > yObject + dsize) return false;
         if (yPeople < yObject) return false;
         return true;

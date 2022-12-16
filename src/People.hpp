@@ -7,6 +7,7 @@
 #include "src/definition_library.hpp"
 #include "src/Handler.hpp"
 #include <fstream>
+#include "Position.hpp"
 //#include "src/LaneGenerator.hpp"
 
 
@@ -60,6 +61,8 @@ public:
     void loading(std::ifstream& fin);
     
     int update();
+    
+    Position getSize();
 };
 
 sf::Sprite set_character (const People &character);

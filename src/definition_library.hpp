@@ -14,12 +14,12 @@ using namespace sf;
 #define resource_ptr ResourceManager*
 
 #define FRAME_RATE_SECOND (1.0f/1000.0f)
-#define SCREEN_WIDTH 1000
+#define SCREEN_WIDTH 700
 #define SCREEN_HEIGHT 700
 #define BOUNDARY_LANE 600
 #define HEIGHT_TITLE 100
 #define dsize 100
-#define people_size 32
+#define people_size 30
 
 #define CAR_PER_LANE 3
 

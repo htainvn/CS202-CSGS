@@ -315,3 +315,7 @@ int People::update()
         }
     
 }
+
+Position People::getSize() {
+    return Position(sp.getTexture()->getSize().x, sp.getTexture()->getSize().y);
+}

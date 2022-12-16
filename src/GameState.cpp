@@ -273,7 +273,7 @@ void GameState::pre_lost()
     }
     else{
         view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
-        view.setSize(sf::Vector2f(1000, 700));
+        view.setSize(sf::Vector2f(700, 700));
         srand(time(NULL));
         int temp = rand()%4;
         switch (temp) {

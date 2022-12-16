@@ -213,7 +213,7 @@ bool River::check_lost() {
         if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) || traffic_light == 1) /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
             return false;
 
-        if (float_objs[i]->get_type() != 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) /*on the other hand, it returns true*/ {
+        if (float_objs[i]->get_type() != 2 && people_pos.get_x() < fpos.get_x() - people_size && people_pos.get_x() > fpos.get_x() + dsize + 2) /*on the other hand, it returns true*/ {
 
             if (traffic_light != 1) //animal sound
 
@@ -272,7 +272,7 @@ void River::set_current(People*& mario, int type)
     
     
     int currentLog = get_currentlog(); //if people is standing on any log, return the log index. Otherwise, return -1.
-    Position mariop = Position(mario->get_position().x, Lane::position().get_y()); // current position of mario
+    Position mariop = Position(mario->get_position().x , Lane::position().get_y()); // current position of mario
     
     j = mariop.get_x()/100; //finding the cell that people is standing on the river.
     
@@ -288,7 +288,7 @@ void River::set_current(People*& mario, int type)
     for (int i = 0; i < float_objs.size(); i++)
     {
         Position obj_p = float_objs[i]->position();
-        if (mariop.inRect(obj_p)) //if people is located inside the cell
+        if (mariop.inRect(obj_p, mario->getSize())) //if people is located inside the cell
         {
             float_objs[i]->setCurrent(mario);
             if (float_objs[i]->get_type() == 2)/*if log...*/{
