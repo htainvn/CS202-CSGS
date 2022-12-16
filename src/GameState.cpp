@@ -162,9 +162,7 @@ void GameState::update(float dt)
         else{
             if (lost_count || !people->is_alive())
             {
-                if (!is_TouchBounder)
-                    lost_count = ((lost_count) ? lost_count-1 : 1000);
-                else lost_count = ((lost_count) ? lost_count-1 : 1000);
+                lost_count = ((lost_count) ? lost_count-1 : 1000);
                 
                 if (lost_count) pre_lost();
                 else {
@@ -271,7 +269,7 @@ void GameState::pre_lost()
     if (!is_TouchBounder){
         view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
         view.setSize(sf::Vector2f(100, 100));
-        view.zoom(0.8 + 0.002 * lost_count); //transition from 1 to 0.5f
+        view.zoom(0.8 + 0.002 * lost_count);
     }
     else{
         view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));

@@ -17,9 +17,9 @@ void LostMenu::init(int status) {
     
     BackgroundSprite.setTexture(resource_->theme_controller.get("LOST_SCREEN"));
     
-    HeadstoneSprite.setTexture(resource_->theme_controller.get("HEADSTONE"));
+    //HeadstoneSprite.setTexture(resource_->theme_controller.get("HEADSTONE"));
     
-    HeadstoneSprite.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 + 200));
+    //HeadstoneSprite.setPosition(sf::Vector2f(SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 100));
     
     option[0].setFillColor(sf::Color::Blue);
     option[0].setString(option1);
@@ -31,8 +31,7 @@ void LostMenu::init(int status) {
         option[i].setCharacterSize(30);
         std::string str;
         if (i>0) str = option[i-1].getString();
-        std::cout << "str length: " << str.length() << std::endl;
-        option[i].setPosition(sf::Vector2f(((i>0) ? (option[i-1].getPosition().x + (double)str.length()*15 + 200) : 180), SCREEN_HEIGHT/2 + 150));
+        option[i].setPosition(sf::Vector2f(((i>0) ? (option[i-1].getPosition().x + (double)str.length()*15 + 150) : 180), SCREEN_HEIGHT/2 + 150));
         option[i].setStyle(sf::Text::Regular);
         option[i].setFillColor(sf::Color::White);
     }
@@ -99,7 +98,7 @@ void LostMenu::update(float signal) {
 void LostMenu::draw(float dt) {
     resource_->window.clear();
     resource_->window.draw(BackgroundSprite);
-    resource_->window.draw(HeadstoneSprite);
+    //resource_->window.draw(HeadstoneSprite);
     resource_->window.draw(option[0]);
     resource_->window.draw(option[1]);
     resource_->window.draw(option[2]);

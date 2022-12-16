@@ -19,14 +19,14 @@ using namespace sf;
 #define BOUNDARY_LANE 600
 #define HEIGHT_TITLE 100
 #define dsize 100
-#define people_size 30
+#define people_size 32
 
 #define CAR_PER_LANE 3
 
 #define WORKING_DIR std::filesystem::current_path().string()
 
 #define LOST_BACKGROUND "_lost_background.png"
-#define HEADSTONE "_headstone"
+#define HEADSTONE "_headstone.png"
 
 #define PAVEMENT_IMAGE_FILE_PATH "_pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH "_left-bottomdash-normal.png"

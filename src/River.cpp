@@ -274,7 +274,7 @@ void River::set_current(People*& mario, int type)
     int currentLog = get_currentlog(); //if people is standing on any log, return the log index. Otherwise, return -1.
     Position mariop = Position(mario->get_position().x, Lane::position().get_y()); // current position of mario
     
-    j = mariop.get_x()/100 - 1; //finding the cell that people is standing on the river.
+    j = mariop.get_x()/100; //finding the cell that people is standing on the river.
     
     int movObj = (type == 2) ? get_prevobj(j) : get_nextobj(j); //if move right (type == 1), searching for the right cell on the river. On the contrary, searching for the cell on the left handside.
     

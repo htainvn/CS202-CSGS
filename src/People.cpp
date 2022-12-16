@@ -24,7 +24,7 @@ sf::Vector2f People::get_position() const{
 
 bool People::can_move_right(){
     sf::Vector2f v = sp.getPosition();
-    if (v.x + dsize >= SCREEN_WIDTH || alive_ == false)
+    if (v.x + 2*people_size >= SCREEN_WIDTH || alive_ == false)
         return false;
     else
         return true;
@@ -32,7 +32,7 @@ bool People::can_move_right(){
 
 bool People::can_move_left(){
     sf::Vector2f v = sp.getPosition();
-    if (v.x <= 0 || alive_ == false)
+    if (v.x - people_size <= 0 || alive_ == false)
         return false;
     else
         return true;
