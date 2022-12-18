@@ -34,8 +34,9 @@ Position Vehicle::position()
     return Position(sprite.getPosition().x, sprite.getPosition().y);
 }
 
-float Vehicle::get_speed() {
-    return speed * (!redlight) * ( 1 - yellowlight * 0.7 );
+float Vehicle::get_speed(bool filter) {
+    if (!filter) return speed * (!redlight) * ( 1 - yellowlight * 0.7 );
+    return speed;
 }
 
 std::string Vehicle::get_car_texture(const int dir, const int index) { 
@@ -62,4 +63,9 @@ void Vehicle::traffic_light(int light) { // 0 green 1 yellow 2 red'
         redlight = true;
         return;
     }
+}
+
+void Vehicle::save(std::ofstream& fout) {
+    
+    fout << position().get_x() << "\n";
 }

@@ -12,11 +12,11 @@ int River::get_maxlog(){
     int car_left = 0;
     if (lev.lev() % 3 == 1) {
         if (lev.road_remain() <= 2) {
-            return 4;
+            return 3;
         }
     }
     car_left = lev.lev() - (road_bd - lev.road_remain()) * CAR_PER_LANE;
-    return 6 - std::min(car_left, 3);
+    return 5 - std::min(car_left, 3);
 }
 
 
@@ -83,7 +83,7 @@ void River::spawn()
     {
         while (true) 
         {
-            int index = rand() % 10;
+            int index = rand() % (SCREEN_WIDTH / 100);
             
             for (int i = 0; i < float_objs.size(); i++) 
             {
@@ -132,7 +132,6 @@ void River::spawn()
                 
                 break;
             }
-
         }
     }
 
@@ -152,19 +151,19 @@ void River::spawn()
 
             if (type_of_animal) 
             {
-                Croc* newCroc = new Croc(tools, dir, Position((!dir) ? 1000 : -100, Lane::position().get_y()), speed);
+                Croc* newCroc = new Croc(tools, dir, Position((!dir) ? SCREEN_WIDTH : -100, Lane::position().get_y()), speed);
                 float_objs.push_back(newCroc);
             }
 
             else {
-                Hippo * newHippo = new Hippo(tools, dir, Position((!dir) ? 1000 : -100, Lane::position().get_y()), speed);
+                Hippo * newHippo = new Hippo(tools, dir, Position((!dir) ? SCREEN_WIDTH : -100, Lane::position().get_y()), speed);
                 float_objs.push_back(newHippo);
             }
         }
 
         else 
         {
-            Log* newLog = new Log(tools, dir, Position((!dir) ? 1000 : -100, Lane::position().get_y() + 25), speed);
+            Log* newLog = new Log(tools, dir, Position((!dir) ? SCREEN_WIDTH : -100, Lane::position().get_y() + 25), speed);
             float_objs.push_back(newLog);
         }
     }
@@ -332,21 +331,63 @@ void River::set_current(People*& mario, int type)
 
 }
 
+void River::loading(std::ifstream& fin) {
+    
+    float_objs.clear();
+    
+    fin >> dir >> max_log >> speed;
+    
+    for (int i = 0; i < max_log + 3; i++) {
+        
+        int OBJ_TYPE; fin >> OBJ_TYPE;
+        
+        float OBJ_COOR_X;
+        
+        fin >> OBJ_COOR_X;
+        
+        switch(OBJ_TYPE) {
+            case 0:
+            {
+                Croc* newCroc = new Croc(tools, dir, Position(OBJ_COOR_X, position().get_y()), speed);
+                
+                float_objs.push_back(newCroc);
+                
+                break;
+            }
+            case 1:
+            {
+                Hippo* newHippo = new Hippo(tools, dir, Position(OBJ_COOR_X, position().get_y()), speed);
+                
+                float_objs.push_back(newHippo);
+                
+                break;
+            }
+            case 2:
+            {
+                Log* newLog = new Log(tools, dir, Position(OBJ_COOR_X, position().get_y() + 25), speed);
+                
+                float_objs.push_back(newLog);
+                
+                break;
+            }
+        }
+    }
+}
 
 void River::save(std::ofstream& fout) {
-    fout << type() << " " << level() << " " << lev.path_remain() << " " << lev.road_remain() << std::endl;
+    fout << type() << " " << is_current() << "\n";
+    
+    fout << level() << " " << lev.path_remain() << " " << lev.road_remain() << "\n";
 
-    fout << Lane::position().get_x() << " " << Lane::position().get_y() << std::endl;
+    fout << Lane::position().get_x() << " " << Lane::position().get_y() << "\n";
 
-    fout << is_current() << std::endl;
+    fout << dir << " " << max_log << "\n";
 
-    fout << dir << " " << max_log << std::endl;
-
-    fout << speed << std::endl;
-
-    fout << is_current() << std::endl;
-
-    for (auto& i : float_objs) i->save(fout);
+    fout << speed << "\n";
+    
+    for (auto& obj : float_objs) {
+        obj->save(fout);
+    }
 }
 
 int River::get_currentlog() {
@@ -374,8 +415,4 @@ void River::unset() {
     int current_index = get_currentlog();
     if (current_index == -1) return;
     float_objs[current_index]->unset();
-}
-
-void River::loading(std::ifstream& fin) {
-    
 }

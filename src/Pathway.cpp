@@ -26,6 +26,14 @@ void Pathway::draw()
     
 }
 
+void Pathway::save(std::ofstream& fout) {
+    fout << type() << " " << is_current() << "\n";
+    
+    fout << level() << " " << lev.path_remain() << " " << lev.road_remain() << "\n";
+    
+    fout << position().get_x() << " " << position().get_y() << "\n";
+}
+
 void PathwayLight::draw()
 {
     
@@ -40,7 +48,7 @@ void PathwayLight::adjust_objects()
     
     Lane::adjust_objects();
     
-    light.locate_at(800, Lane::position().get_y() - 70);
+    light.locate_at(SCREEN_WIDTH - 200, Lane::position().get_y() - 70);
     
 }
 
@@ -48,21 +56,21 @@ PathwayLight::PathwayLight(handler_ptr _tools, Level level) : Pathway(_tools, le
 {
     light = TrafficLight(_tools);
     
-    light.locate_at(800, Lane::position().get_y() - 70);
+    light.locate_at(SCREEN_WIDTH - 200, Lane::position().get_y() - 70);
 }
 
 PathwayLight::PathwayLight(handler_ptr _tools, float x, float y, Level level) : Pathway(_tools, x, y, level)
 {
     light = TrafficLight(_tools);
     
-    light.locate_at(800, Lane::position().get_y() - 70);
+    light.locate_at(SCREEN_WIDTH - 200, Lane::position().get_y() - 70);
 }
 
 PathwayLight::PathwayLight(handler_ptr _tools, Position pos, Level level) : Pathway(_tools, pos, level)
 {
     light = TrafficLight(_tools);
     
-    light.locate_at(800, Lane::position().get_y() - 70);
+    light.locate_at(SCREEN_WIDTH - 200, Lane::position().get_y() - 70);
 }
 
 void PathwayLight::stop()
@@ -78,4 +86,12 @@ void PathwayLight::slowdown()
 void PathwayLight::run()
 {
     light.turn_green();
+}
+
+void PathwayLight::save(std::ofstream& fout) {
+    fout << type() << " " << is_current() << "\n";
+    
+    fout << level() << " " << lev.path_remain() << " " << lev.road_remain() << "\n";
+    
+    fout << position().get_x() << " " << position().get_y() << "\n";
 }

@@ -114,10 +114,11 @@ using namespace sf;
 #define GREEN_COUNT_DOWN RED_TIME_END-3
 
 #define FONT_PATH_FILE WORKING_DIR+"/src_design/font/TextaPro-Medium.otf"
-#define FONT_MENU_PATH_FILE WORKING_DIR + "/src_design/font/low_batt.ttf" 
+#define FONT_MENU_PATH_FILE WORKING_DIR + "/src_design/font/AwareBold-qZo3x.ttf"
+#define FONT_MENU_OPTION_PATH_FILE WORKING_DIR + "/src_design/font/Rubik-VariableFont_wght.ttf"
 
 #define DATA_FILE_PATH WORKING_DIR + "/datagame/"
 
-#define	MENU_BACKGROUND_PATH_FILE WORKING_DIR + "/src_design/background/menu.png"
+#define	MENU_BACKGROUND_PATH_FILE WORKING_DIR + "/src_design/background/menu_3.png"
 #define	OPTIONS_BACKGROUND_PATH_FILE WORKING_DIR + "/src_design/background/options.png"
 #define	ABOUT_BACKGROUND_PATH_FILE WORKING_DIR + "/src_design/background/about.png"

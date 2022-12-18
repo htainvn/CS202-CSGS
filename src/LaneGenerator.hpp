@@ -21,14 +21,6 @@
 
 class LaneFactory {
     
-private:
-    
-    handler_ptr tools = nullptr;
-    
-    level_ptr level = nullptr;
-    
-    std::vector<Lane*> lanes;
-    
 public:
     
     LaneFactory() = default;
@@ -44,7 +36,9 @@ public:
     
     void pop_bottom_lane();
     
-    void loading(std::ifstream& fin);
+    void extracted();
+    
+    void loading(std::ifstream& fin, People*& mariof);
     
     Lane*& at(int const index);
     
@@ -79,6 +73,14 @@ public:
             level = nullptr;
         }
     }
+    
+private:
+    
+    handler_ptr tools = nullptr;
+    
+    level_ptr level = nullptr;
+    
+    std::vector<Lane*> lanes;
 };
 
 #endif /* Background_hpp */

@@ -97,8 +97,9 @@ void Hippo::tell() {
 	sound.play();
 }
 
-void floatObject::save(std::ofstream& fout) {
+void floatObject::save(std::ofstream& fout)
+{
 	fout << this->get_type() << std::endl;
-
+    
 	fout << this->position().get_x() << std::endl;
 }

@@ -12,6 +12,7 @@
 #include "src/Handler.hpp"
 #include "src/definition_library.hpp"
 #include <stdio.h>
+#include <fstream>
 
 class Traffic {
 public:
@@ -25,13 +26,16 @@ public:
 /* END */
     
 /* BEHAVIOUR */
-    void timing();
     
     int update();
     
     void init(sf::Font *font);
     
     void draw();
+    
+    void save(std::ofstream& fout);
+    
+    void load(std::ifstream& fin);
 /* END */
     
 private:
@@ -42,7 +46,12 @@ private:
     sf::Text count_down;
     
     sf::Clock clock;
+    
+    int current_time = 0;
+    
 private:
+    void timing();
+    
 };
 
 #endif /* Traffic_hpp */

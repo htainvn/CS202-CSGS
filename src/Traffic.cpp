@@ -14,28 +14,30 @@ void Traffic::timing() {
 
 int Traffic::update() {
     
-    int t, res = 0;
+    int  res = 0;
     
-    t = clock.getElapsedTime().asMilliseconds();
-        
-    if (t > 15000)
+    long long checkpoint1 = clock.getElapsedTime().asMicroseconds();
+    
+    if (current_time > 15000)
     {
+        checkpoint1 = 0;
+        
         timing();
         
-        t = clock.getElapsedTime().asMilliseconds();
+        current_time = 0;
     }
     
-    if (t <= 6000)
+    if (current_time <= 6000)
     {
         res = 0;
         
         light_circle.setFillColor(sf::Color::Red);
 
-        count_down.setString(std::to_string((6000 - t) / 1000));
+        count_down.setString(std::to_string((6000 - current_time) / 1000));
     }
     else
     {
-        if (t >= 14000)
+        if (current_time >= 14000)
         {
             res = 1;
             
@@ -47,8 +49,13 @@ int Traffic::update() {
             
             light_circle.setFillColor(sf::Color::Green);
         }
-        count_down.setString(std::to_string((15000 - t) / 1000));
+        count_down.setString(std::to_string((15000 - current_time) / 1000));
     }
+    
+    long long checkpoint2 = clock.getElapsedTime().asMicroseconds();
+    
+    this->current_time += (checkpoint2 - checkpoint1);
+    
     return res;
 }
 
@@ -65,4 +72,12 @@ void Traffic::init(sf::Font *font) {
 void Traffic::draw() {
     tools->window.draw(count_down);
     tools->window.draw(light_circle);
+}
+
+void Traffic::save(std::ofstream& fout) {
+    fout << current_time << "\n";
+}
+
+void Traffic::load(std::ifstream& fin) {
+    fin >> current_time;
 }

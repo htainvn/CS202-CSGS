@@ -21,7 +21,37 @@
 #include <fstream>
 
 class GameState : public State {
-private:
+    
+public:
+    
+    GameState(handler_ptr _data);
+    
+    void init(int status);
+    
+    void handle_input();
+    
+    virtual void create_new();
+    
+    void load_game(std::string filename);
+    
+    void update(float dt);
+    
+    void draw(float dt);
+    
+    void pause();
+    
+    void resume();
+
+    void save();
+    
+    bool check_lost();
+    
+    void pre_lost();
+    
+    ~GameState();
+    
+    
+protected:
     
     float level = 0;
     
@@ -43,33 +73,8 @@ private:
     
     bool is_TouchBounder = false;
     
-    sf::View view; 
+    sf::View view;
     
-public:
-    
-    GameState(handler_ptr _data);
-    
-    void init(int status);
-    
-    void handle_input();
-    
-    void load_game(std::string filename);
-    
-    void update(float dt);
-    
-    void draw(float dt);
-    
-    void pause();
-    
-    void resume();
-
-    void save(std::string filename);
-    
-    bool check_lost();
-    
-    void pre_lost();
-    
-    ~GameState();
 };
 
 #endif /* GameState_hpp */

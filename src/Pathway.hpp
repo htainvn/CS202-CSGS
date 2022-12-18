@@ -34,6 +34,8 @@ public:
     
     int type() { return PATHWAY_TYPE; }
     
+    void save(std::ofstream& fout);
+    
 /* END HERE */
 };
 
@@ -66,6 +68,8 @@ public:
     void slowdown();
     
     void run();
+    
+    void save(std::ofstream& fout);
     
 /* END HERE */
     

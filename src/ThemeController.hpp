@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include "Position.hpp"
 #include "src/ResourceManager.hpp"
+#include "src/definition_library.hpp"
 
 class ThemeController {
 public:
@@ -32,6 +33,8 @@ public:
     void add(std::string _theme);
     
     Position getSize(std::string type);
+    
+    std::string autosave_getfilename();
     
 private:
     

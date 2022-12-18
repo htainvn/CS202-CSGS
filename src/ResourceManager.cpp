@@ -126,4 +126,3 @@ void ResourceManager::init(std::string theme)
 
     load_texture("LOG", WORKING_DIR + "/src_design/vehicle/" + theme + LOG_PATH);
 }
-

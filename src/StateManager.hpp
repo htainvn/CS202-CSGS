@@ -31,9 +31,13 @@ public:
     }
     
     void process_request();
+    
     void receive_add_request(state_ptr newState);
+    
     void receive_replace_request(state_ptr newState);
+    
     void receive_delete_request();
+    
     state_ptr get_current_state();
     
     ~StateManager() {

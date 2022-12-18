@@ -230,7 +230,7 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
 {
     Lane::set_level(level);
 
-    this->dir = rand() % 2;
+    this->dir = _dir;
     
     Lane::change_image(_tools->theme_controller.get(get_texture_code()));
     
@@ -279,9 +279,9 @@ void Road::run() {
 void Road::loading(std::ifstream& fin, bool LANE_DIR)
 {
     
-    fin >> position >> dir >> bottom_type >> top_type >> max_car;
+    vehicles.clear();
     
-    change_status(position, dir, bottom_type, top_type);
+    fin >> max_car;
     
     float VEHICLE_SPEED;
     
@@ -302,17 +302,22 @@ void Road::loading(std::ifstream& fin, bool LANE_DIR)
 }
 
 void Road::save(std::ofstream& fout) {
-    fout << type() << " " << level() << " " << lev.path_remain() << " " << lev.road_remain() << std::endl;
+
+    fout << type() << " " << is_current() << std::endl;
+    
+    fout << level() << " " << lev.path_remain() << " " << lev.road_remain() << std::endl;
 
     fout << Lane::position().get_x() << " " << Lane::position().get_y() << std::endl;
-
-    fout << is_current() << std::endl;
 
     fout << position << " " << dir << " " << bottom_type << " " << top_type << " " << max_car << std::endl;
 
     fout << get_speed() << std::endl;
+    
+    for (auto& each: vehicles) {
+        each->save(fout);
+    }
 }
 
 float Road::get_speed() {
-    return vehicles[0]->get_speed();
+    return vehicles[0]->get_speed(1);
 }

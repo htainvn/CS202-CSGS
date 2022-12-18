@@ -9,6 +9,9 @@
 #define Game_hpp
 
 #include <stdio.h>
+
+#include "src/StartMenuState.hpp"
+
 #include <SFML/Graphics.hpp>
 
 #include "src/Handler.hpp"

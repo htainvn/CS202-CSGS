@@ -16,12 +16,12 @@
 #include <string>
 
 #define options 3
-#define option1 "Try Again"
-#define option2 "Menu"
-#define option3 "Exit"
+#define option1 "TRY AGAIN"
+#define option2 "MENU"
+#define option3 "EXIT"
 
 
-class LostMenu : public State{
+class LostMenu : public State {
 private:
     sf::Sprite BackgroundSprite, HeadstoneSprite;
     handler_ptr resource_;
@@ -30,7 +30,12 @@ private:
 protected:
     int PointingButton_ = 0;
 public:
-    LostMenu(handler_ptr resource = nullptr) : resource_(resource){}
+    LostMenu(handler_ptr resource = nullptr) : resource_(resource){
+        sf::View defaultView;
+        defaultView.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        defaultView.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+        resource_->window.setView(defaultView);
+    }
     ~LostMenu(){}
 
     void init(int status);

@@ -14,44 +14,58 @@
 class People
 {
     
-private:
-    handler_ptr tools;
-    sf::Sprite sp;
-    bool alive_;
-    std::string type_;
-    int index = 0;
-    bool isMoving = false;
-    sf::Vector2f newPos;
-    int cnt_movement = 0;
-    int type_movement = 0;
-    
 public:
     
     int set_current_lane(int index);
+    
     People() {}
+    
     People(handler_ptr tools, bool alive = true, std::string type = "MARIO_FORWARD");
+    
     ~People();
+    
     std::string type_path () const;
+    
     sf::Vector2f get_position() const;
+    
     bool can_move_right();
+    
     bool can_move_left();
+    
     bool can_move_down();
+    
     bool can_move_forward();
+    
     void move_right();
+    
     void move_left();
+    
     void move_down();
+    
     void move_forward(/*sf::Vector2f vec,*/ );
+    
     void change_type (std::string type);
+    
     void scroll();
+    
     bool touch_border();
+    
     void go_to_position(float x, float y);
+    
     void move (sf::Vector2f vec);
+    
     bool is_alive();
+    
     void lost();
+    
     bool is_mid_height();
+    
     int lane() const;
+    
     void moving();
+    
     void stop_moving();
+    
     bool is_moving();
     
     sf::Sprite& get_sprite ();
@@ -63,6 +77,17 @@ public:
     int update();
     
     Position getSize();
+    void save(std::ofstream& fout);
+    
+    
+private:
+    handler_ptr tools;
+    sf::Sprite sp;
+    bool alive_;
+    std::string type_;
+    bool isMoving = false;
+    int cnt_movement = 0;
+    int type_movement = 0;
 };
 
 sf::Sprite set_character (const People &character);

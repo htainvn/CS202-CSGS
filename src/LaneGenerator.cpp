@@ -190,26 +190,61 @@ void LaneFactory::horizontal_movement(People *&mario, int type) {
 }
 
 
-void LaneFactory::loading(std::ifstream& fin) {
+void LaneFactory::loading(std::ifstream& fin, People*& mario) {
     int LANE_SIZE;
+    
     fin >> LANE_SIZE;
+    
     for (int i = 0; i < LANE_SIZE; i++)
     {
         int LANE_TYPE, LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD;
+        
+        bool CURRENT = false;
+        
         float LANE_COOR_X, LANE_COOR_Y;
         
-        fin >> LANE_TYPE >> LEVEL_NUM >> LEVEL_PATH >> LEVEL_ROAD >> LANE_COOR_X >> LANE_COOR_Y;
+        fin >> LANE_TYPE >> CURRENT >> LEVEL_NUM >> LEVEL_PATH >> LEVEL_ROAD >> LANE_COOR_X >> LANE_COOR_Y;
         
-        add_lane(LANE_TYPE, Position(LANE_COOR_X, LANE_COOR_Y), Level(LEVEL_NUM, LEVEL_ROAD, LEVEL_PATH));
+        switch(LANE_TYPE) {
+            case PATHWAY_TYPE:
+            {
+                Pathway* newPathway = new Pathway(tools, LANE_COOR_X, LANE_COOR_Y, Level(LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD));
+                lanes.push_back(newPathway);
+                break;
+            }
+            case PATHWAYLIGHT_TYPE:
+            {
+                PathwayLight* newPathwayLight = new PathwayLight(tools, LANE_COOR_X, LANE_COOR_Y, Level(LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD));
+                lanes.push_back(newPathwayLight);
+                break;
+            }
+            case ROAD_TYPE:
+            {
+                int _pos, _dir, _btype, _ttype;
+                fin >> _pos >> _dir >> _btype >> _ttype;
+                Road* newRoad = new Road(tools, _pos, _dir, _btype, _ttype, Level(LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD), Position(LANE_COOR_X, LANE_COOR_Y));
+                newRoad->loading(fin, _dir);
+                lanes.push_back(newRoad);
+                break;
+            }
+            case RIVER_TYPE:
+            {
+                River* newRiver = new River(tools, Level(LEVEL_NUM, LEVEL_PATH, LEVEL_ROAD), Position(LANE_COOR_X, LANE_COOR_Y));
+                newRiver->loading(fin);
+                lanes.push_back(newRiver);
+                break;
+            }
+        }
         
-        lanes[lanes.size()-1]->loading(fin);
+        if (CURRENT) lanes[lanes.size()-1]->set_current(mario);
         
     }
 }
 
 
-void LaneFactory::save(std::ofstream& fout) {
+void LaneFactory::save(std::ofstream& fout)
+{
     fout << lanes.size() << std::endl;
-
-    for (auto& i : lanes) i->save(fout);
+    
+    for (auto& lane : lanes) lane->save(fout);
 }

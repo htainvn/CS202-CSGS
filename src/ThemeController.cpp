@@ -66,6 +66,19 @@ Position ThemeController::getSize(std::string type) {
     return Position(get(type).getSize().x, get(type).getSize().y);
 }
 
-
-
-
+std::string ThemeController::autosave_getfilename() {
+    std::string path = WORKING_DIR + "/datagame";
+    for (int i = 0; i <= 5; i++) {
+        bool check = true;
+        std::string filename = "data_saved_" + std::to_string(i);
+        for (const auto & entry : std::filesystem::directory_iterator(path))
+        {
+            if (entry.path() == path + "/" + filename + ".txt") {
+                check = false;
+                break;
+            }
+        }
+        if (check) return filename;
+    }
+    return "Nothing_left";
+}

@@ -32,13 +32,15 @@ public:
     
     void locate_at(float x, float y = 0);
     
-    float get_speed();
+    float get_speed(bool filter = 0);
     
     void draw();
 
     void traffic_light(int light);
     
     Position position();
+    
+    void save(std::ofstream& fout);
     
 /* END HERE */
     
@@ -51,6 +53,7 @@ private:
     int speed = 0;
     
     bool redlight = false;
+    
     bool yellowlight = false;
     
 private:

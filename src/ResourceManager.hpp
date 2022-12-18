@@ -13,6 +13,7 @@
 #include <iostream>
 #include <cstring>
 #include <stdio.h>
+#include <filesystem>
 
 class ResourceManager {
 public:
@@ -26,6 +27,8 @@ public:
     sf::SoundBuffer& get_sound_buffer(std::string hash_name);
     
     void init(std::string theme);
+    
+    std::string autosave_getfilename();
     
 private:
     

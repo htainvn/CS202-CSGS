@@ -7,7 +7,7 @@ AboutState::AboutState(handler_ptr _tools) : tools(_tools) {};
 void AboutState::init(int status) {
 
 	font = new sf::Font();
-	if (!font->loadFromFile(FONT_MENU_PATH_FILE)) {
+	if (!font->loadFromFile(FONT_MENU_OPTION_PATH_FILE)) {
 		std::cout << "Error";
 		return;
 	}
@@ -42,12 +42,11 @@ void AboutState::init(int status) {
 	Paragraph.setStyle(sf::Text::Regular);
 	Paragraph.setFillColor(sf::Color::White);
 	sf::String para = "";
-	para += "* Using arrows buttons to move your character. \n \n";
-	para += "* Using W A S D buttons to move your charater. \n \n";
-	para += "* At the start of game you can change theme by pressing R. \n \n";
-	para += "* The number of cars in each level is equal to the current level. \n \n";
-	para += "* There are many traffic lights that you can utilize. \n \n";
-
+	para += "USING ARROWS BUTTONS TO MOVE YOUR CHARACTER.";
+	para += "Using W A S D buttons to move your charater. \n \n";
+	para += "At the start of game you can change theme by pressing R. \n \n";
+	para += "The number of cars in each level is equal to the current level. \n \n";
+	para += "There are many traffic lights that you can utilize. \n \n";
 	Paragraph.setString(para);
 }
 

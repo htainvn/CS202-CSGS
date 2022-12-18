@@ -3,7 +3,7 @@
 People::People(handler_ptr _tools, bool alive, std::string type) : tools(_tools)
 {
     sp.setTexture(_tools->theme_controller.get(type));
-    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2 + 25, SCREEN_HEIGHT - 300 + 20));
+    sp.setPosition(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT - 300 + 20));
     alive_ = alive;
     type_ = type;
 }
@@ -163,7 +163,7 @@ void People::move_down(){
 }
 
 int People::lane() const{
-    return index;
+    return 0;
 }
 
 void People::move_forward(/*sf::Vector2f vec,*/){
@@ -191,7 +191,7 @@ void People::move_forward(/*sf::Vector2f vec,*/){
         //    }
         //    break;
         //}
-
+        
         if (!cnt_movement) type_ = "MARIO_FORWARD";
         if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_FORWARDRUN";
         if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_FORWARDGO";
@@ -227,7 +227,6 @@ void People::move (sf::Vector2f vec){
 }
 
 int People::set_current_lane(int _index) {
-    index = _index;
     return 0;
 }
 
@@ -273,7 +272,10 @@ bool People::is_moving(){
 
 void People::loading(std::ifstream& fin)
 {
-    
+    float positionx, positiony;
+    fin >> type_ >> positionx >> positiony;
+    go_to_position(positionx, positiony);
+    fin >> alive_ >> isMoving >> cnt_movement >> type_movement;
 }
 
 void People::start_movement(int type_) {
@@ -289,33 +291,40 @@ int People::update()
             {
                 move_forward();
             }
-                break;
+            break;
             case 1:
             {
                 move_right();
             }
-                break;
+            break;
             case 2:
             {
                 move_left();
             }
-                break;
+            break;
             case 3:
             {
                 move_down();
             }
-                break;
+            break;
         }
         return -1;
     }
-    else {
-            int tmp = type_movement;
-            type_movement = -1;
-            return tmp;
-        }
+    else
+    {
+        int tmp = type_movement;
+        type_movement = -1;
+        return tmp;
+    }
     
 }
 
 Position People::getSize() {
     return Position(sp.getTexture()->getSize().x, sp.getTexture()->getSize().y);
+}
+
+void People::save(std::ofstream& fout) {
+    fout << type_ << "\n";
+    fout << get_position().x << " " << get_position().y << "\n";
+    fout << alive_ << " " << isMoving << " " << cnt_movement << " " << type_movement << "\n";
 }
