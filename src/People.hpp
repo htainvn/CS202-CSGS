@@ -36,9 +36,9 @@ public:
     
     bool can_move_forward();
     
-    void move_right();
+    void move_right(int type);
     
-    void move_left();
+    void move_left(int type);
     
     void move_down();
     
@@ -88,6 +88,7 @@ private:
     bool isMoving = false;
     int cnt_movement = 0;
     int type_movement = 0;
+    int land_type = 0;
 };
 
 sf::Sprite set_character (const People &character);

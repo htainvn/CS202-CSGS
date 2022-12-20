@@ -67,13 +67,13 @@ void GameState::handle_input() {
                     case (sf::Keyboard::Right):
                         people->moving();
                         people->start_movement(1);
-                        people->move_right();
+                        people->move_right((lane_gen->at(lane_gen->current()))->type());
                         break;
                     case (sf::Keyboard::A):
                     case (sf::Keyboard::Left):
                         people->moving(); //change moving attribute in people class to true, in order to prevent the function abjust_object in log class run automatically, then we get rid of the position of people is not updated after moving.
                         people->start_movement(2);
-                        people->move_left();
+                        people->move_left((lane_gen->at(lane_gen->current()))->type());
                         break;
                     case (sf::Keyboard::S):
                     case (sf::Keyboard::Down):

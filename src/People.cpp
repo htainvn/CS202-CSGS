@@ -60,9 +60,10 @@ bool People::is_mid_height(){
     return false;
 }
 
-void People::move_right(){
+void People::move_right(int type){
+    land_type = type;
     sf::Vector2f v = sp.getPosition();
-    if (can_move_right())
+    if (can_move_right() || type == 3)
     {
         sf::Vector2f v = sp.getPosition();
         sp.move(sf::Vector2f(0.5, 0));
@@ -94,9 +95,10 @@ void People::move_right(){
     }
 }
 
-void People::move_left(){
+void People::move_left(int type){
+    land_type = type;
     sf::Vector2f v = sp.getPosition();
-    if (can_move_left())
+    if (can_move_left() || type == 3)
     {
         sf::Vector2f v = sp.getPosition();
         sp.move(sf::Vector2f(-0.5, 0));
@@ -294,12 +296,12 @@ int People::update()
             break;
             case 1:
             {
-                move_right();
+                move_right(land_type);
             }
             break;
             case 2:
             {
-                move_left();
+                move_left(land_type);
             }
             break;
             case 3:

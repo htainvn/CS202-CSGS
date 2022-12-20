@@ -19,7 +19,7 @@ using namespace sf;
 #define BOUNDARY_LANE 600
 #define HEIGHT_TITLE 100
 #define dsize 100
-#define people_size 30
+#define people_size 32
 
 #define CAR_PER_LANE 3
 

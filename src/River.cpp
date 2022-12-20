@@ -305,16 +305,13 @@ void River::set_current(People*& mario, int type)
     Lane::unset();
     Lane::set_current(mario, type);
     
-    if (check_lost()) return;
     for (int i = 0; i < float_objs.size(); i++)
     {
         Position obj_p = float_objs[i]->position();
         if (mariop.inRect(obj_p, mario->getSize())) //if people is located inside the cell
         {
             float_objs[i]->setCurrent(mario);
-            if (float_objs[i]->get_type() == 2)/*if log...*/{
-                float_objs[i]->adjust_objects(); //set people to the center of log.
-            }
+            float_objs[i]->adjust_objects();
             break;
         }
     }
