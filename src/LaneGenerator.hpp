@@ -63,7 +63,7 @@ public:
     void slowdown(); //objects run slowly
     
     void run(); //normal
-    
+        
     ~LaneFactory()
     {
         if (level)
