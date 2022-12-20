@@ -60,6 +60,8 @@ public:
     void save(std::ofstream& fout);
 
     float get_speed();
+
+    void tell();
     
 /* END HERE */
     
@@ -76,6 +78,10 @@ private:
     std::vector<Vehicle*> vehicles;
 
     int max_car = 1;
+
+    sf::Sound sound;
+
+    std::string sound_hash_name = "CAR_SOUND";
     
 private:
     
