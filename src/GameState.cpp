@@ -214,10 +214,6 @@ bool GameState::check_lost()
 }
 
 GameState::~GameState() {
-    if (tools) {
-        delete tools;
-        tools = nullptr;
-    }
     if (font) {
         delete font;
         font = nullptr;
