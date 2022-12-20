@@ -1,4 +1,5 @@
 //
+// 
 //  Traffic.cpp
 //  CROSSING_ROAD
 //
@@ -10,11 +11,13 @@
 #include <chrono>
 
 
-void Traffic::timing() { 
+void Traffic::timing() 
+{ 
     clock.restart();
 }
 
-int Traffic::update() {
+int Traffic::update() 
+{
     
     int  res = 0;
     std::cout << current_time << ' ';
@@ -65,7 +68,8 @@ int Traffic::update() {
     return res;
 }
 
-void Traffic::init(sf::Font *font) { 
+void Traffic::init(sf::Font *font) 
+{ 
     light_circle.setFillColor(sf::Color::Red);
     light_circle.setPosition(sf::Vector2f(10, 10));
     
@@ -75,15 +79,18 @@ void Traffic::init(sf::Font *font) {
     count_down.setStyle(sf::Text::Regular);
 }
 
-void Traffic::draw() {
+void Traffic::draw() 
+{
     tools->window.draw(count_down);
     tools->window.draw(light_circle);
 }
 
-void Traffic::save(std::ofstream& fout) {
+void Traffic::save(std::ofstream& fout) 
+{
     fout << current_time << "\n";
 }
 
-void Traffic::load(std::ifstream& fin) {
+void Traffic::load(std::ifstream& fin) 
+{
     fin >> current_time;
 }
