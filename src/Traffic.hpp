@@ -47,9 +47,14 @@ private:
     
     sf::Clock clock;
     
-    int current_time = 0;
-    
+    float current_time = 0;
+
+    long long checkpoint2 = 0;
+
+    long long checkpoint1 = 0;
+
 private:
+
     void timing();
     
 };
