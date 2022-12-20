@@ -38,6 +38,10 @@ void Game::run() {
     float runningTime = 0.0f;
     
     while (this->machine->window.isOpen()) {
+        sf::View defaultView;
+        defaultView.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+        defaultView.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this->machine->window.setView(defaultView);
         this->machine->state_manager.process_request();
         this->frame_refresh(currentTime, runningTime);
     }
