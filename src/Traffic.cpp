@@ -6,6 +6,8 @@
 //
 
 #include "Traffic.hpp"
+#include <time.h>
+#include <chrono>
 
 
 void Traffic::timing() { 
@@ -15,25 +17,31 @@ void Traffic::timing() {
 int Traffic::update() {
     
     int  res = 0;
+    std::cout << current_time << ' ';
     
-    long long checkpoint1 = clock.getElapsedTime().asMicroseconds();
-    
+    //long long checkpoint1 = clock.getElapsedTime().asMicroseconds();
+    checkpoint2 = clock.getElapsedTime().asMilliseconds();
+
+    current_time += checkpoint2 - checkpoint1;
+        
     if (current_time > 15000)
     {
-        checkpoint1 = 0;
+        /*checkpoint1 = 0;*/
         
         timing();
         
         current_time = 0;
     }
     
+    int current_time_FloatToInt = current_time;
+
     if (current_time <= 6000)
     {
         res = 0;
         
         light_circle.setFillColor(sf::Color::Red);
 
-        count_down.setString(std::to_string((6000 - current_time) / 1000));
+        count_down.setString(std::to_string((6000 - current_time_FloatToInt) / 1000));
     }
     else
     {
@@ -49,12 +57,10 @@ int Traffic::update() {
             
             light_circle.setFillColor(sf::Color::Green);
         }
-        count_down.setString(std::to_string((15000 - current_time) / 1000));
+        count_down.setString(std::to_string((15000 - current_time_FloatToInt) / 1000));
     }
     
-    long long checkpoint2 = clock.getElapsedTime().asMicroseconds();
-    
-    this->current_time += (checkpoint2 - checkpoint1);
+    checkpoint1 = clock.getElapsedTime().asMilliseconds();
     
     return res;
 }
