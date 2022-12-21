@@ -35,6 +35,7 @@ private:
     std::vector<std::pair<std::string, sf::Texture>> storage;
 
     std::vector <std::pair<std::string, sf::SoundBuffer>> sound_storage;
+
 };
 
 #endif /* ResourceManager_hpp */

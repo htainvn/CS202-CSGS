@@ -237,14 +237,18 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
     set_maxcar();
     
     spawn();
+
+    sound.setBuffer(tools->theme_controller.get_buffer(sound_hash_name));
 }
 
 bool Road::check_lost() {
     Position people_pos = people_position(), veh_pos;;
     for(int i=0; i<vehicles.size(); i++){
         veh_pos = vehicles[i]->position();
-        if(veh_pos.get_x() + 100 <= people_pos.get_x()+125 && veh_pos.get_x() + 92 >= people_pos.get_x()) //numbers are using to estimated the size of people and objects. Particularly, 100 is size of vehicle, 25 is guessed to be the width of people sprite. The function returns false iff the car head is located inside the area of people (range from x-coordinate of people to 100 + people_size).
+        if (veh_pos.get_x() + 100 <= people_pos.get_x() + 125 && veh_pos.get_x() + 92 >= people_pos.get_x()) { //numbers are using to estimated the size of people and objects. Particularly, 100 is size of vehicle, 25 is guessed to be the width of people sprite. The function returns false iff the car head is located inside the area of people (range from x-coordinate of people to 100 + people_size).
+            tell();
             return true;
+        }
     }
     return false;
 }
@@ -316,6 +320,10 @@ void Road::save(std::ofstream& fout) {
     for (auto& each: vehicles) {
         each->save(fout);
     }
+}
+
+void Road::tell() {
+    sound.play();
 }
 
 float Road::get_speed() {

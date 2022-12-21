@@ -101,7 +101,9 @@ public:
     /* END HERE */
 private:
     std::string get_hash_name();
+
     sf::Sound sound;
+
     std::string sound_hash_name = "ZOMBIE_SOUND";
 };
 
@@ -127,7 +129,9 @@ public:
     /* END HERE */
 private:
     std::string get_hash_name();
+
     sf::Sound sound;
+
     std::string sound_hash_name = "CROC_SOUND";
     
 };

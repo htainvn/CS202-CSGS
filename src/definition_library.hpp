@@ -93,6 +93,7 @@ using namespace sf;
 
 #define ZOMBIE_SOUND_FILE_PATH "zombie_sound.wav"
 #define CROC_SOUND_FILE_PATH "croc_sound.wav"
+#define CAR_SOUND_FILE_PATH "car_sound.wav"
 
 #define LOG_PATH "_log.png"
 

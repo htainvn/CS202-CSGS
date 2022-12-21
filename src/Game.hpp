@@ -30,7 +30,7 @@ private:
     
 public:
     Game();
-
+    ~Game();
 };
 
 #endif /* Game_hpp */

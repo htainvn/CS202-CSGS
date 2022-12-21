@@ -50,3 +50,8 @@ void Game::run() {
     this->machine->state_manager.get_current_state()->draw(interpolator);
 }
 
+Game::~Game() {
+    if (machine) {
+        delete machine;
+    }
+}

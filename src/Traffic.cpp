@@ -20,7 +20,6 @@ int Traffic::update()
 {
     
     int  res = 0;
-    std::cout << current_time << ' ';
     
     //long long checkpoint1 = clock.getElapsedTime().asMicroseconds();
     checkpoint2 = clock.getElapsedTime().asMilliseconds();

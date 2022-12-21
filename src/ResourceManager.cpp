@@ -120,9 +120,11 @@ void ResourceManager::init(std::string theme)
     load_texture("HIPPO_LEFT", WORKING_DIR + "/src_design/animal/" + theme + HIPPO_LEFT_FILE_PATH );
     load_texture("HIPPO_RIGHT", WORKING_DIR + "/src_design/animal/" + theme + HIPPO_RIGHT_FILE_PATH );
 
-    load_sound_buffer("CROC_SOUND", WORKING_DIR + "/src_design/animal/" + CROC_SOUND_FILE_PATH);
-    load_sound_buffer("ZOMBIE_SOUND", WORKING_DIR + "/src_design/animal/" + ZOMBIE_SOUND_FILE_PATH);
-    load_sound_buffer("RIVER_SOUND",WORKING_DIR + "/src_design/environment/" + RIVER_SOUND_FILE_PATH);
+    //sound
+    load_sound_buffer("CROC_SOUND", WORKING_DIR + "/src_design/sound/" + CROC_SOUND_FILE_PATH);
+    load_sound_buffer("ZOMBIE_SOUND", WORKING_DIR + "/src_design/sound/" + ZOMBIE_SOUND_FILE_PATH);
+    load_sound_buffer("RIVER_SOUND",WORKING_DIR + "/src_design/sound/" + RIVER_SOUND_FILE_PATH);
+    load_sound_buffer("CAR_SOUND", WORKING_DIR + "/src_design/sound/" + CAR_SOUND_FILE_PATH);
 
     load_texture("LOG", WORKING_DIR + "/src_design/vehicle/" + theme + LOG_PATH);
 }
