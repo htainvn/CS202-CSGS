@@ -12,7 +12,7 @@ class MenuState : public State {
 public:
 	
 	MenuState() = default;
-	~MenuState() = default;
+    ~MenuState() = default;
 	MenuState(handler_ptr _tools);
 
 	virtual void init(int status);

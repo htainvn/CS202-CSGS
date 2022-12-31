@@ -36,7 +36,9 @@ public:
         defaultView.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
         resource_->window.setView(defaultView);
     }
-    ~LostMenu(){}
+    ~LostMenu(){
+        
+    }
 
     void init(int status);
     void handle_input();
