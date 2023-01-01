@@ -35,12 +35,18 @@ public:
     Position getSize(std::string type);
     
     std::string autosave_getfilename();
+
+    void play_music();
+
+    void stop_music();
     
 private:
     
     ResourceManager resource_manager;
     
     std::string current_theme = "";
+
+    sf::Music theme_sound;
     
 };
 

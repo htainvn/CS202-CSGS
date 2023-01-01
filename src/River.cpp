@@ -235,6 +235,7 @@ bool River::check_lost() {
             return false;
 
         if (float_objs[i]->get_type() != 2 && people_pos.get_x() < fpos.get_x() - people_size && people_pos.get_x() > fpos.get_x() + dsize + 2) /*on the other hand, it returns true*/ {
+            tools->theme_controller.stop_music();
 
             if (traffic_light != 1) //animal sound
 
@@ -246,6 +247,8 @@ bool River::check_lost() {
         }
 
     }
+
+    tools->theme_controller.stop_music();
 
     river_sound.play();
 

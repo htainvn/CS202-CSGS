@@ -36,6 +36,7 @@ std::string ThemeController::get_random_theme()
 void ThemeController::load()
 {
     resource_manager.init(current_theme);
+    resource_manager.load_music(current_theme,theme_sound);
 }
 
 std::string ThemeController::get_theme_name()
@@ -81,4 +82,12 @@ std::string ThemeController::autosave_getfilename() {
         if (check) return filename;
     }
     return "Nothing_left";
+}
+
+void ThemeController::play_music() {
+    theme_sound.play();
+}
+
+void ThemeController::stop_music() {
+    theme_sound.stop();
 }

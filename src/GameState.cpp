@@ -18,6 +18,8 @@ GameState::GameState(handler_ptr _tools) : tools(_tools)
     tools->theme_controller.get_random_theme();
     
     tools->theme_controller.load();
+
+    tools->theme_controller.play_music();
     
     sf::View defaultView;
     defaultView.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
