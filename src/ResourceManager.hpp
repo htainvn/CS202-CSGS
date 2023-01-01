@@ -21,6 +21,8 @@ public:
     void load_texture(std::string hash_name, std::string path);
 
     void load_sound_buffer(std::string hash_name, std::string path);
+
+    void load_music(std::string current_theme,sf::Music& theme_sound);
     
     sf::Texture& get_texture(std::string hash_name);
 

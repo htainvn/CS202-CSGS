@@ -29,6 +29,19 @@ void ResourceManager::load_sound_buffer(std::string hash_name, std::string path)
     }
 }
 
+void ResourceManager::load_music(std::string current_theme, sf::Music& theme_sound) {
+    std::string filepath;
+    
+    if (current_theme == "lava")
+        filepath = LAVA_THEME_SOUND_FILE_PATH;
+    else
+        filepath = NORMAL_THEME_SOUND_FILE_PATH;
+
+    if (!theme_sound.openFromFile(filepath)) {
+        std::cout << "error at: " << filepath << "\n";
+    }
+}
+
 sf::Texture& ResourceManager::get_texture(std::string hash_name) {
     for (int i = 0; i < storage.size(); i++) {
         if (storage[i].first == hash_name) {
@@ -123,8 +136,8 @@ void ResourceManager::init(std::string theme)
     //sound
     load_sound_buffer("CROC_SOUND", WORKING_DIR + "/src_design/sound/" + CROC_SOUND_FILE_PATH);
     load_sound_buffer("ZOMBIE_SOUND", WORKING_DIR + "/src_design/sound/" + ZOMBIE_SOUND_FILE_PATH);
-    load_sound_buffer("RIVER_SOUND",WORKING_DIR + "/src_design/sound/" + RIVER_SOUND_FILE_PATH);
     load_sound_buffer("CAR_SOUND", WORKING_DIR + "/src_design/sound/" + CAR_SOUND_FILE_PATH);
-
     load_texture("LOG", WORKING_DIR + "/src_design/vehicle/" + theme + LOG_PATH);
+
+    load_sound_buffer("RIVER_SOUND", WORKING_DIR + "/src_design/sound/" + RIVER_SOUND_FILE_PATH);
 }
