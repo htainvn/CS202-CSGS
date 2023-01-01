@@ -26,6 +26,7 @@ private:
     sf::Sprite BackgroundSprite, HeadstoneSprite;
     handler_ptr resource_;
     sf::Text option [options];
+    sf::Text recording;
     bool is_entered = false;
 protected:
     int PointingButton_ = 0;

@@ -48,6 +48,8 @@ public:
     
     void pre_lost();
     
+    void record();
+    
     ~GameState();
     
     

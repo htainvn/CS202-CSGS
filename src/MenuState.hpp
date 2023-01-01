@@ -38,5 +38,5 @@ protected:
     sf::Texture background;
     sf::Sprite background_sprite;
 
-    sf::Color button_color[5];
+    sf::Color button_color[7];
 };

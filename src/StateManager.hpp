@@ -46,7 +46,6 @@ public:
             states_container.top() = nullptr;
             states_container.pop();
         }
-        
     }
 };
 

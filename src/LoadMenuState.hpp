@@ -29,7 +29,7 @@ private:
     
     handler_ptr tools;
 
-    sf::Color button_color[5] = {sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White};
+    sf::Color button_color[7] = {sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White};
 };
 
 #endif /* LoadMenuState_hpp */

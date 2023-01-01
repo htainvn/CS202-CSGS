@@ -270,6 +270,16 @@ void GameState::save() {
 
 void GameState::pre_lost()
 {
+    std::ifstream fin(WORKING_DIR + "/datagame/Recorder.txt");
+    int MaxLevel;
+    fin >> MaxLevel;
+    fin.close();
+    std::string str = t_lev.getString();
+    if (MaxLevel < stoi(str))
+        MaxLevel = stoi(str);
+    std::ofstream fout(WORKING_DIR + "/datagame/Recorder.txt");
+    fout << MaxLevel;
+    fout.close();
     if (!is_TouchBounder)
     {
         view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));

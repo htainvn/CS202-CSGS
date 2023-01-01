@@ -21,23 +21,38 @@ void LostMenu::init(int status) {
     
     //HeadstoneSprite.setPosition(sf::Vector2f(SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 100));
     
-    option[0].setFillColor(sf::Color::White);
+    std::string temp;
+    recording.setFillColor(sf::Color::White);
+    std::ifstream fin(WORKING_DIR + "/datagame/Recorder.txt");
+    getline(fin,temp);
+    recording.setString("Best Score: " + temp);
+    fin.close();
+    
     option[0].setString(option1);
     option[1].setString(option2);
     option[2].setString(option3);
     
-    for (int i = 0; i < options; i++) {
-        option[i].setFont(*font);
-        option[i].setCharacterSize(20);
-        std::string str = option[i].getString();
+    for (int i = -1; i < options; i++) {
+        //std::string str = option[i].getString();
         //std::cout << str.length() << "\n";
         int margin_left = 0;
-        if (i == 0) margin_left = 308;
+        if (i == -1) margin_left = 298;
+        else if (i == 0) margin_left = 308;
         else if (i == 1) margin_left = 330;
         else margin_left = 340;
-        option[i].setPosition(sf::Vector2f(margin_left, 200 + 30 * i));
-        option[i].setStyle(sf::Text::Regular);
-        option[i].setFillColor(sf::Color::White);
+        if (i == -1){
+            recording.setFont(*font);
+            recording.setCharacterSize(20);
+            recording.setPosition(sf::Vector2f(margin_left, 200 + 60 * i));
+            recording.setStyle(sf::Text::Regular);
+            recording.setFillColor(sf::Color::White);
+        }else{
+            option[i].setFont(*font);
+            option[i].setCharacterSize(20);
+            option[i].setPosition(sf::Vector2f(margin_left, 200 + 30 * i));
+            option[i].setStyle(sf::Text::Regular);
+            option[i].setFillColor(sf::Color::White);
+        }
     }
 
 }
@@ -129,6 +144,7 @@ void LostMenu::update(float signal) {
 void LostMenu::draw(float dt) {
     resource_->window.clear();
     resource_->window.draw(BackgroundSprite);
+    resource_->window.draw(recording);
     resource_->window.draw(option[0]);
     resource_->window.draw(option[1]);
     resource_->window.draw(option[2]);
