@@ -33,7 +33,7 @@ void StartMenuState::handle_input() {
                         MenuState::tools->state_manager.receive_add_request(new GameState(MenuState::tools));
                     }
                     if (MenuState::buttonSelected == 1) {
-                        MenuState::tools->state_manager.receive_add_request(new LoadMenuState(this->tools));
+                        MenuState::tools->state_manager.receive_add_request(new LoadMenuState(MenuState::tools));
                     }
                     if (MenuState::buttonSelected == 2) {
                         MenuState::tools->state_manager.receive_add_request(new AboutState(MenuState::tools));

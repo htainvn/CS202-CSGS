@@ -16,11 +16,11 @@
 class Handler {
 public:
     
+    sf::RenderWindow window;
+    
     StateManager state_manager;
     
     ThemeController theme_controller;
-    
-    sf::RenderWindow window;
     
     Handler() {
         this->state_manager = StateManager();
