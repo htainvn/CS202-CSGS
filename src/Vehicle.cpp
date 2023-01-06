@@ -9,16 +9,13 @@
 #include <time.h>
 #include "Vehicle.hpp"
 
-const int car_number = 9;
-const int MAX_SPEED = 36; // maximum speed
-
 
 Vehicle::Vehicle(Handler *_tools, int dir, int speed, int x) {
     tools = _tools;
     
     this->speed = speed;
     
-    sprite.setTexture(tools->theme_controller.get(get_car_texture(dir, rand() % car_number)));
+    sprite.setTexture(tools->theme_controller.get(get_car_texture(dir, rand() % _tools->car_number)));
     
     locate_at(x, 0);
 }

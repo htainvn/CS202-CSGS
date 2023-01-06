@@ -21,8 +21,8 @@ void AboutState::init(int status) {
 
 	// Define title
 	Title.setFont(*font);
-	Title.setCharacterSize(80);
-	Title.setPosition(Vector2f(380, 50));
+	Title.setCharacterSize(50);
+	Title.setPosition(Vector2f(250, 50));
 	Title.setStyle(sf::Text::Regular);
 	Title.setFillColor(sf::Color(105, 105, 105));
 	Title.setString("ABOUT");
@@ -30,7 +30,7 @@ void AboutState::init(int status) {
 	// Define button return
 	button.setFont(*font);
 	button.setCharacterSize(50);
-	button.setPosition(Vector2f(800, 580));
+	button.setPosition(Vector2f(500, 580));
 	button.setStyle(sf::Text::Regular);
 	button.setFillColor(sf::Color(105, 105, 105));
 	button.setString("RETURN");

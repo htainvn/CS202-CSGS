@@ -231,7 +231,7 @@ bool River::check_lost() {
     for (int i = 0; i < float_objs.size(); i++) {
 
         fpos = float_objs[i]->position();
-        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2) || traffic_light == 1) /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
+        if ((float_objs[i]->get_type() == 2 && people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2)) /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
             return false;
 
         if (float_objs[i]->get_type() != 2 && people_pos.get_x() < fpos.get_x() - people_size && people_pos.get_x() > fpos.get_x() + dsize + 2) /*on the other hand, it returns true*/ {
