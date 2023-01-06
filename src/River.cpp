@@ -221,7 +221,7 @@ void River::draw()
     
     for (auto& each: float_objs)
     {
-        if (traffic_light != 1 || !each->is_animal()) each->draw();
+        each->draw();
     }
 }
 

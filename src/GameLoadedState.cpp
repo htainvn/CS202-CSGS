@@ -23,5 +23,7 @@ void GameLoadedState::create_new() {
     
     fin >> GameState::level >> GameState::is_pause >> GameState::lost_count >> GameState::mario_lost_count >> GameState::is_TouchBounder;
     
+    remove(filename.c_str());
+    
     fin.close();
 }

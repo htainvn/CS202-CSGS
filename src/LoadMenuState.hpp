@@ -9,7 +9,6 @@
 #define LoadMenuState_hpp
 
 #include <stdio.h>
-#include <vector>
 #include "src/MenuState.hpp"
 #include "src/GameLoadedState.hpp"
 
@@ -22,12 +21,16 @@ public:
     void handle_input();
     
 private:
-    void getButtonSize();
+    void getDataCointainer();
+    void getButtonDefaultStyle(const std::string &tmp);
+    void getButtonActiveStyle();
     
 private:
     
     std::vector<sf::Text> btt;
 
+    std::vector<int> data_index;
+    
     sf::Color button_color[7] = {sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White};
 };
 

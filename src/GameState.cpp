@@ -270,10 +270,38 @@ void GameState::save() {
     fout.close();
 }
 
-void GameState::pre_lost()
-{
+void GameState::earthquake() {
+    view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
+    view.setSize(sf::Vector2f(700, 700));
+    view.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+    int temp = rand() % 4;
+    switch (temp) {
+        case 0:
+            view.move(sf::Vector2f(lost_count % 10,lost_count % 10));
+            break;
+        case 1:
+            view.move(sf::Vector2f(-lost_count % 10,lost_count % 10));
+            break;
+        case 2:
+            view.move(sf::Vector2f(lost_count % 10,-lost_count % 10));
+            break;
+        case 3:
+            view.move(sf::Vector2f(-lost_count % 10,-lost_count % 10));
+            break;
+        default:
+            break;
+    }
+}
+
+void GameState::zoom_in() {
+    view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
+    view.setSize(sf::Vector2f(350, 350));
+    view.zoom(0.99 + 0.0001 * lost_count);
+}
+
+void GameState::save_record() {
     std::ifstream fin(WORKING_DIR + "/datagame/Recorder.txt");
-    int MaxLevel;
+    int MaxLevel = 0;
     fin >> MaxLevel;
     fin.close();
     std::string str = t_lev.getString();
@@ -282,33 +310,18 @@ void GameState::pre_lost()
     std::ofstream fout(WORKING_DIR + "/datagame/Recorder.txt");
     fout << MaxLevel;
     fout.close();
+}
+
+void GameState::pre_lost()
+{
+    save_record();
+    
     if (!is_TouchBounder)
     {
-        view.setCenter(sf::Vector2f(people->get_position().x + 10, people->get_position().y + 30));
-        view.setSize(sf::Vector2f(350, 350));
-        view.zoom(0.99 + 0.0001 * lost_count); //transition from 1 to 0.5f
+        zoom_in(); //transition from 1 to 0.5f
     }
     else {
-        view.setCenter(sf::Vector2f(SCREEN_WIDTH/2, SCREEN_HEIGHT/2));
-        view.setSize(sf::Vector2f(700, 700));
-        view.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
-        int temp = rand() % 4;
-        switch (temp) {
-            case 0:
-                view.move(sf::Vector2f(lost_count % 10,lost_count % 10));
-                break;
-            case 1:
-                view.move(sf::Vector2f(-lost_count % 10,lost_count % 10));
-                break;
-            case 2:
-                view.move(sf::Vector2f(lost_count % 10,-lost_count % 10));
-                break;
-            case 3:
-                view.move(sf::Vector2f(-lost_count % 10,-lost_count % 10));
-                break;
-            default:
-                break;
-        }
+        earthquake();
     }
     tools->window.setView(view);
 }

@@ -7,40 +7,15 @@
 
 #include "LoadMenuState.hpp"
 
-void LoadMenuState::update(float dt) {
-    
-    MenuState::btt_size = 0;
-    
-    getButtonSize();
-    
-    MenuState::buttonSelected = std::min(MenuState::buttonSelected, MenuState::btt_size);
-    
-    btt.resize(MenuState::btt_size);
-    
-    for (int i = 0; i < btt_size; i++) {
-        btt[i].setFont(*font);
-        btt[i].setCharacterSize(20);
-        btt[i].setPosition(sf::Vector2f(SCREEN_WIDTH * 2 / 3 + 50, 300 + 25 * i));
-        btt[i].setStyle(sf::Text::Regular);
-        if (i != btt_size - 1) btt[i].setString("Data " + std::to_string(i));
-        else btt[i].setString("Back to menu.");
-        btt[i].setFillColor(sf::Color::White);
-    }
-
-    std::string tmp = btt[MenuState::buttonSelected].getString();
-    
-    if (tmp[0] == '>') tmp.erase(0, 5);
-    
+void LoadMenuState::getButtonDefaultStyle(const std::string &tmp) {
     btt[MenuState::buttonSelected].setStyle(sf::Text::Regular);
     
     btt[MenuState::buttonSelected].setString(tmp);
     
     btt[MenuState::buttonSelected].setFillColor(sf::Color::White);
+}
 
-    MenuState::buttonSelected += dt + btt_size + 1;
-    
-    MenuState::buttonSelected %= (btt_size + 1);
-
+void LoadMenuState::getButtonActiveStyle() {
     btt[MenuState::buttonSelected].setString(">    " + btt[MenuState::buttonSelected].getString());
     
     btt[MenuState::buttonSelected].setFillColor(button_color[MenuState::buttonSelected]);
@@ -48,14 +23,54 @@ void LoadMenuState::update(float dt) {
     btt[MenuState::buttonSelected].setStyle(sf::Text::Bold);
 }
 
-void LoadMenuState::getButtonSize() {
+void LoadMenuState::update(float dt) {
+    
+    data_index.clear();
+    
+    getDataCointainer();
+    
+    MenuState::btt_size = data_index.size();
+    
+    MenuState::buttonSelected = std::min(MenuState::buttonSelected, MenuState::btt_size);
+    
+    btt.resize(MenuState::btt_size);
+    
+    for (int i = 0; i < data_index.size(); i++) {
+        btt[i].setFont(*font);
+        btt[i].setCharacterSize(20);
+        btt[i].setPosition(sf::Vector2f(SCREEN_WIDTH * 2 / 3 + 50, 300 + 25 * i));
+        btt[i].setStyle(sf::Text::Regular);
+        if (data_index.at(i) != -1) btt[i].setString("Data " + std::to_string(data_index.at(i)));
+        else btt[i].setString("Menu");
+        btt[i].setFillColor(sf::Color::White);
+    }
+    
+    std::string tmp = btt[MenuState::buttonSelected].getString();
+        
+    if (tmp[0] == '>') tmp.erase(0, 5);
+    
+    getButtonDefaultStyle(tmp);
+
+    MenuState::buttonSelected += dt + btt_size;
+    
+    MenuState::buttonSelected %= btt_size;
+
+    getButtonActiveStyle();
+}
+
+void LoadMenuState::getDataCointainer() {
+    
     std::string path = WORKING_DIR + "/datagame";
     
     for (const auto & entry : std::filesystem::directory_iterator(path)) {
-        MenuState::btt_size++;
+        std::string path_entry = entry.path();
+        path_entry.erase(path_entry.begin(), path_entry.begin() + path.length() + 1);
+        if (path_entry.find("data_saved_") != std::string::npos) {
+            data_index.push_back(path_entry[11] - '0');
+        }
     }
     
-    MenuState::btt_size--;
+    data_index.push_back(-1);
 }
 
 void LoadMenuState::draw(float dt)
@@ -95,7 +110,8 @@ void LoadMenuState::handle_input() {
                     break;
                 case (sf::Keyboard::Enter):
                     if (MenuState::buttonSelected == btt_size - 1) MenuState::tools->state_manager.receive_delete_request();
-                    else MenuState::tools->state_manager.receive_add_request(new GameLoadedState(MenuState::tools, MenuState::buttonSelected));
+                    else MenuState::tools->state_manager.receive_add_request(new GameLoadedState(MenuState::tools,
+                                                                                                 data_index[MenuState::buttonSelected]));
                     break;
                 default:
                     break;

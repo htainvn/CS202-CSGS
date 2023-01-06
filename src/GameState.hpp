@@ -46,7 +46,9 @@ public:
     
     bool check_lost();
     
-    void pre_lost();
+    void extracted();
+    
+void pre_lost();
     
     void record();
     
@@ -77,6 +79,12 @@ protected:
     
     sf::View view;
     
+private:
+    void earthquake();
+    
+    void zoom_in();
+    
+    void save_record();
 };
 
 #endif /* GameState_hpp */

@@ -12,15 +12,21 @@ class MenuState : public State {
 public:
 	
 	MenuState() = default;
+    
     ~MenuState() = default;
+    
 	MenuState(handler_ptr _tools);
 
 	virtual void init(int status);
+    
 	virtual void handle_input();
+    
 	virtual void update(float dt);
+    
 	virtual void draw(float dt);
 
 	void pause() {};
+    
 	void resume() {};
     
 protected:
@@ -30,9 +36,11 @@ protected:
     sf::Font* titleFont = nullptr;
     
     sf::Text button[5];
+    
     sf::Text Title;
     
     handler_ptr tools;
+    
     int buttonSelected = 0;
 
     sf::Texture background;
