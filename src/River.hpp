@@ -50,7 +50,9 @@ public:
     
     void loading(std::ifstream& fin);
 
-    void save(std::ofstream& fout);
+    void extracted(std::ofstream &fout);
+    
+void save(std::ofstream& fout);
     
     float get_speed() {return speed;}
     
@@ -81,6 +83,8 @@ private:
     int get_nextobj(int current_log_index);
     
     int get_prevobj(int current_log_index);
+    
+    void saveRiverAttribute(std::ofstream &fout);
 };
 
 #endif /* River_hpp */

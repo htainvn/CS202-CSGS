@@ -20,14 +20,13 @@ public:
     void update(float dt);
     void draw(float dt);
     void handle_input();
+    
 private:
     void getButtonSize();
     
 private:
     
     std::vector<sf::Text> btt;
-    
-    handler_ptr tools;
 
     sf::Color button_color[7] = {sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White, sf::Color::White};
 };

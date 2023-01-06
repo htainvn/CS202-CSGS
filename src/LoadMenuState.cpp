@@ -80,7 +80,7 @@ void LoadMenuState::handle_input() {
     switch (key_event.type)
     {
         case (sf::Event::Closed):
-            this->tools->window.close();
+            if (MenuState::tools->window.isOpen()) MenuState::tools->window.close();
             break;
         case (sf::Event::KeyPressed):
             switch (key_event.key.code) {

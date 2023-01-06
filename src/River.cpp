@@ -58,13 +58,14 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
 
 void River::stop() { 
     traffic_light = 1;
-    for (auto& i : float_objs) i->stop();
+    
+    //for (auto& i : float_objs) i->stop();
 }
 
 void River::slowdown() {
     traffic_light = 2;
 
-    for (auto& i : float_objs) i->slowndown();
+    //for (auto& i : float_objs) i->slowndown();
 }
 
 void River::run() {
@@ -374,19 +375,26 @@ void River::loading(std::ifstream& fin) {
     }
 }
 
-void River::save(std::ofstream& fout) {
+void River::saveRiverAttribute(std::ofstream &fout) {
     fout << type() << " " << is_current() << "\n";
     
     fout << level() << " " << lev.path_remain() << " " << lev.road_remain() << "\n";
-
+    
     fout << Lane::position().get_x() << " " << Lane::position().get_y() << "\n";
-
+    
     fout << dir << " " << max_log << "\n";
-
+    
     fout << speed << "\n";
+}
+
+void River::save(std::ofstream& fout)
+{
+    saveRiverAttribute(fout);
     
     for (auto& obj : float_objs) {
+        
         obj->save(fout);
+        
     }
 }
 
