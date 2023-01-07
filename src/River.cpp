@@ -248,6 +248,12 @@ bool River::check_lost() {
 
     }
 
+    tools->theme_controller.stop_music();
+
+    river_sound.play();
+
+    return true;
+
 }
 
 void River::set_current(People*& mario, int type)
