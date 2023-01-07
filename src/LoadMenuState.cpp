@@ -63,7 +63,7 @@ void LoadMenuState::getDataCointainer() {
     std::string path = WORKING_DIR + "/datagame";
     
     for (const auto & entry : std::filesystem::directory_iterator(path)) {
-        std::string path_entry = entry.path();
+        std::string path_entry = entry.path().string();
         path_entry.erase(path_entry.begin(), path_entry.begin() + path.length() + 1);
         if (path_entry.find("data_saved_") != std::string::npos) {
             data_index.push_back(path_entry[11] - '0');
