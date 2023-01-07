@@ -18,9 +18,11 @@ class Traffic {
 public:
     
 /* CONSTRUCTORS & DESTRUCTORS */
-    
-    Traffic(handler_ptr _tools) : tools(_tools) {};
-    
+    Traffic() = default;
+    Traffic(handler_ptr _tools) : tools(_tools) {}
+    Traffic(const Traffic& other){
+        *this = other;
+    }
     ~Traffic() {}
     
 /* END */

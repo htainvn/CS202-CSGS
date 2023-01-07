@@ -20,7 +20,6 @@
 #define option2 "MENU"
 #define option3 "EXIT"
 
-
 class LostMenu : public State {
 private:
     sf::Sprite BackgroundSprite, HeadstoneSprite;

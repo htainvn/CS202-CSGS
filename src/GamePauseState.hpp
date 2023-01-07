@@ -8,16 +8,50 @@
 #ifndef GamePauseState_hpp
 #define GamePauseState_hpp
 
-#include <stdio.h>
-#include "src/GameState.hpp"
+#include <SFML/Graphics.hpp>
+#include "src/State.hpp"
+#include "src/definition_library.hpp"
+#include "src/GameStateScreen.hpp"
 
-class GamePauseState : public GameState {
-private:
-    Handler* tools;
+#define choices 2
+#define option4 "RESUME"
+#define option5 "BACK TO MENU"
+
+class GamePauseState : public State{
 public:
-    GamePauseState(Handler* _tools) : GameState(_tools) {}
+    GamePauseState(handler_ptr resource, GameStateScreen* game) : tools(resource), game_(game){
+    }
+    
+    void init(int status);
     void handle_input();
-    void update();
+    void update(float dt);
+    void draw(float dt);
+    
+    void pause(){}
+    void resume(){}
+    
+    ~GamePauseState(){
+        if(font){
+            delete font;
+            font = nullptr;
+        }
+        if(game_)
+        {
+            delete game_;
+            game_ = nullptr;
+        }
+    }
+    
+private:
+    GameStateScreen* game_;
+    handler_ptr tools;
+    sf::Font* font;
+    sf::Sprite background;
+    sf::Text option [choices];
+    sf::Text title;
+    bool is_entered = false;
+    
+protected:
+    int PointingButton_ = 0;
 };
-
 #endif /* GamePauseState_hpp */

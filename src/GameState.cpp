@@ -7,6 +7,7 @@
 
 #include "src/GameState.hpp"
 #include "src/Position.hpp"
+#include "src/GamePauseState.hpp"
 #include <fstream>
 
 GameState::GameState(handler_ptr _tools) : tools(_tools)
@@ -26,6 +27,16 @@ GameState::GameState(handler_ptr _tools) : tools(_tools)
     defaultView.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
     
     tools->window.setView(defaultView);
+}
+
+GameState::GameState(const GameState& other)
+{
+    *this = other;
+    lane_gen = new LaneFactory(*other.lane_gen);
+    traffic = new Traffic(*other.traffic);
+    people = new People(*other.people);
+    font = new Font (*other.font);
+    
 }
 
 void GameState::init(int status) {
@@ -190,12 +201,7 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
-    if (is_pause == true)
-    {
-        resume();
-        is_pause = false;
-    }
-    else is_pause = true;
+    tools->state_manager.receive_add_request(new GamePauseState(this->tools, new GameStateScreen(this)));
 }
 
 void GameState::resume()
@@ -223,6 +229,14 @@ GameState::~GameState() {
     if (lane_gen) {
         delete lane_gen;
         lane_gen = nullptr;
+    }
+    if (traffic){
+        delete traffic;
+        traffic = nullptr;
+    }
+    if(people){
+        delete people;
+        people = nullptr;
     }
 }
 

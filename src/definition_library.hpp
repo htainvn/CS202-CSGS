@@ -27,6 +27,7 @@ using namespace sf;
 
 #define LOST_BACKGROUND "_lost_background.png"
 #define HEADSTONE "_headstone.png"
+#define BlackBoard "_black_board.png"
 
 #define PAVEMENT_IMAGE_FILE_PATH "_pavement.png"
 #define LEFT_BOTTOMDASH_NORMAL_FILE_PATH "_left-bottomdash-normal.png"
