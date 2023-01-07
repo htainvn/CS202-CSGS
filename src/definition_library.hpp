@@ -112,6 +112,7 @@ using namespace sf;
 #define FONT_PATH_FILE WORKING_DIR+"/src_design/font/TextaPro-Medium.otf"
 #define FONT_MENU_PATH_FILE WORKING_DIR + "/src_design/font/AwareBold-qZo3x.ttf"
 #define FONT_MENU_OPTION_PATH_FILE WORKING_DIR + "/src_design/font/Rubik-VariableFont_wght.ttf"
+#define FONT_MENU_ABOUT_PATH_FILE WORKING_DIR + "/src_design/font/low_batt.ttf"
 
 #define DATA_FILE_PATH WORKING_DIR + "/datagame/"
 
