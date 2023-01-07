@@ -124,6 +124,7 @@ using namespace sf;
 #define ZOMBIE_SOUND_FILE_PATH "zombie_sound.wav"
 #define CROC_SOUND_FILE_PATH "croc_sound.wav"
 #define CAR_SOUND_FILE_PATH "car_sound.wav"
+#define STONE_SOUND_FILE_PATH "stone_rolling.wav"
 
 #define LAVA_THEME_SOUND_FILE_PATH WORKING_DIR + "/src_design/sound/lava_theme_sound.wav"
 #define NORMAL_THEME_SOUND_FILE_PATH WORKING_DIR + "/src_design/sound/normal_theme_sound.wav"

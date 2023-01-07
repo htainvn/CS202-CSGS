@@ -81,7 +81,7 @@ private:
 
     sf::Sound sound;
 
-    std::string sound_hash_name = "CAR_SOUND";
+    std::string sound_hash_name();
     
 private:
     
