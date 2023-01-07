@@ -7,7 +7,7 @@ AboutState::AboutState(handler_ptr _tools) : tools(_tools) {};
 void AboutState::init(int status) {
 
 	font = new sf::Font();
-	if (!font->loadFromFile(FONT_MENU_OPTION_PATH_FILE)) {
+	if (!font->loadFromFile(FONT_MENU_ABOUT_PATH_FILE)) {
 		std::cout << "Error";
 		return;
 	}
@@ -22,31 +22,32 @@ void AboutState::init(int status) {
 	// Define title
 	Title.setFont(*font);
 	Title.setCharacterSize(50);
-	Title.setPosition(Vector2f(250, 50));
+	Title.setPosition(Vector2f(270, 50));
 	Title.setStyle(sf::Text::Regular);
-	Title.setFillColor(sf::Color(105, 105, 105));
+	Title.setFillColor(sf::Color::White);
 	Title.setString("ABOUT");
 
 	// Define button return
 	button.setFont(*font);
-	button.setCharacterSize(50);
+	button.setCharacterSize(40);
 	button.setPosition(Vector2f(500, 580));
 	button.setStyle(sf::Text::Regular);
-	button.setFillColor(sf::Color(105, 105, 105));
+	button.setFillColor(sf::Color::White);
 	button.setString("RETURN");
 
 	// Define paragpaph
 	Paragraph.setFont(*font);
-	Paragraph.setCharacterSize(25);
+	Paragraph.setCharacterSize(20);
 	Paragraph.setPosition(Vector2f(100,170));
 	Paragraph.setStyle(sf::Text::Regular);
 	Paragraph.setFillColor(sf::Color::White);
 	sf::String para = "";
-	para += "USING ARROWS BUTTONS TO MOVE YOUR CHARACTER.";
-	para += "Using W A S D buttons to move your charater. \n \n";
-	para += "At the start of game you can change theme by pressing R. \n \n";
-	para += "The number of cars in each level is equal to the current level. \n \n";
-	para += "There are many traffic lights that you can utilize. \n \n";
+	para += "- Using arrow button to move your character. \n \n";
+	para += "- Using W A S D buttons to move your charater. \n \n";
+	para += "- At the start of game you can change theme by pressing R. \n \n";
+	para += "- The number of cars in each level is equal to the current level. \n \n";
+	para += "- There are many traffic lights that you can utilize. \n \n";
+	para += "- Our game has many themes for gameplay, try it yourself :3 \n";
 	Paragraph.setString(para);
 }
 
