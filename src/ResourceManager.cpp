@@ -138,6 +138,7 @@ void ResourceManager::init(std::string theme)
     load_sound_buffer("CROC_SOUND", WORKING_DIR + "/src_design/sound/" + CROC_SOUND_FILE_PATH);
     load_sound_buffer("ZOMBIE_SOUND", WORKING_DIR + "/src_design/sound/" + ZOMBIE_SOUND_FILE_PATH);
     load_sound_buffer("CAR_SOUND", WORKING_DIR + "/src_design/sound/" + CAR_SOUND_FILE_PATH);
+    load_sound_buffer("STONE_SOUND", WORKING_DIR + "/src_design/sound/" + STONE_SOUND_FILE_PATH);
     load_texture("LOG", WORKING_DIR + "/src_design/vehicle/" + theme + LOG_PATH);
 
     load_sound_buffer("RIVER_SOUND", WORKING_DIR + "/src_design/sound/" + RIVER_SOUND_FILE_PATH);

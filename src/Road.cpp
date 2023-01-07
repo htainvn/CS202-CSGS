@@ -238,7 +238,7 @@ Road::Road(handler_ptr _tools, int _position, int _dir, int _bottom, int _top, L
     
     spawn();
 
-    sound.setBuffer(tools->theme_controller.get_buffer(sound_hash_name));
+    sound.setBuffer(tools->theme_controller.get_buffer(sound_hash_name()));
 }
 
 bool Road::check_lost() {
@@ -329,4 +329,9 @@ void Road::tell() {
 
 float Road::get_speed() {
     return vehicles[0]->get_speed(1);
+}
+
+std::string Road::sound_hash_name() {
+    if (tools->theme_controller.get_theme_name() == "lava") return "STONE_SOUND";
+    return "CAR_SOUND";
 }
