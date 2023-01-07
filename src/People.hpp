@@ -22,6 +22,10 @@ public:
     
     People(handler_ptr tools, bool alive = true, std::string type = "MARIO_FORWARD");
     
+    People(const People& other) : tools(other.tools){
+        *this = other;
+    }
+    
     ~People();
     
     std::string type_path () const;

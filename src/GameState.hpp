@@ -18,13 +18,18 @@
 #include "src/People.hpp"
 #include "src/Traffic.hpp"
 #include "src/LostState.hpp"
+//#include "src/GamePauseState.hpp"
 #include <fstream>
 
 class GameState : public State {
     
 public:
     
+    GameState() = default;
     GameState(handler_ptr _data);
+    GameState(const GameState& other);
+    
+    ~GameState();
     
     void init(int status);
     
@@ -48,11 +53,10 @@ public:
     
     void extracted();
     
-void pre_lost();
+    void pre_lost();
     
     void record();
     
-    ~GameState();
     
     
 protected:

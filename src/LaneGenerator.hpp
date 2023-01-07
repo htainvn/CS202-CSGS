@@ -30,6 +30,9 @@ public:
         level = new Level(3, 0, 1);
     }
     
+    LaneFactory(const LaneFactory& other) : tools(other.tools), lanes(other.lanes){
+        level = new Level(*other.level);
+    }
     LaneFactory(handler_ptr _tools, level_ptr _level) : tools(_tools), level(_level) {};
     
     lane_ptr create_lane(int type, Position pos = Position(), Level lev = Level());
