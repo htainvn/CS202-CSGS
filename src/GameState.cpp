@@ -171,15 +171,6 @@ void GameState::update(float dt)
             
             if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
             if(check_lost()) people->lost();
-            case 0:
-                lane_gen->stop();
-                break;
-            case 1:
-                lane_gen->slowdown();
-                break;
-            case 2:
-                lane_gen->run();
-                break;
         }
         
         /* update level */
