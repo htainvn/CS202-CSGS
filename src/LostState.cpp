@@ -89,6 +89,7 @@ void LostMenu::handle_input() {
     };
 }
 
+
 void LostMenu::update(float signal) {
     if (is_entered){
         switch (PointingButton_) {

@@ -30,9 +30,9 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
         
         if (option) {
             
-            int cutoff = fmax(200, last_speed * 1.2);
+            int cutoff = fmax(150, last_speed * 1.2);
             
-            speed = rand() % (300 - cutoff + 1) + cutoff;
+            speed = rand() % (225 - cutoff + 1) + cutoff;
             
         }
         
@@ -45,7 +45,7 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
             
         }
     }
-    else speed = rand() % (200 - 50 + 1) + 50;
+    else speed = rand() % (150 - 50 + 1) + 50;
 
     dir = rand() % 2;
 

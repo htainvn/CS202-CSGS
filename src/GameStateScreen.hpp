@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "src/GameState.hpp"
 
-class GameStateScreen : public GameState{
+class GameStateScreen : public GameState {
 public:
     GameStateScreen(const GameState* base) : GameState(*base){}
     ~GameStateScreen(){}

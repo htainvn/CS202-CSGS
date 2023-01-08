@@ -75,6 +75,13 @@ public:
             
             level = nullptr;
         }
+        for (int i = 0; i < lanes.size(); i++) {
+            if (lanes[0] != nullptr) {
+                delete lanes[0];
+                lanes[0] = nullptr;
+            }
+            lanes.erase(lanes.begin());
+        }
     }
     
 private:

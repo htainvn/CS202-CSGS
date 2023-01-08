@@ -255,6 +255,7 @@ bool Road::check_lost() {
 }
 
 Road::~Road() {
+    sound.stop();
     while (!vehicles.empty()) {
         if (vehicles[0]) {
             delete vehicles[0];

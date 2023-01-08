@@ -90,7 +90,9 @@ public:
     
     Hippo(handler_ptr _tools, bool dir, Position p, float _speed);// : floatObject(_tools, dir, y) {}
     
-    ~Hippo() {}
+    ~Hippo() {
+        sound.stop();
+    }
 
     int get_type();
 
@@ -118,7 +120,9 @@ public:
     
     Croc(handler_ptr _tools, bool dir, Position p, float _speed);// : floatObject(_tools, dir, y) {}
     
-    ~Croc() {}
+    ~Croc() {
+        sound.stop();
+    }
 
     int get_type();
 

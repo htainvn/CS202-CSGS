@@ -25,10 +25,6 @@ bool Log::isCurrent() {
 }
 
 Log::~Log() {
-	if (people) {
-		delete people;
-		people = nullptr;
-	}
 }
 
 void Log::unset() {

@@ -8,32 +8,6 @@
 #include "src/StateManager.hpp"
 
 void StateManager::process_request() {
-//    switch(this->syntax)
-//    {
-//        case -1:
-//            break;
-//        case 0: //add
-//            if (!this->states_container.empty()) this->states_container.top()->pause();
-//            this->states_container.push(std::move(received_state));
-//            this->states_container.top()->init(0);
-//            break;
-//        case 1: //replace
-//            if (!this->states_container.empty()) {
-//                delete this->states_container.top();
-//                this->states_container.pop();
-//            }
-//            this->states_container.push(std::move(received_state));
-//            this->states_container.top()->init(0);
-//            break;
-//        case 2: //delete
-//            if (!this->states_container.empty()) {
-//                delete this->states_container.top();
-//                this->states_container.pop();
-//            }
-//            if (!this->states_container.empty()) this->states_container.top()->resume();
-//            break;
-//    }
-//    this->syntax = -1;
     
     if (clear) {
         while (!states_container.empty()) {
@@ -58,17 +32,18 @@ void StateManager::process_request() {
         }
         states_container.push(std::move(received_state));
         push = replace = false;
-        states_container.top()->init(0);
     }
 }
 
 void StateManager::receive_add_request(state_ptr newState) {
     this->received_state = std::move(newState);
+    this->received_state->init(0);
     push = true;
 }
 
 void StateManager::receive_replace_request(state_ptr newState) {
     this->received_state = std::move(newState);
+    this->received_state->init(0);
     push = replace = true;
 }
 

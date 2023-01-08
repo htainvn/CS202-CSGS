@@ -36,7 +36,6 @@ GameState::GameState(const GameState& other)
     traffic = new Traffic(*other.traffic);
     people = new People(*other.people);
     font = new Font (*other.font);
-    
 }
 
 void GameState::init(int status) {
@@ -138,47 +137,25 @@ void GameState::update(float dt)
         
         int return_code = people->update();
         if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
-        
+            
         switch(status)
         {
-        
-            /* update position */
-            
-            /* update level */
-            int status = traffic->update();
-            
-            int return_code = people->update();
-
-            if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
-            
-            lane_gen->refactor(level);
-            
-            switch(status)
-            {
-                case 0:
-                    lane_gen->stop();
-                    break;
-                case 1:
-                    lane_gen->slowdown();
-                    break;
-                case 2:
-                    lane_gen->run();
-                    break;
-            }
-            
-            /* update level */
-            std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
-            
-            if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-            if(check_lost()) people->lost();
+            case 0:
+                lane_gen->stop();
+                break;
+            case 1:
+                lane_gen->slowdown();
+                break;
+            case 2:
+                lane_gen->run();
+                break;
         }
-        
+            
         /* update level */
         std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-        
-        if(check_lost())people->lost();
+        if(check_lost()) people->lost();
     }
     else {
         if (lost_count || !people->is_alive()) {
@@ -240,20 +217,26 @@ bool GameState::check_lost()
     return false;
 }
 
-GameState::~GameState() {
+GameState::~GameState()
+{
+    tools->theme_controller.stop_music();
+    
     if (font) {
         delete font;
         font = nullptr;
     }
-    if (lane_gen) {
+    
+    if (lane_gen)  {
         delete lane_gen;
         lane_gen = nullptr;
     }
-    if (traffic){
+    
+    if (traffic) {
         delete traffic;
         traffic = nullptr;
     }
-    if(people){
+    
+    if (people){
         delete people;
         people = nullptr;
     }

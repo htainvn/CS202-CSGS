@@ -66,30 +66,13 @@ void People::move_right(int type){
     if (can_move_right() || type == 3)
     {
         sf::Vector2f v = sp.getPosition();
-        sp.move(sf::Vector2f(0.8, 0));
+        sp.move(sf::Vector2f(0.5, 0));
         type_movement = 1;
         cnt_movement--;
-        ///*switch(cnt_movement) {
-        //    case 101 ... 199:
-        //    {
-        //        type_ = "MARIO_RIGHTGO";
-        //    }
-        //    break;
-        //    case 1 ... 100:
-        //    {
-        //        type_ = "MARIO_RIGHTRUN";
-        //    }
-        //    break;
-        //    case 0:
-        //    {
-        //        type_ = "MARIO_RIGHT";
-        //    }
-        //    break;
-        //}*/
-
+        
         if (!cnt_movement) type_ = "MARIO_RIGHT";
-        if (1 <= cnt_movement && cnt_movement <= 62) type_ = "MARIO_RIGHTRUN";
-        if (63 <= cnt_movement && cnt_movement <= 125) type_ = "MARIO_RIGHTGO";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_RIGHTRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_RIGHTGO";
 
         sp.setTexture(tools->theme_controller.get(type_));
     }
@@ -101,30 +84,12 @@ void People::move_left(int type){
     if (can_move_left() || type == 3)
     {
         sf::Vector2f v = sp.getPosition();
-        sp.move(sf::Vector2f(-0.8, 0));
+        sp.move(sf::Vector2f(-0.5, 0));
         type_movement = 2;
         cnt_movement--;
-        //switch(cnt_movement) {
-        //    case 101 ... 199:
-        //    {
-        //        type_ = "MARIO_LEFTGO";
-        //    }
-        //    break;
-        //    case 1 ... 100:
-        //    {
-        //        type_ = "MARIO_LEFTRUN";
-        //    }
-        //    //break;
-        //    case 0:
-        //    {
-        //        type_ = "MARIO_LEFT";
-        //    }
-        //    break;
-        //}
-
         if (!cnt_movement) type_ = "MARIO_LEFT";
-        if (1 <= cnt_movement && cnt_movement <= 62) type_ = "MARIO_LEFTRUN";
-        if (63 <= cnt_movement && cnt_movement <= 125) type_ = "MARIO_LEFTGO";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_LEFTRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_LEFTGO";
 
         sp.setTexture(tools->theme_controller.get(type_));
     }
@@ -135,30 +100,12 @@ void People::move_down(){
     if (can_move_forward())
     {
         sf::Vector2f v = sp.getPosition();
-        sp.move(sf::Vector2f(0, 0.8));
+        sp.move(sf::Vector2f(0, 0.5));
         type_movement = 3;
         cnt_movement--;
-        //switch(cnt_movement) {
-        //    case 101 ... 199:
-        //    {
-        //        type_ = "MARIO_DOWNWARDGO";
-        //    }
-        //    break;
-        //    case 1 ... 100:
-        //    {
-        //        type_ = "MARIO_DOWNWARDRUN";
-        //    }
-        //    //break;
-        //    case 0:
-        //    {
-        //        type_ = "MARIO_DOWNWARD";
-        //    }
-        //    break;
-        //}
-
         if (!cnt_movement) type_ = "MARIO_DOWNWARD";
-        if (1 <= cnt_movement && cnt_movement <= 62) type_ = "MARIO_DOWNWARDGO";
-        if (63 <= cnt_movement && cnt_movement <= 125) type_ = "MARIO_DOWNWARDGO";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_DOWNWARDGO";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_DOWNWARDGO";
 
         sp.setTexture(tools->theme_controller.get(type_));
     }
@@ -173,30 +120,12 @@ void People::move_forward(/*sf::Vector2f vec,*/){
     if (can_move_down())
     {
         sf::Vector2f v = sp.getPosition();
-        sp.move(sf::Vector2f(0, -0.8));
+        sp.move(sf::Vector2f(0, -0.5));
         type_movement = 0;
         cnt_movement--;
-        //switch(cnt_movement) {
-        //    case 101 ... 199:
-        //    {
-        //        type_ = "MARIO_FORWARDGO";
-        //    }
-        //    break;
-        //    case 1 ... 100:
-        //    {
-        //        type_ = "MARIO_FORWARDRUN";
-        //    }
-        //    //break;
-        //    case 0:
-        //    {
-        //        type_ = "MARIO_FORWARD";
-        //    }
-        //    break;
-        //}
-        
         if (!cnt_movement) type_ = "MARIO_FORWARD";
-        if (1 <= cnt_movement && cnt_movement <= 62) type_ = "MARIO_FORWARDRUN";
-        if (63 <= cnt_movement && cnt_movement <= 125) type_ = "MARIO_FORWARDGO";
+        if (1 <= cnt_movement && cnt_movement <= 100) type_ = "MARIO_FORWARDRUN";
+        if (101 <= cnt_movement && cnt_movement <= 199) type_ = "MARIO_FORWARDGO";
 
         sp.setTexture(tools->theme_controller.get(type_));
     }
@@ -281,7 +210,7 @@ void People::loading(std::ifstream& fin)
 }
 
 void People::start_movement(int type_) {
-    cnt_movement = 125;
+    cnt_movement = 200;
 }
 
 int People::update()
