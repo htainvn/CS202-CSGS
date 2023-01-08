@@ -23,6 +23,10 @@ void GameLoadedState::create_new() {
     
     fin >> GameState::level >> GameState::is_pause >> GameState::lost_count >> GameState::mario_lost_count >> GameState::is_TouchBounder;
     
+    tools->theme_controller.play_music();
+    
+    GameState::update(-1);
+    
     remove(filename.c_str());
     
     fin.close();

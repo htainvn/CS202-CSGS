@@ -42,7 +42,6 @@ Lane::Lane(handler_ptr _tools, float x, float y, Level level) : tools(_tools), l
 }
 
 Lane::Lane(handler_ptr _tools, Position pos, Level level) : tools(_tools), lev(level) {
-    
     locate_at(pos.get_x(), pos.get_y());
 }
 
@@ -85,4 +84,21 @@ void Lane::loading(std::ifstream& fin)
 {
     
 }
+
+Level Lane::Level_() { 
+    return lev;
+}
+
+Lane& Lane::operator=(const Lane &other) {
+    tools = other.tools;
+    lev = other.lev;
+    if (other.people)
+        people = new People (*other.people);
+    else
+        people = nullptr;
+    sprite = other.sprite;
+    return *this;
+}
+
+
 

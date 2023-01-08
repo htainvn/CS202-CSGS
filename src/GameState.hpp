@@ -31,7 +31,7 @@ public:
     
     GameState(const GameState& other);
     
-    virtual ~GameState();
+    ~GameState();
     
     void init(int status);
     

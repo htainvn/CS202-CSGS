@@ -22,6 +22,27 @@ public:
     
     River(handler_ptr _tools, Level level, Position pos = Position(), float last_speed = -1);
     
+    River(River* other){
+        Lane::operator=(*other);
+        *this = *other;
+        float_objs.resize(other->float_objs.size());
+        for (int i=0; i<float_objs.size(); i++){
+            int t = other->float_objs[i]->get_type();
+            switch(t){
+                case 0:
+                    float_objs[i] = new Hippo(dynamic_cast<Hippo*>(other->float_objs[i]));
+                    break;
+                case 1:
+                    float_objs[i] = new Croc(dynamic_cast<Croc*>(other->float_objs[i]));
+                    break;
+                case 2:
+                    float_objs[i] = new Log(dynamic_cast<Log*>(other->float_objs[i]));
+                    break;
+            }
+        }
+        return *this;
+    }
+    
     ~River();
     
     /* END HERE */

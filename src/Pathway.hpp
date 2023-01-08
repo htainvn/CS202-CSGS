@@ -23,7 +23,7 @@ public:
     Pathway(handler_ptr _tools, float x, float y, Level level);
     
     Pathway(handler_ptr _tools, Position pos, Level level);
-
+        
     ~Pathway() {}
     
 /* END HERE */
@@ -47,10 +47,12 @@ public:
     
     PathwayLight(handler_ptr _tools, Level level);
     
+    PathwayLight(handler_ptr _tools, Level level, TrafficLight light_);
+    
     PathwayLight(handler_ptr _tools, float x, float y, Level level);
     
     PathwayLight(handler_ptr _tools, Position pos, Level level);
-
+    
     ~PathwayLight() {}
     
 /* END HERE */

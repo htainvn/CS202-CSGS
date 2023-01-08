@@ -8,6 +8,8 @@ public:
 	Log(handler_ptr tools) : floatObject(tools) {}
 
 	Log(handler_ptr tools, bool dir, Position pos, float _speed);
+    
+    Log (Log* other);
 
 	void adjust_objects();
 

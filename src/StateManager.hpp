@@ -46,11 +46,8 @@ public:
     
     ~StateManager() {
         while (!states_container.empty()) {
-            if (states_container.top() != nullptr) {
-                delete states_container.top();
-                states_container.top() = nullptr;
-            }
-            states_container.pop();
+            this->receive_clear_request();
+            this->process_request();
         }
     }
 };

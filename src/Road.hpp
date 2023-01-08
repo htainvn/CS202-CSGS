@@ -18,6 +18,7 @@ class Road : public Lane {
 public:
     
 /* CONSTRUCTORS & DESTRUCTORS */
+    Road() = default;
     
     Road(handler_ptr _tools, Level level);
     
@@ -25,6 +26,15 @@ public:
     
     Road(handler_ptr _tools, int another_dir, int& changed_type, Level level, Position pos = Position());
     
+    Road(Road* other){
+        Lane::operator=(*other);
+        *this = *other;
+        for (int i=0; i<vehicles.size(); i++){
+            vehicles[i] = new Vehicle();
+            *vehicles[i] = *other->vehicles[i];
+        }
+    }
+
     ~Road();
     
 /* END HERE */

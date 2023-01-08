@@ -93,6 +93,14 @@ void Croc::tell() {
 	sound.play();
 }
 
+Croc::Croc(Croc* other) {
+    floatObject::operator=(*other);
+    //*this = *other;
+    sound = other->sound;
+    
+}
+
+
 void Hippo::tell() {
 	sound.play();
 }
@@ -102,4 +110,23 @@ void floatObject::save(std::ofstream& fout)
 	fout << this->get_type() << std::endl;
     
 	fout << this->position().get_x() << std::endl;
+}
+
+floatObject &floatObject::operator=(const floatObject &other) {
+    pos = other.pos;
+
+    dir = other.dir;
+
+    speed = other.speed;
+    
+    tools = other.tools;
+
+    sprite = other.sprite;
+    return *this;
+}
+
+Hippo::Hippo(Hippo* other){
+    floatObject::operator=(*other);
+    sound = other->sound;
+    //*this = *other;
 }

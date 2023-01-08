@@ -28,6 +28,8 @@ public:
     
     floatObject(handler_ptr _tools, bool dir, Position p, float _speed);
     
+    floatObject& operator = (const floatObject& other);
+    
     virtual ~floatObject(){}
     
     /* END HERE */
@@ -90,6 +92,8 @@ public:
     
     Hippo(handler_ptr _tools, bool dir, Position p, float _speed);// : floatObject(_tools, dir, y) {}
     
+    Hippo(Hippo* other);
+    
     ~Hippo() {
         sound.stop();
     }
@@ -119,6 +123,8 @@ public:
     Croc(handler_ptr _tools) : floatObject(_tools) {}
     
     Croc(handler_ptr _tools, bool dir, Position p, float _speed);// : floatObject(_tools, dir, y) {}
+    
+    Croc(Croc* other);
     
     ~Croc() {
         sound.stop();

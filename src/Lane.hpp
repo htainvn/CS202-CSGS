@@ -25,13 +25,20 @@ public:
     
 /* CONSTRUCTORS & DESTRUCTORS*/
     
+    Lane() = default;
+    
     Lane(handler_ptr _tools, Level level) : tools (_tools), lev(level) {}
     
     Lane(handler_ptr _tools, float x, float y, Level level);
     
     Lane(handler_ptr _tools, Position pos, Level level);
     
-    virtual ~Lane() {}
+    virtual Lane& operator = (const Lane& other);
+    
+    virtual ~Lane() {
+        if (people)
+            delete people;
+    }
     
 /* END HERE */
     
@@ -52,6 +59,8 @@ public:
     bool is_current();
     
     int level();
+    
+    Level Level_();
     
     Position people_position();
     

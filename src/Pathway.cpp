@@ -19,6 +19,8 @@ Pathway::Pathway(handler_ptr _tools, Position pos, Level level) : Lane(_tools, p
     Lane::change_image(_tools->theme_controller.get("PAVEMENT"));
 }
 
+
+
 void Pathway::draw()
 {
     

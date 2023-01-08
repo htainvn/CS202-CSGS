@@ -136,7 +136,7 @@ void GameState::update(float dt)
         int status = traffic->update(is_pause);
         
         int return_code = people->update();
-        if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
+        if (dt == -1|| return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
             
         switch(status)
         {
@@ -195,13 +195,14 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
-    is_pause = true;
+    //is_pause = true;
     tools->state_manager.receive_add_request(new GamePauseState(this->tools, new GameStateScreen(this)));
 }
 
 void GameState::resume()
 {
     update(0);
+    //tools->theme_controller.play_music();
     is_pause = false;
 }
 
@@ -219,8 +220,12 @@ bool GameState::check_lost()
 
 GameState::~GameState()
 {
-    tools->theme_controller.stop_music();
-    
+    //tools->theme_controller.stop_music();
+
+    /*if (people){
+        delete people;
+        people = nullptr;
+    }*/
     if (font) {
         delete font;
         font = nullptr;
@@ -236,10 +241,6 @@ GameState::~GameState()
         traffic = nullptr;
     }
     
-    if (people){
-        delete people;
-        people = nullptr;
-    }
 }
 
 void GameState::create_new() {

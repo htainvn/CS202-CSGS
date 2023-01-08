@@ -6,7 +6,7 @@
 //
 
 #include "LostState.hpp"
-
+#include "StartMenuState.hpp"
 
 void LostMenu::init(int status) {
     font = new sf::Font();
@@ -97,8 +97,9 @@ void LostMenu::update(float signal) {
                 resource_->state_manager.receive_replace_request(new GameState(resource_));
                 break;
             case 1:
-                resource_->state_manager.receive_delete_request();
-                resource_->state_manager.receive_delete_request();
+                resource_->state_manager.receive_clear_request();
+                resource_->state_manager.receive_add_request(new StartMenuState(this->resource_));
+                resource_->state_manager.process_request();
                 break;
             case 2:
                 resource_->window.close();

@@ -30,3 +30,9 @@ Log::~Log() {
 void Log::unset() {
     people = nullptr;
 }
+
+Log::Log(Log* other) { 
+    floatObject::operator=(*other);
+    if (other->people) people = new People(*other->people);
+}
+

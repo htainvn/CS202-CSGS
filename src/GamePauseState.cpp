@@ -119,10 +119,12 @@ void GamePauseState::update(float dt) {
                 tools->state_manager.receive_delete_request();
                 break;
             case 1:
-                game_->resume();
                 game_->save();
+                tools->theme_controller.stop_music();
                 tools->state_manager.receive_clear_request();
+                //tools->state_manager.process_request();
                 tools->state_manager.receive_add_request(new StartMenuState(this->tools));
+                tools->state_manager.process_request();
                 break;
             default:
                 break;
