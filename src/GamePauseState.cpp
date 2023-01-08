@@ -77,8 +77,43 @@ void GamePauseState::handle_input() {
     
 }
 
+void GamePauseState::menuNagivator(float dt) {
+    if(PointingButton_ + dt < 0 || PointingButton_ + dt >= choices)return;
+    
+    option[PointingButton_].setStyle(sf::Text::Regular);
+    
+    std::string tmp = option[PointingButton_].getString();
+    
+    if (tmp[0] == '>') {
+        tmp.erase(0, 5);
+        option[PointingButton_].setPosition(sf::Vector2f(option[PointingButton_].getPosition().x + 30, option[PointingButton_].getPosition().y));
+    }
+    
+    if (tmp[tmp.size()-1] == '<') tmp.erase(tmp.size() - 5, 5);
+    
+    
+    option[PointingButton_].setString(tmp);
+    
+    option[PointingButton_].setFillColor(sf::Color::White);
+    
+    PointingButton_ += dt;
+    
+    std::string tmp2 = option[PointingButton_].getString();
+    
+    tmp2 = ">    " + tmp2 + "    <";
+    
+    option[PointingButton_].setString(tmp2);
+    
+    option[PointingButton_].setFillColor(sf::Color::White);
+    
+    option[PointingButton_].setPosition(sf::Vector2f(option[PointingButton_].getPosition().x - 30, option[PointingButton_].getPosition().y));
+    
+    option[PointingButton_].setStyle(sf::Text::Bold);
+}
+
 void GamePauseState::update(float dt) {
-    if (is_entered){
+    if (is_entered)
+    {
         switch (PointingButton_) {
             case 0:
                 tools->state_manager.receive_delete_request();
@@ -123,6 +158,9 @@ void GamePauseState::update(float dt) {
         option[PointingButton_].setPosition(sf::Vector2f(option[PointingButton_].getPosition().x - 30, option[PointingButton_].getPosition().y));
         
         option[PointingButton_].setStyle(sf::Text::Bold);
+    else
+    {
+        menuNagivator(dt);
     }
 }
 
