@@ -220,12 +220,13 @@ bool GameState::check_lost()
 
 GameState::~GameState()
 {
-    //tools->theme_controller.stop_music();
+    tools->theme_controller.stop_music();
 
     /*if (people){
         delete people;
         people = nullptr;
     }*/
+    
     if (font) {
         delete font;
         font = nullptr;

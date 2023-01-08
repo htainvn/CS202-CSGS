@@ -17,12 +17,14 @@ class Handler {
 public:
     
     const int car_number = 9;
+    
     const int MAX_SPEED = 36; // maximum speed
+    
     sf::RenderWindow window;
     
-    StateManager state_manager;
-    
     ThemeController theme_controller;
+    
+    StateManager state_manager;
     
     Handler() {
         this->state_manager = StateManager();
