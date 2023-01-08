@@ -17,7 +17,7 @@ void Traffic::timing()
     clock.restart();
 }
 
-int Traffic::update() 
+int Traffic::update(int pause)
 {
     
     int  res = 0;
@@ -25,6 +25,8 @@ int Traffic::update()
     //long long checkpoint1 = clock.getElapsedTime().asMicroseconds();
     checkpoint2 = clock.getElapsedTime().asMilliseconds();
 
+    if (pause) checkpoint2 = checkpoint1;
+    
     current_time += checkpoint2 - checkpoint1;
         
     if (current_time > 15000)

@@ -17,26 +17,33 @@
 #define option4 "RESUME"
 #define option5 "BACK TO MENU"
 
-class GamePauseState : public State{
+class GamePauseState : public State {
 public:
     GamePauseState(handler_ptr resource, GameStateScreen* game) : tools(resource), game_(game){
     }
     
     void init(int status);
+    
     void handle_input();
+    
+    void extracted(float dt);
+    
     void update(float dt);
+    
     void draw(float dt);
     
-    void pause(){}
-    void resume(){}
+    void pause() {}
     
-    ~GamePauseState(){
-        if(font){
+    void resume() {}
+    
+    void menuNagivator(float dt);
+    
+    ~GamePauseState() {
+        if (font) {
             delete font;
             font = nullptr;
         }
-        if(game_)
-        {
+        if (game_) {
             delete game_;
             game_ = nullptr;
         }

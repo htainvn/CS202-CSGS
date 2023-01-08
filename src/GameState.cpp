@@ -127,49 +127,45 @@ void GameState::handle_input() {
 
 void GameState::update(float dt)
 {
-    if(!is_pause)
+    
+    if (people->is_alive())
     {
-        if (people->is_alive())
+        /* update position */
+        lane_gen->refactor(level);
+        
+        /* update level */
+        int status = traffic->update(is_pause);
+        
+        int return_code = people->update();
+        if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
+        
+        switch(status)
         {
-            /* update position */
-            lane_gen->refactor(level);
-            
-            /* update level */
-            int status = traffic->update();
-            
-            int return_code = people->update();
-            if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
-            
-            switch(status)
-            {
-                case 0:
-                    lane_gen->stop();
-                    break;
-                case 1:
-                    lane_gen->slowdown();
-                    break;
-                case 2:
-                    lane_gen->run();
-                    break;
-            }
-            
-            /* update level */
-            std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
-            
-            if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-            
-            if(check_lost())people->lost();
+            case 0:
+                lane_gen->stop();
+                break;
+            case 1:
+                lane_gen->slowdown();
+                break;
+            case 2:
+                lane_gen->run();
+                break;
         }
-        else {
-            if (lost_count || !people->is_alive())
-            {
-                lost_count = ((lost_count) ? lost_count-1 : 1000);
-                
-                if (lost_count) pre_lost();
-                else
-                {
-                    tools->state_manager.receive_replace_request(new LostMenu(tools));
-                }
+        
+        /* update level */
+        std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
+        
+        if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
+        
+        if(check_lost())people->lost();
+    }
+    else {
+        if (lost_count || !people->is_alive()) {
+            lost_count = ((lost_count) ? lost_count-1 : 1000);
+            
+            if (lost_count) pre_lost();
+            else {
+                tools->state_manager.receive_replace_request(new LostMenu(tools));
             }
         }
     }
@@ -201,11 +197,13 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
+    is_pause = true;
     tools->state_manager.receive_add_request(new GamePauseState(this->tools, new GameStateScreen(this)));
 }
 
 void GameState::resume()
 {
+    update(0);
     is_pause = false;
 }
 

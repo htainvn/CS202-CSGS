@@ -26,7 +26,9 @@ class GameState : public State {
 public:
     
     GameState() = default;
+    
     GameState(handler_ptr _data);
+    
     GameState(const GameState& other);
     
     ~GameState();

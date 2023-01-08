@@ -29,7 +29,7 @@ public:
     
 /* BEHAVIOUR */
     
-    int update();
+    int update(int pause = 0);
     
     void init(sf::Font *font);
     
