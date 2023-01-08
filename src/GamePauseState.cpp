@@ -6,6 +6,8 @@
 //
 
 #include "src/GamePauseState.hpp"
+#include "src/StartMenuState.hpp"
+#include "src/MenuState.hpp"
 
 
 void GamePauseState::init(int status){
@@ -61,9 +63,6 @@ void GamePauseState::handle_input() {
                     case (sf::Keyboard::S):
                         update(1);
                         break;
-                    case (sf::Keyboard::R):
-                        tools->state_manager.receive_delete_request();
-                        break;
                     case (sf::Keyboard::Enter):
                         is_entered = true;
                         break;
@@ -85,16 +84,15 @@ void GamePauseState::update(float dt) {
                 tools->state_manager.receive_delete_request();
                 break;
             case 1:
-                tools->state_manager.receive_delete_request();
-                tools->state_manager.process_request();
-                tools->state_manager.receive_delete_request();
+                tools->state_manager.receive_clear_request();
+                tools->state_manager.receive_add_request(new StartMenuState(this->tools));
                 break;
             default:
                 break;
         }
     }
     else{
-        if(PointingButton_ + dt < 0 || PointingButton_ + dt >= choices)return;
+        if(PointingButton_ + dt < 0 || PointingButton_ + dt >= choices) return;
         
         option[PointingButton_].setStyle(sf::Text::Regular);
         

@@ -99,11 +99,11 @@ protected:
 
     Level lev;
     
+    People* people = nullptr;
+    
 private:
     
     Sprite sprite;
-    
-    People* people = nullptr;
     
 private:
     

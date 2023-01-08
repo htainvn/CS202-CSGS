@@ -131,14 +131,17 @@ void GameState::update(float dt)
     {
         if (people->is_alive())
         {
+        
             /* update position */
-            lane_gen->refactor(level);
             
             /* update level */
             int status = traffic->update();
             
             int return_code = people->update();
+
             if (return_code == 1 || return_code == 2) lane_gen->horizontal_movement(people, return_code);
+            
+            lane_gen->refactor(level);
             
             switch(status)
             {
@@ -157,8 +160,7 @@ void GameState::update(float dt)
             std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
             
             if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-            
-            if(check_lost())people->lost();
+            if(check_lost()) people->lost();
         }
         else {
             if (lost_count || !people->is_alive())

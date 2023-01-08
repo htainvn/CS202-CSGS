@@ -45,7 +45,7 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
             
         }
     }
-    else speed = rand() % (300 - 50 + 1) + 50;
+    else speed = rand() % (200 - 50 + 1) + 50;
 
     dir = rand() % 2;
 
@@ -190,7 +190,6 @@ void River::adjust_objects()
     
     for (int i = 0; i < float_objs.size(); i++)
     {
-        
         auto each = float_objs[i];
         
         if (each->get_type() == 2) each->locate_at(each->position().get_x(), position().get_y());
@@ -200,7 +199,7 @@ void River::adjust_objects()
         else each->locate_at(each->position().get_x(), position().get_y() + 10);
         
         if (dir) each->move_right();
-        
+            
         else each->move_left();
         
         each->adjust_objects();
@@ -228,32 +227,26 @@ void River::draw()
 bool River::check_lost() {
     Position people_pos = people_position(), fpos;
     bool direction = dir;
-
+    
     for (int i = 0; i < float_objs.size(); i++) {
-
+        
         fpos = float_objs[i]->position();
-        if ((people_pos.get_x() >= fpos.get_x() - people_size && people_pos.get_x() <= fpos.get_x() + dsize + 2)) { /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
-
+        Lane::people->is_moving();
+        if ((people_pos.get_x() > (fpos.get_x() - people_size + 10) && people_pos.get_x() < fpos.get_x() + dsize - 10)) { /* the function returns false, which means you are lost, if people is not standing on the log when the traffic light is not red.*/
+            
             if (float_objs[i]->get_type() != 2) {
                 tools->theme_controller.stop_music();
-
+                
                 float_objs[i]->tell();
-
+                
                 return true;
             }
-
             return false;
-
+            
         }
-
     }
-
-    tools->theme_controller.stop_music();
-
-    river_sound.play();
-
+    
     return true;
-
 }
 
 void River::set_current(People*& mario, int type)
@@ -295,6 +288,8 @@ void River::set_current(People*& mario, int type)
     else
     {*/
     
+    Lane::unset();
+    Lane::set_current(mario, type);
     
     int currentLog = get_currentlog(); //if people is standing on any log, return the log index. Otherwise, return -1.
     Position mariop = Position(mario->get_position().x , Lane::position().get_y()); // current position of mario
@@ -305,9 +300,7 @@ void River::set_current(People*& mario, int type)
     
     if (currentLog != -1) float_objs[currentLog]->unset();
     
-    //lane set mario.
-    Lane::unset();
-    Lane::set_current(mario, type);
+    //lane set mario
     
     for (int i = 0; i < float_objs.size(); i++)
     {

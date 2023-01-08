@@ -64,7 +64,6 @@ bool LaneFactory::detect_outscr()
 void LaneFactory::refactor(float& shift_level) {
     
     //int able_shift = (isShifting) ? std::min(isShifting, 7)-1 : 0;
-    
     float tk = shift_level;
     
     float movement;

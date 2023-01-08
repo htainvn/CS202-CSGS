@@ -72,7 +72,7 @@ public:
     
     bool is_moving();
     
-    sf::Sprite& get_sprite ();
+    sf::Sprite& get_sprite();
     
     void start_movement(int type_);
     

@@ -22,6 +22,8 @@ private:
     state_ptr received_state;
     int syntax;
     
+    bool push, pop, clear, replace;
+    
     
 public:
     StateManager() {
@@ -37,6 +39,8 @@ public:
     void receive_replace_request(state_ptr newState);
     
     void receive_delete_request();
+    
+    void receive_clear_request();
     
     state_ptr get_current_state();
     

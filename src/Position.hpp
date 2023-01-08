@@ -41,8 +41,8 @@ public:
         int xObject = (int) another.x;
         int yObject = (int) another.y;
         
-        if (xPeople > xObject + dsize + 2) return false;
-        if (xPeople < xObject - size.x - 2) return false;
+        if (xPeople > xObject + dsize + 1) return false;
+        if (xPeople < xObject - size.x-1) return false;
         if (yPeople > yObject + dsize) return false;
         if (yPeople < yObject) return false;
         return true;
