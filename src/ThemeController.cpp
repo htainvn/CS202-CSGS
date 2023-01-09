@@ -35,7 +35,7 @@ std::string ThemeController::get_random_theme()
 
 void ThemeController::load()
 {
-    resource_manager.init(current_theme);
+    resource_manager.load(current_theme);
     resource_manager.load_music(current_theme,theme_sound);
 }
 

@@ -23,7 +23,7 @@ int River::get_maxlog(){
 River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : Lane(_tools, pos, level)
 {
     Lane::change_image(tools->theme_controller.get("RIVER"));
-
+    
     if (last_speed != -1)
     {
         bool option = rand() % 2;
@@ -45,8 +45,11 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
             
         }
     }
+    
     else speed = rand() % (150 - 50 + 1) + 50;
 
+    if (speed < 30) speed = 30;
+    
     dir = rand() % 2;
 
     max_log = get_maxlog();

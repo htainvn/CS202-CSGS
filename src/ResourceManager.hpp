@@ -28,13 +28,22 @@ public:
 
     sf::SoundBuffer& get_sound_buffer(std::string hash_name);
     
-    void init(std::string theme);
+    void extracted(const std::string &theme);
+    
+void init();
+    
+    void load(std::string theme);
     
     std::string autosave_getfilename();
     
 private:
+    void loadTextureData(const std::string &theme);
+    
+private:
     
     std::vector<std::pair<std::string, sf::Texture>> storage;
+    
+    std::vector<std::pair<std::string, sf::Texture>> texture_warehouse;
 
     std::vector <std::pair<std::string, sf::SoundBuffer>> sound_storage;
 

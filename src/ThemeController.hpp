@@ -18,6 +18,10 @@
 class ThemeController {
 public:
     
+    ThemeController() {
+        resource_manager.init();
+    }
+    
     std::string get_random_theme();
     
     void load();
