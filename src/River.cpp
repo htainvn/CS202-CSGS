@@ -6,6 +6,7 @@
 //
 
 #include "src/River.hpp"
+#include <algorithm>
 
 int River::get_maxlog(){
     int road_bd = (lev.lev() - 1) / 3 + 1;
@@ -30,7 +31,9 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
         
         if (option) {
             
-            int cutoff = fmax(150, last_speed * 1.2);
+            int cutoff = last_speed * 1.2f;
+            
+            if (cutoff > 150) cutoff = 150;
             
             speed = rand() % (225 - cutoff + 1) + cutoff;
             
@@ -41,6 +44,10 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
             
             int cutoff = (last_speed / 1.2f);
             
+            if (cutoff - 50 < 0) {
+                cutoff = 50;
+            }
+            
             speed = rand() % (cutoff - 50 + 1) + 50;
             
         }
@@ -49,6 +56,7 @@ River::River(handler_ptr _tools, Level level, Position pos, float last_speed) : 
     else speed = rand() % (150 - 50 + 1) + 50;
 
     if (speed < 30) speed = 30;
+    if (speed > 225) speed = 225;
     
     dir = rand() % 2;
 
