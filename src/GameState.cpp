@@ -195,7 +195,7 @@ void GameState::draw(float dt)
 
 void GameState::pause()
 {
-    //is_pause = true;
+    is_pause = true;
     tools->state_manager.receive_add_request(new GamePauseState(this->tools, new GameStateScreen(this)));
 }
 
