@@ -155,7 +155,10 @@ void GameState::update(float dt)
         std::string t = std::to_string(lane_gen->at(lane_gen->current())->level());
         
         if (t.length() > t_lev.getString().getSize() || t > t_lev.getString()) t_lev.setString(t);
-        if(check_lost()) people->lost();
+        if(check_lost()) {
+            people->lost();
+            tools->theme_controller.stop_music();
+        }
     }
     else {
         if (lost_count || !people->is_alive()) {
@@ -220,7 +223,7 @@ bool GameState::check_lost()
 
 GameState::~GameState()
 {
-    tools->theme_controller.stop_music();
+    //tools->theme_controller.stop_music();
 
     /*if (people){
         delete people;
